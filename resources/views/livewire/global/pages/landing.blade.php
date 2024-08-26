@@ -4,8 +4,7 @@
             <h3>POLICE SCORECARD MANAGEMENT SYSTEM</h3>
         </div>
         <div class="header-auth">
-            <a href="/sign-up" class="btn btn-success btn-sm" wire:navigate>Sign Up</a>
-            <a href="login" class="btn btn-primary btn-sm" wire:navigate>Log In</a>
+            <a href="/login" class="btn btn-success btn-sm" wire:navigate>Log In</a>
         </div>
     </div>
     <div class="body">

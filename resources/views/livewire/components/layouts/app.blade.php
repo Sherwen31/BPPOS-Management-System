@@ -26,7 +26,7 @@
 
     <script data-navigate-once src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-    <title>{{ $title ?? 'BPPOS Manangement System' }}</title>
+    <title>{{ isset($title) ? 'BPPOS Management System | ' . $title : 'BPPOS Management System' }}</title>
 
     @livewireStyles
 </head>

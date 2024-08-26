@@ -1,7 +1,9 @@
 <div>
     <div class="signup">
         <div class="signup-header">
-            <h3><strong>PSMS</strong></h3>
+            <a href="/" wire:navigate class="text-decoration-none text-dark">
+                <h3><strong>PSMS</strong></h3>
+            </a>
             <h4>Admin Sign Up</h4>
         </div>
         <form wire:submit='register'>
@@ -9,15 +11,22 @@
                 <div class="d-flex gap-1">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter Name" wire:model='name'>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-user"></i></span>
+                            <input type="text" class="form-control" id="name" placeholder="Enter Name"
+                                wire:model='name'>
+                        </div>
                         @error('name')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" placeholder="Enter Username"
-                            wire:model='username'>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-user"></i></span>
+                            <input type="text" class="form-control" id="username" placeholder="Enter Username"
+                                wire:model='username'>
+                        </div>
                         @error('username')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -26,16 +35,22 @@
                 <div class="d-flex gap-1">
                     <div class="form-group">
                         <label for="police_id">Police Id</label>
-                        <input type="text" class="form-control" id="police_id" placeholder="Enter Polic Id"
-                            wire:model='police_id'>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-user-police"></i></span>
+                            <input type="text" class="form-control" id="police_id" placeholder="Enter Polic Id"
+                                wire:model='police_id'>
+                        </div>
                         @error('police_id')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="contact_number">Contact Number</label>
-                        <input type="number" class="form-control" id="contact_number" placeholder="Enter Contact Number"
-                            wire:model='contact_number'>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-phone"></i></span>
+                            <input type="number" class="form-control" id="contact_number"
+                                placeholder="Enter Contact Number" wire:model='contact_number'>
+                        </div>
                         @error('contact_number')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -44,16 +59,22 @@
                 <div class="d-flex gap-1">
                     <div class="form-group">
                         <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="Enter Address"
-                            wire:model='address'>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-location-dot"></i></span>
+                            <input type="text" class="form-control" id="address" placeholder="Enter Address"
+                                wire:model='address'>
+                        </div>
                         @error('address')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter Email"
-                            wire:model='email'>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i></span>
+                            <input type="email" class="form-control" id="email" placeholder="Enter Email"
+                                wire:model='email'>
+                        </div>
                         @error('email')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -62,16 +83,22 @@
                 <div class="d-flex gap-1">
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Create Password"
-                            wire:model='password'>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-key"></i></span>
+                            <input type="password" class="form-control" id="password" placeholder="Create Password"
+                                wire:model='password'>
+                        </div>
                         @error('password')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="cpassword">Confirm Password</label>
-                        <input type="password" class="form-control" id="cpassword" placeholder="Confirm Password"
-                            wire:model='password_confirmation'>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-key"></i></span>
+                            <input type="password" class="form-control" id="cpassword" placeholder="Confirm Password"
+                                wire:model='password_confirmation'>
+                        </div>
                         @error('password_confirmation')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror

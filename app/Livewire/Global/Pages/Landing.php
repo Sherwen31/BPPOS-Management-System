@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Global\Pages;
 
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 class Landing extends Component

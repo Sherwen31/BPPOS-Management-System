@@ -1,7 +1,9 @@
 <div>
     <div class="signup">
         <div class="signup-header">
-            <h3><strong>PSMS</strong></h3>
+            <a href="/" wire:navigate class="text-decoration-none text-dark">
+                <h3><strong>PSMS</strong></h3>
+            </a>
             <h4>Admin Log In</h4>
         </div>
         <form wire:submit='login'>
@@ -9,16 +11,22 @@
             <div class="signup-form">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Enter Username"
-                        wire:model='username_or_email_or_police_id'>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1"><i class="far fa-user"></i></span>
+                        <input type="text" class="form-control" id="username" placeholder="Enter Username"
+                            wire:model='username_or_email_or_police_id'>
+                    </div>
                     @error('username_or_email_or_police_id')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter Password"
-                        wire:model='password'>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1"><i class="far fa-key"></i></span>
+                        <input type="password" class="form-control" id="password" placeholder="Enter Password"
+                            wire:model='password'>
+                    </div>
 
                     @error('password')
                     <span class="text-danger">{{ $message }}</span>
