@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('username')->nullable();
             $table->string('police_id')->nullable();
             $table->string('contact_number')->nullable();
+            $table->string('rank')->nullable();
             $table->string('address')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

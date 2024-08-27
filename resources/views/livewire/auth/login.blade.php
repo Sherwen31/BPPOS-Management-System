@@ -32,7 +32,10 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-dark">Login</button>
+                <button type="submit" class="btn btn-dark">
+                    <span wire:loading.remove>Login</span>
+                    <span wire:loading class="spinner-border"></span>
+                </button>
                 <a href="#">Forgot Password?</a>
                 <hr>
                 <p class="text-center">

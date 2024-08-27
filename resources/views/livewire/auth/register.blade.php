@@ -104,7 +104,10 @@
                         @enderror
                     </div>
                 </div>
-                <button type="submit" class="btn btn-dark mb-5">Submit</button>
+                <button type="submit" class="btn btn-dark mb-5">
+                    <span wire:loading.remove>Submit</span>
+                    <span class="spinner-border" wire:loading></span>
+                </button>
 
                 <p class="text-center">
                     Already have an account?
