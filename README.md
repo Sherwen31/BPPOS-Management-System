@@ -20,3 +20,4 @@ The Bohol Police Provincial Office Scoreboard Management System is a web-based a
 - **MySQL:** Database for storing user data and scores.
 
 ![BPPO Logo](https://www.boholchronicle.com.ph/wp-content/uploads/2018/07/bppo-logo.jpg)
+
