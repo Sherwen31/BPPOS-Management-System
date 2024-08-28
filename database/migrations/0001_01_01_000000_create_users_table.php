@@ -18,7 +18,10 @@ return new class extends Migration
             $table->string('police_id')->nullable();
             $table->string('contact_number')->nullable();
             $table->string('rank')->nullable();
+            $table->string('position')->nullabe();
+            $table->string('unit_assignment')->nulalble();
             $table->string('address')->nullable();
+            $table->string('year_attended')->nullabe();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

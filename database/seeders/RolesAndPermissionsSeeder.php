@@ -34,9 +34,13 @@ class RolesAndPermissionsSeeder extends Seeder
         ], [
             'name' => 'John Doe',
             'username' => 'johndoe',
-            'police_id' => 'johndoe',
+            'police_id' => '1234-1234',
             'contact_number' => '09123456789',
             'address' => 'New York City',
+            'position' => 'Director General',
+            'rank' => 'Police Executive Master Sergeant',
+            'unit_assignment' => 'Balig Kubaw City',
+            'year_attended' => '2020-10-10',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
         ]);
@@ -51,6 +55,10 @@ class RolesAndPermissionsSeeder extends Seeder
             'police_id' => 'admin',
             'contact_number' => '09123456789',
             'address' => 'Los Angeles',
+            'position' => 'Director General II',
+            'rank' => 'Police Executive Major',
+            'unit_assignment' => 'Tukal Bako City',
+            'year_attended' => '2019-08-08',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
         ]);

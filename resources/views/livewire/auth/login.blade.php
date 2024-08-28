@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label for="username">Username</label>
                     <div class="input-group">
-                        <span class="input-group-text" id="basic-addon1"><i class="far fa-user"></i></span>
+                        <span class="input-group-text" id="basic-addon1"><i class="far fa-users"></i></span>
                         <input type="text" class="form-control" id="username" placeholder="Enter Username"
                             wire:model='username_or_email_or_police_id'>
                     </div>
