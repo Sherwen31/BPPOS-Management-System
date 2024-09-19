@@ -4,7 +4,7 @@
             <a href="/" wire:navigate class="text-decoration-none text-dark">
                 <h3><strong>PSMS</strong></h3>
             </a>
-            <h4>Admin Log In</h4>
+            <h4>Log In</h4>
         </div>
         <form wire:submit='login'>
 
@@ -34,7 +34,11 @@
                 </div>
                 <button type="submit" class="btn btn-dark">
                     <span wire:loading.remove>Login</span>
-                    <span wire:loading class="spinner-border"></span>
+                    <div wire:loading>
+                        <span class="spinner-grow spinner-grow-sm"></span>
+                        <span class="spinner-grow spinner-grow-sm"></span>
+                        <span class="spinner-grow spinner-grow-sm"></span>
+                    </div>
                 </button>
                 <a href="#">Forgot Password?</a>
                 <hr>

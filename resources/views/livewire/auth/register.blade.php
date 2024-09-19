@@ -4,7 +4,7 @@
             <a href="/" wire:navigate class="text-decoration-none text-dark">
                 <h3><strong>PSMS</strong></h3>
             </a>
-            <h4>Admin Sign Up</h4>
+            <h4>Sign Up</h4>
         </div>
         <form wire:submit='register'>
             <div class="signup-form">
@@ -104,10 +104,16 @@
                         @enderror
                     </div>
                 </div>
-                <button type="submit" class="btn btn-dark mb-5">
-                    <span wire:loading.remove>Submit</span>
-                    <span class="spinner-border" wire:loading></span>
-                </button>
+                <d class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-dark mb-5" style="width: 50%">
+                        <span wire:loading.remove>Submit</span>
+                        <div wire:loading>
+                            <span class="spinner-grow spinner-grow-sm"></span>
+                            <span class="spinner-grow spinner-grow-sm"></span>
+                            <span class="spinner-grow spinner-grow-sm"></span>
+                        </div>
+                    </button>
+                </d>
 
                 <p class="text-center">
                     Already have an account?

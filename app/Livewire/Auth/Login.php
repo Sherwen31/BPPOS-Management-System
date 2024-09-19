@@ -43,7 +43,9 @@ class Login extends Component
         ]);
 
         if ($login) {
-            if ($user->hasRole('admin')) {
+            if ($user->hasRole('super_admin')) {
+                $this->redirect('/super-admin/dashboard', navigate: true);
+            } elseif ($user->hasRole('admin')) {
                 $this->redirect('/admin/dashboard', navigate: true);
             } else {
                 $this->redirect('/home', navigate: true);

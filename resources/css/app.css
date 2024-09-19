@@ -1,0 +1,354 @@
+/*  Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700");
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-boxMod;
+    font-family: "Poppins", sans-serif;
+    /* background-color: whitesmoke; */
+}
+
+body {
+    background: whitesmoke;
+    /* overflow: hidden; */
+}
+
+.containerMod {
+    display: flex;
+}
+
+.containerMod ul li {
+    list-style-type: none;
+    margin-left: -30px;
+}
+
+.logo {
+    position: relative;
+    color: whitesmoke;
+    font-size: 14px;
+    display: table;
+    width: 1280px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    margin: 10px 0 0 10px;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.logo span {
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+.sidebarMod ul li {
+    display: flex;
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+}
+.sidebarMod a {
+    position: relative;
+    color: whitesmoke;
+    font-size: 14px;
+    display: table;
+    width: 1280px;
+    padding: 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+.sidebarMod i {
+    padding-top: 10px;
+}
+
+/* .sidebarMod a:hover {
+  background: #ff0000;
+} */
+
+.sidebarMod {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    left: 0;
+    background: #2f343d;
+    width: 340px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+}
+
+.sidebarMod.collapsed {
+    width: 90px;
+}
+
+.sidebarMod .nav-item {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.sidebarMod.collapsed .nav-item {
+    opacity: 0;
+}
+
+.sidebarMod .logo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.sidebarMod .fas,
+.fa-duotone,
+.fa-sharp-duotone {
+    width: 70px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+}
+
+#toggle-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 20px;
+    font-size: 24px;
+}
+
+.sidebarMod ul li {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Remove background on hover when not collapsed */
+.sidebarMod:not(.collapsed) ul li:hover a {
+    background: whitesmoke;
+    color: #2f343d;
+}
+
+/* Default hover background when collapsed */
+.sidebarMod.collapsed ul li:hover a {
+    background: whitesmoke;
+    color: #2f343d;
+}
+
+/* Update tooltip positioning */
+.sideNavToolTip {
+    position: absolute;
+    left: 90px; /* Adjust this based on your collapsed sidebar width */
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 10; /* Ensure it stays above other elements */
+}
+
+/* Show tooltip on hover */
+.sidebarMod.collapsed ul li:hover .sideNavToolTip {
+    opacity: 1;
+    visibility: visible;
+    margin-left: 5px;
+}
+
+/* Prevent `li` from cutting off the tooltip */
+.sidebarMod ul li {
+    position: relative; /* Necessary to position the tooltip outside */
+    overflow: visible; /* Ensure the tooltip is not clipped */
+}
+
+/* Ensure nav-item is hidden when collapsed */
+.sidebarMod.collapsed .nav-item {
+    display: none;
+}
+
+/* Sidebar hover color handling */
+.sidebarMod a:hover {
+    background: #ff0000;
+}
+
+/* Sidebar hover color handling */
+/* .sidebarMod a:hover {
+  background: #ff0000!important;
+}
+
+.sidebarMod.collapsed a:hover {
+  background: #ff0000!important;
+} */
+
+/* mainMod Section */
+.mainMod {
+    position: relative;
+    padding: 20px;
+    width: 100%;
+}
+
+.mainMod-top {
+    display: flex;
+    width: 100%;
+}
+
+.mainMod-top i {
+    position: absolute;
+    right: 0;
+    margin: 10px 30px;
+    color: rgb(110, 109, 109);
+    cursor: pointer;
+}
+
+.mainMod-skills {
+    display: flex;
+    margin-top: 20px;
+}
+
+.mainMod-skills .cardMod {
+    width: 25%;
+    margin: 10px;
+    background: #fff;
+    text-align: center;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.mainMod-skills .cardMod h3 {
+    margin: 10px;
+    text-transform: capitalize;
+}
+
+.mainMod-skills .cardMod p {
+    font-size: 12px;
+}
+
+.mainMod-skills .cardMod button {
+    background: orangered;
+    color: #fff;
+    padding: 7px 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.mainMod-skills .cardMod button:hover {
+    background: rgba(223, 70, 15, 0.856);
+}
+
+.mainMod-skills .cardMod i {
+    font-size: 22px;
+    padding: 10px;
+}
+
+/* Courses */
+.mainMod-course {
+    margin-top: 20px;
+    text-transform: capitalize;
+}
+
+.course-boxMod {
+    width: 100%;
+    height: 300px;
+    padding: 10px 10px 30px 10px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.course-boxMod ul {
+    list-style: none;
+    display: flex;
+}
+
+.course-boxMod ul li {
+    margin: 10px;
+    color: gray;
+    cursor: pointer;
+}
+
+.course-boxMod ul .active {
+    color: #000;
+    border-bottom: 1px solid #000;
+}
+
+.course-boxMod .course {
+    display: flex;
+}
+
+.boxMod {
+    width: 33%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background: rgb(235, 233, 233);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.boxMod p {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.boxMod button {
+    background: #000;
+    color: #fff;
+    padding: 7px 10px;
+    border-radius: 10px;
+    margin-top: 3rem;
+    cursor: pointer;
+}
+
+.boxMod button:hover {
+    background: rgba(0, 0, 0, 0.842);
+}
+
+.boxMod i {
+    font-size: 7rem;
+    float: right;
+    margin: -20px 20px 20px 0;
+}
+
+.html {
+    color: rgb(25, 94, 54);
+}
+
+.css {
+    color: rgb(104, 179, 35);
+}
+
+.js {
+    color: rgb(28, 98, 179);
+}
+
+/* USER ACCOUNT MANAGEMENT */
+
+.createUserBtn {
+    position: absolute;
+    right: 5%;
+}
+.createUserBtn button {
+    background-color: #2f343d;
+    color: whitesmoke;
+    margin-top: -25%;
+}
+#addUser .form-floating .col {
+    position: absolute !important;
+}
+.step {
+    display: none;
+}
+.step.active {
+    display: block;
+}

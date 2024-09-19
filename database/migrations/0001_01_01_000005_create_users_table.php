@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('police_id')->nullable();
             $table->string('contact_number')->nullable();
             $table->string('rank')->nullable();
-            $table->string('position')->nullabe();
-            $table->string('unit_assignment')->nulalble();
+            $table->foreignId('position_id')->nullabe();
+            $table->foreignId('unit_id')->nulalble();
             $table->string('address')->nullable();
             $table->string('year_attended')->nullabe();
             $table->string('email')->unique();
@@ -27,6 +27,9 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -19,50 +19,72 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // Create or retrieve permissions
         $accessAllPages = Permission::firstOrCreate(['name' => 'access-all-pages']);
+        $accessAdminPages = Permission::firstOrCreate(['name' => 'access-admin-pages']);
         $accessUserPages = Permission::firstOrCreate(['name' => 'access-user-pages']);
 
         // Create or retrieve roles and assign permissions
+        $superAdminRole = Role::firstOrCreate(['name' => 'super_admin']);
+        $superAdminRole->syncPermissions([$accessAllPages, $accessAdminPages, $accessUserPages]);
+
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
-        $adminRole->syncPermissions([$accessAllPages, $accessUserPages]);
+        $adminRole->syncPermissions([$accessAdminPages, $accessUserPages]);
 
         $userRole = Role::firstOrCreate(['name' => 'user']);
         $userRole->syncPermissions([$accessUserPages]);
 
         // Create or retrieve users and assign roles
         $user = User::firstOrCreate([
-            'email' => 'johndoe@gmail.com',
+            'email'                 =>          'johndoe@gmail.com',
         ], [
-            'name' => 'John Doe',
-            'username' => 'johndoe',
-            'police_id' => '1234-1234',
-            'contact_number' => '09123456789',
-            'address' => 'New York City',
-            'position' => 'Director General',
-            'rank' => 'Police Executive Master Sergeant',
-            'unit_assignment' => 'Balig Kubaw City',
-            'year_attended' => '2020-10-10',
-            'email_verified_at' => now(),
-            'password' => bcrypt('password'),
+            'name'                  =>          'John Doe',
+            'username'              =>          'johndoe',
+            'police_id'             =>          '1234-1234',
+            'contact_number'        =>          '09123456789',
+            'address'               =>          'New York City',
+            'position_id'           =>          5,
+            'rank'                  =>          'Police Executive Master Sergeant',
+            'unit_id'               =>          5,
+            'year_attended'         =>          '2020-10-10',
+            'email_verified_at'     =>          now(),
+            'password'              =>          bcrypt('password'),
         ]);
 
         $user->assignRole($userRole);
 
         $admin = User::firstOrCreate([
-            'email' => 'admin@gmail.com',
+            'email'                 =>              'admin@gmail.com',
         ], [
-            'name' => 'Administrator',
-            'username' => 'admin',
-            'police_id' => 'admin',
-            'contact_number' => '09123456789',
-            'address' => 'Los Angeles',
-            'position' => 'Director General II',
-            'rank' => 'Police Executive Major',
-            'unit_assignment' => 'Tukal Bako City',
-            'year_attended' => '2019-08-08',
-            'email_verified_at' => now(),
-            'password' => bcrypt('password'),
+            'name'                  =>              'Administrator',
+            'username'              =>              'admin',
+            'police_id'             =>              'admin',
+            'contact_number'        =>              '09123456789',
+            'address'               =>              'Los Angeles',
+            'position_id'           =>              2,
+            'rank'                  =>              'Police Executive Major',
+            'unit_id'               =>              2,
+            'year_attended'         =>              '2019-08-08',
+            'email_verified_at'     =>              now(),
+            'password'              =>              bcrypt('password'),
         ]);
 
         $admin->assignRole($adminRole);
+
+        $superAdmin = User::firstOrCreate([
+            'email'                     =>              'super_admin@gmail.com',
+        ], [
+            'name'                      =>              'Super Administrator',
+            'username'                  =>              'super_admin',
+            'police_id'                 =>              'super_admin',
+            'contact_number'            =>              '09123456789',
+            'address'                   =>              'USA',
+            'position_id'               =>              1,
+            'rank'                      =>              'Director-General',
+            'unit_id'                   =>              1,
+            'year_attended'             =>              '2019-08-08',
+            'email_verified_at'         =>              now(),
+            'password'                  =>              bcrypt('password'),
+        ]);
+
+        $superAdmin->assignRole($superAdminRole);
     }
 }

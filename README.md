@@ -21,3 +21,19 @@ The Bohol Police Provincial Office Scoreboard Management System is a web-based a
 
 ![BPPO Logo](https://www.boholchronicle.com.ph/wp-content/uploads/2018/07/bppo-logo.jpg)
 
+
+
+
+
+// RAW
+
+        $startDate = Carbon::parse('2020-10-25');
+        $endDate = Carbon::now();
+
+        $diff = $startDate->diff($endDate);
+
+        $years = $diff->y;
+        $months = $diff->m;
+        $formattedDifference = "{$years} years and {$months} months";
+
+        $now = now()->format('F d, Y g:i A');
