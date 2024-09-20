@@ -28,7 +28,8 @@
                             <div class="mb-3">
                                 <label for="firstName" class="form-label"><strong>
                                         <h3>Dimensions</h3>
-                                    </strong>Output(25 points)</label>
+                                        Output(25 points)
+                                    </strong></label>
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                         <td>Performance Indications</td>
