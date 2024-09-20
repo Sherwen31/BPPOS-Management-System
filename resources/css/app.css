@@ -134,6 +134,11 @@ body {
     color: #2f343d;
 }
 
+.active {
+    background: whitesmoke;
+    color: #2f343d !important;
+}
+
 /* Default hover background when collapsed */
 .sidebarMod.collapsed ul li:hover a {
     background: whitesmoke;
@@ -343,6 +348,13 @@ body {
     color: whitesmoke;
     margin-top: -25%;
 }
+
+.createUserBtn button:hover {
+    background-color: #404347;
+    color: whitesmoke;
+    margin-top: -25%;
+}
+
 #addUser .form-floating .col {
     position: absolute !important;
 }

@@ -28,7 +28,7 @@ class Register extends Component
     {
         $this->validate([
             'name'                      =>              ['required', 'min:4', 'max:50'],
-            'username'                  =>              ['required', 'min:4', 'max:50', 'unique:users,username'],
+            'username'                  =>              ['required', 'min:4', 'max:20', 'regex:/^[a-zA-Z0-9_]+$/', 'unique:users,username'],
             'police_id'                 =>              ['required', 'min:1', 'max:100', 'unique:users,police_id'],
             'contact_number'            =>              ['required', 'numeric', 'digits:11'],
             'address'                   =>              ['required', 'min:4', 'max:100'],

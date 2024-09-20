@@ -36,7 +36,9 @@ class RolesAndPermissionsSeeder extends Seeder
         $user = User::firstOrCreate([
             'email'                 =>          'johndoe@gmail.com',
         ], [
-            'name'                  =>          'John Doe',
+            'last_name'             =>          'Doe',
+            'first_name'            =>          'John',
+            'middle_name'           =>          'Boltiks',
             'username'              =>          'johndoe',
             'police_id'             =>          '1234-1234',
             'contact_number'        =>          '09123456789',
@@ -54,7 +56,9 @@ class RolesAndPermissionsSeeder extends Seeder
         $admin = User::firstOrCreate([
             'email'                 =>              'admin@gmail.com',
         ], [
-            'name'                  =>              'Administrator',
+            'last_name'             =>              null,
+            'first_name'            =>              'Administrator',
+            'middle_name'           =>              null,
             'username'              =>              'admin',
             'police_id'             =>              'admin',
             'contact_number'        =>              '09123456789',
@@ -72,7 +76,9 @@ class RolesAndPermissionsSeeder extends Seeder
         $superAdmin = User::firstOrCreate([
             'email'                     =>              'super_admin@gmail.com',
         ], [
-            'name'                      =>              'Super Administrator',
+            'last_name'                 =>              'Administrator',
+            'first_name'                =>              'Super',
+            'middle_name'               =>              null,
             'username'                  =>              'super_admin',
             'police_id'                 =>              'super_admin',
             'contact_number'            =>              '09123456789',
