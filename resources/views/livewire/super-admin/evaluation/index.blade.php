@@ -1,4 +1,108 @@
 <div>
+    <!-- Evaluation Modal -->
+    <div wire:ignore.self class="modal fade" id="evaluationModal" tabindex="-1" aria-labelledby="evaluationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="evaluationModalLabel">Manage Evaluation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form wire:submit.prevent='createEvaluation'>
+                        <div class="card px-3 mb-2">
+                            <div class="card-body">
+                                <p class="text-center">
+                                    <strong>Enter Evaluation Details</strong>
+                                    <br>
+                                    <span class="text-muted">
+                                        Example: My Title(10 points)
+                                    </span>
+                                </p>
+                                <div class="d-flex gap-3">
+                                    <div class="mb-3 form-floating col-6">
+                                        <input wire:model='title' type="text" class="form-control" id="title"
+                                            placeholder="Enter Evaluation Title">
+                                        <label for="title">Enter Evaluation Title</label>
+                                        @error('title')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 form-floating col-6">
+                                        <input wire:model='sub_title' type="number" class="form-control" id="sub_title"
+                                            placeholder="Enter Evaluation Sub Title (E.g: 10 points)">
+                                        <label for="sub_title">Enter Evaluation Points (E.g: 10 points)</label>
+                                        @error('sub_title')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="border-top border-bottom d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-sm btn-primary my-2">
+                                        <span wire:target='createEvaluation' wire:loading.remove>Save</span>
+                                        <span wire:target='createEvaluation' wire:loading><span
+                                                class="spinner-border spinner-border-sm"></span> Saving...</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form wire:submit.prevent='createEvaluationItem'>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="text-center">
+                                    <strong>Enter Evaluation Item</strong>
+                                </p>
+                                <div class="mb-3 form-floating">
+                                    <select wire:model='evaluation_id' class="form-select">
+                                        <option hidden selected>Select Evaluation Title</option>
+                                        <option disabled>Select Evaluation Title</option>
+                                        @forelse ($evaluations as $evaluation)
+                                        <option value="{{ $evaluation->id }}">{{ $evaluation->title }}({{
+                                            $evaluation->sub_title }})</option>
+                                        @empty
+                                        <option disabled>No evaluations founded</option>
+                                        @endforelse
+                                    </select>
+                                    <label for="evaluation_id">Select Evaluation Title</label>
+                                    @error('evaluation_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 form-floating">
+                                    <input type="text" class="form-control" wire:model='performance_indications'
+                                        placeholder="Enter Performance Indications">
+                                    <label for="performance_indications">Enter Performance Indications</label>
+                                    @error('performance_indications')
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 form-floating">
+                                    <input type="text" class="form-control" wire:model='point_allocation'
+                                        placeholder="Enter Point Allocation">
+                                    <label for="point_allocation">Enter Point Allocation</label>
+                                    @error('point_allocation')
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="border-top border-bottom d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-sm btn-primary my-2">
+                                        <span wire:target='createEvaluationItem' wire:loading.remove>Save</span>
+                                        <span wire:target='createEvaluationItem' wire:loading><span
+                                                class="spinner-border spinner-border-sm"></span> Saving...</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="containerMod">
         @livewire('components.layouts.sidebar')
         <section class="mainMod">
@@ -7,6 +111,11 @@
             </button>
             <div class="mainMod-top">
                 <h1>User Evaluation Management</h1>
+            </div>
+            <div class="d-flex justify-content-end">
+                <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#evaluationModal">
+                    <i class="far fa-file-plus"></i> Create Evaluation
+                </a>
             </div>
             <div class="mainMod-skills">
                 <table class="table">
@@ -19,8 +128,9 @@
                             <th scope="col">Current Position</th>
                             <th scope="col">Position Duration</th>
                             <th scope="col">Role</th>
+                            <th scope="col">Last Evaluated</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,6 +176,12 @@
                                 @endforeach
                             </td>
                             <td>
+                                @php
+                                $latestRating = $user->evaluationRatings->sortByDesc('created_at')->first();
+                                @endphp
+                                {{ $latestRating ? $latestRating->created_at->diffForHumans() : 'Not Evaluated Yet' }}
+                            </td>
+                            <td>
                                 @if ($user->email_verified_at === null)
                                 <span class="badge bg-danger">Unverified</span>
                                 @else
@@ -79,8 +195,12 @@
                                         data-bs-target="#manageUserModal{{ $user->id }}">
                                         <i class="far fa-gears"></i> Manage
                                     </button>
-                                    <a href="/super-admin/evaluation/user-evaluation/{{ $user->id }}/{{ $user->police_id }}" wire:navigate class="btn btn-primary btn-sm">
+                                    <a href="/super-admin/evaluation/user-evaluation/{{ $user->id }}/{{ $user->police_id }}"
+                                        wire:navigate class="btn btn-primary btn-sm">
                                         <i class="far fa-file-circle-plus"></i> Evaluate
+                                    </a>
+                                    <a class="btn btn-warning btn-sm" wire:navigate href="/super-admin/print/printing-details/preview/{{ $user->id }}/{{ $user->police_id }}/info">
+                                        <i class="far fa-print"></i> Print
                                     </a>
                                 </div>
                                 {{-- Manage Modal --}}
@@ -93,7 +213,8 @@
                                             <div class="modal-content" style="max-height: 500px; overflow: auto;">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5"
-                                                        id="manageUserModal{{ $user->id }}Label">Updating {{
+                                                        id="manageUserModal{{ $user->id }}Label">
+                                                        Updating {{
                                                         $user->first_name }}'s details
                                                     </h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -262,7 +383,7 @@
                                                     </div>
                                                     @else
                                                     <div class="d-flex justify-content-center">
-                                                        <span class="spinner-border"></span>
+                                                        <span class="spinner-border spinner-border-sm"></span>
                                                     </div>
                                                     @endif
                                                 </div>

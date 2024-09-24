@@ -8,7 +8,7 @@
             <div class="mainMod-top">
                 <h1>User Account Management</h1>
             </div>
-            <div class="createUserBtn"><button class="btn mb-2 btn-sm" data-bs-toggle="modal"
+            <div class="createUserBtn"><button wire:click='resetData' class="btn mb-2 btn-sm" data-bs-toggle="modal"
                     data-bs-target="#createUserModal"><i class="far fa-user-plus"></i> Create User</button></div>
             <div class="mainMod-skills">
                 <table class="table">
@@ -275,7 +275,7 @@
                                                     </div>
                                                     @else
                                                     <div class="d-flex justify-content-center">
-                                                        <span class="spinner-border"></span>
+                                                        <span class="spinner-border spinner-border-sm"></span>
                                                     </div>
                                                     @endif
                                                 </div>

@@ -48,7 +48,7 @@ class Login extends Component
             } elseif ($user->hasRole('admin')) {
                 $this->redirect('/admin/dashboard', navigate: true);
             } else {
-                $this->redirect('/home', navigate: true);
+                $this->redirect('/users/home', navigate: true);
             }
         } else {
             $this->dispatch('toastr', [
@@ -63,7 +63,7 @@ class Login extends Component
     public function render()
     {
         if (auth()->check()) {
-            $this->redirect('/home', navigate: true);
+            $this->redirect('/users/home', navigate: true);
         }
         return view('livewire.auth.login');
     }

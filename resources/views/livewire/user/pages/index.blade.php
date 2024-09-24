@@ -1,7 +1,7 @@
 <div>
-    <div class="containerModed">
+    <div class="containerMod">
         @livewire('components.layouts.user-sidebar')
-        <div class="sec">
+        <div class="mainMod" style="padding: 0;">
             <div class="btn-toggle">
                 <button id="toggle-button">
                     <i class="fas fa-bars"></i>
@@ -10,12 +10,10 @@
                     <h4><strong>BPPO-Police Scorecard Management System</strong></h4>
                 </div>
             </div>
-            <div class="mainModed">
-
-                <div class="welcome-pageModed">
+            <div class="d-flex justify-content-center align-items-center mt-5">
+                <div class="welcome-pageModed mt-5">
                     <div class="welcome-pageModed-svg">
-                        <img src="/assets/police-officer-male-svgrepo-com.svg" alt="Police" width="100"
-                            height="100">
+                        <img src="/assets/police-officer-male-svgrepo-com.svg" alt="Police" width="100" height="100">
                     </div>
                     <div class="welcome-pageModed-content">
                         <!-- Need data for the Name -->
@@ -29,8 +27,7 @@
                         </div>
                     </div>
                     <div class="welcome-pageModed-svg">
-                        <img src="/assets/police-officer-female-svgrepo-com.svg" alt="Police" width="100"
-                            height="100">
+                        <img src="/assets/police-officer-female-svgrepo-com.svg" alt="Police" width="100" height="100">
                     </div>
                 </div>
             </div>
@@ -39,15 +36,6 @@
     <style>
         body {
             background: #dfe9f5;
-        }
-
-        .containerModed {
-            display: flex;
-        }
-
-        .containerModed ul li {
-            list-style-type: none;
-            margin-left: -30px;
         }
 
         nav {
@@ -59,23 +47,6 @@
             background: #fff;
             width: 280px;
             box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-        }
-
-        .logoModed {
-            text-align: center;
-            display: flex;
-            margin: 10px 0 0 10px;
-        }
-
-        .logoModed img {
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-        }
-
-        .logoModed span {
-            font-weight: bold;
-            font-size: 18px;
         }
 
         a {
@@ -90,47 +61,6 @@
 
         a:hover {
             background: #ff0000;
-        }
-
-        .sidebarModed {
-            position: relative;
-            top: 0;
-            bottom: 0;
-            height: 100vh;
-            left: 0;
-            background: #2f343d;
-            width: 280px;
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-            transition: width 0.3s ease;
-        }
-
-        .sidebarModed.collapsed {
-            width: 90px;
-        }
-
-        .sidebarModed .nav-itemModed {
-            display: inline-block;
-            transition: opacity 0.3s ease;
-        }
-
-        .logoModed {
-            margin-right: 20px;
-            margin-left: 10px;
-        }
-
-        .logoModed .title {
-            font-size: 50px;
-        }
-
-        .sidebarModed.collapsed .nav-itemModed {
-            opacity: 0;
-        }
-
-        .sidebarModed .fas {
-            width: 70px;
-            height: 40px;
-            font-size: 20px;
-            text-align: center;
         }
 
         #toggle-button {
@@ -157,43 +87,6 @@
             color: #2f343d;
         }
 
-        .sidebarModed ul li {
-            position: relative;
-            overflow: visible;
-        }
-
-        .sidebarModed ul li a {
-            display: flex;
-            align-items: center;
-        }
-
-        .sidebarModed ul li i {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-        }
-
-        .sidebarModed .logoModed {
-            color: whitesmoke;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 60px;
-            margin-bottom: 10px;
-        }
-
-        /* Remove background on hover when not collapsed */
-        .sidebarModed:not(.collapsed) ul li:hover a {
-            background: whitesmoke;
-            color: #2f343d;
-        }
-
-        /* Default hover background when collapsed */
-        .sidebarModed.collapsed ul li:hover a {
-            background: whitesmoke;
-            color: #2f343d;
-        }
-
         /* TooltipModed styling */
         .tooltipModed {
             position: absolute;
@@ -210,36 +103,6 @@
             visibility: hidden;
             transition: opacity 0.3s ease;
             z-index: 10;
-            /* Ensure it stays above other elements */
-        }
-
-        .sidebarModed.collapsed ul.li:hover .tooltipModed {
-            opacity: 1;
-            visibility: visible;
-            margin-left: 5px;
-        }
-
-        .sidebarModed.collapsed .logoModed {
-            visibility: hidden;
-            margin-left: 114px;
-        }
-
-        .sidebarModed.collapsed .logoModed img {
-            visibility: visible;
-        }
-
-        /* MainModed Section */
-        .mainModed {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .sec {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
         }
 
         .welcome-pageModed {

@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('year_attended')->nullabe();
             $table->string('email')->unique();
+            $table->string('date_of_birth')->nullable();
+            $table->enum('gender', ['Male', 'Female', 'Not selected'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

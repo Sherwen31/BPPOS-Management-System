@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Position::class);
     }
+
+    public function evaluationRatings()
+    {
+        return $this->hasMany(EvaluationRating::class);
+    }
 }

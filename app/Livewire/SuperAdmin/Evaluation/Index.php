@@ -2,6 +2,8 @@
 
 namespace App\Livewire\SuperAdmin\Evaluation;
 
+use App\Models\Evaluation;
+use App\Models\EvaluationItem;
 use App\Models\Position;
 use App\Models\Unit;
 use App\Models\User;
@@ -29,11 +31,21 @@ class Index extends Component
     public $password;
     public $email;
     public $userData;
+    public $title;
+    public $sub_title;
+    public $evaluation_id;
+    public $performance_indications;
+    public $point_allocation;
+    public $weight_score = 0;
+    public $total_score;
+    public $evaluation_item_id;
+    public $evaluations = [];
+    public $evaluation_items = [];
 
     public function listings()
     {
-        $this->users = User::with(['position', 'unit', 'roles'])->whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'super_admin');
+        $this->users = User::with(['position', 'unit', 'roles', 'evaluationRatings'])->whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'super_admin')->orWhere('name', 'user');
         })
             ->where('id', '!=', auth()->user()->id)
             ->orderBy('id', 'asc')->get();
@@ -41,6 +53,10 @@ class Index extends Component
         $this->positions = Position::all();
 
         $this->units = Unit::all();
+
+        $this->evaluations = Evaluation::all();
+
+        $this->evaluation_items = EvaluationItem::all();
     }
 
     public function createUser()
@@ -217,11 +233,63 @@ class Index extends Component
         $this->userData = '';
     }
 
+    public function createEvaluation()
+    {
+        $this->validate([
+            'title'                       =>                  ['required', 'max:255', 'min:1'],
+            'sub_title'                   =>                  ['required', 'max:255', 'min:1'],
+        ]);
+
+        Evaluation::create([
+            'title'                       =>                  $this->title,
+            'sub_title'                   =>                  $this->sub_title,
+        ]);
+
+        $this->reset();
+
+        $this->dispatch('toastr', [
+            'type'              =>          'success',
+            'message'           =>          'Evaluation created successfully',
+        ]);
+    }
+
+    public function createEvaluationItem()
+    {
+        $this->validate([
+            'evaluation_id'                 =>                  ['required', 'exists:evaluations,id'],
+            'performance_indications'       =>                  ['required', 'max:255', 'min:1'],
+            'point_allocation'              =>                  ['required', 'max:255', 'min:1'],
+        ]);
+
+        $exists = EvaluationItem::where('evaluation_id', $this->evaluation_id)->where('performance_indications', $this->performance_indications)->exists();
+
+        if ($exists)
+        {
+            $this->validate([
+                'performance_indications'       =>                  ['required', 'max:255', 'min:1', 'unique:evaluation_items,performance_indications'],
+            ]);
+        }
+
+        EvaluationItem::create([
+            'evaluation_id'                 =>                  $this->evaluation_id,
+            'performance_indications'       =>                  $this->performance_indications,
+            'point_allocation'              =>                  $this->point_allocation,
+        ]);
+
+        $this->reset(['performance_indications', 'point_allocation']);
+
+        $this->dispatch('toastr', [
+            'type'              =>          'success',
+            'message'           =>          'Evaluation Item created successfully',
+        ]);
+    }
+
     public function messages()
     {
         return [
             'position_id.required'         =>              'The Position is required',
             'unit_id.required'             =>              'The Unit Assigned is required',
+            'evaluation_id.required'       =>              'The Evaluation Title is required',
         ];
     }
     public function render()

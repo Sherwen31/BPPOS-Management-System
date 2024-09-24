@@ -33,7 +33,7 @@ class Index extends Component
     public function listings()
     {
         $this->users = User::with(['position', 'unit', 'roles'])->whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'super_admin');
+            $query->where('name', 'super_admin')->orWhere('name', 'user');
         })
             ->where('id', '!=', auth()->user()->id)
             ->orderBy('id', 'asc')->get();
