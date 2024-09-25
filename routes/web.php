@@ -63,16 +63,7 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin|super_admin']], f
 
 Route::group(['middleware' => ['auth', 'verified', 'role:user|admin|super_admin']], function () {
     Route::get('/users/home', UserPagesIndex::class);
-});
-
-Route::group(['middleware' => ['auth', 'verified', 'role:user|admin|super_admin']], function () {
     Route::get('/users/individual-scorecard', UserPagesIndividualScorecard::class);
-});
-
-Route::group(['middleware' => ['auth', 'verified', 'role:user|admin|super_admin']], function () {
     Route::get('/users/scorecard-history', UserPagesScorecardHistory::class);
-});
-
-Route::group(['middleware' => ['auth', 'verified', 'role:user|admin|super_admin']], function () {
     Route::get('/users/account-management', UserPagesAccountManagement::class);
 });
