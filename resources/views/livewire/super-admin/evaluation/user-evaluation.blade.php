@@ -2,25 +2,36 @@
     <div class="container mt-5">
         <div class="mb-5">
             <a href="/super-admin/evaluation/user-evaluation" wire:navigate
-                class="btn btn-link text-decoration-none border btn-sm bg-dark-subtle rounded text-dark mt-3"><i class="far fa-arrow-left"></i> Back
+                class="btn btn-link text-decoration-none border btn-sm bg-dark-subtle rounded text-dark mt-3"><i
+                    class="far fa-arrow-left"></i> Back
                 to Evaluation</a>
         </div>
 
         <!-- Progress Indicator -->
         <h3 class="text-center"><strong>Police ID:</strong> <u>{{ $police_id }}</u></h3>
         <div class="progress-container mb-4">
-            <span class="step-indicator {{ $activeTab === 1 || $activeTab === 2 || $activeTab === 3 ? 'active' : '' }}" id="step1-indicator"
-                wire:click="setActiveTab(1)" style="cursor: pointer;">1</span>
+            <span class="step-indicator {{ $activeTab === 1 || $activeTab === 2 || $activeTab === 3 ? 'active' : '' }}"
+                id="step1-indicator" wire:click="setActiveTab(1)" style="cursor: pointer;">
+                <span wire:loading.remove wire:target='setActiveTab(1)'>1</span><span wire:loading
+                    wire:target='setActiveTab(1)'><span class="spinner-border spinner-border-sm"></span></span>
+            </span>
             <div class="progress-bar-container">
-                <div class="progress-bar {{ $activeTab === 2 || $activeTab === 3 ? 'active' : '' }}" id="progress-bar-1"></div>
+                <div class="progress-bar {{ $activeTab === 2 || $activeTab === 3 ? 'active' : '' }}"
+                    id="progress-bar-1"></div>
             </div>
             <span class="step-indicator {{ $activeTab === 2 || $activeTab === 3 ? 'active' : '' }}" id="step2-indicator"
-                wire:click="setActiveTab(2)" style="cursor: pointer;">2</span>
+                wire:click="setActiveTab(2)" style="cursor: pointer;">
+                <span wire:loading.remove wire:target='setActiveTab(2)'>2</span><span wire:loading
+                    wire:target='setActiveTab(2)'><span class="spinner-border spinner-border-sm"></span></span>
+            </span>
             <div class="progress-bar-container">
                 <div class="progress-bar {{ $activeTab === 3 ? 'active' : '' }}" id="progress-bar-2"></div>
             </div>
             <span class="step-indicator {{ $activeTab === 3 ? 'active' : '' }}" id="step3-indicator"
-                wire:click="setActiveTab(3)" style="cursor: pointer;">3</span>
+                wire:click="setActiveTab(3)" style="cursor: pointer;">
+                <span wire:loading.remove wire:target='setActiveTab(3)'>3</span><span wire:loading
+                    wire:target='setActiveTab(3)'><span class="spinner-border spinner-border-sm"></span></span>
+            </span>
         </div>
         <div class="card">
             <div class="card-body">
@@ -53,7 +64,7 @@
                                             <td>x</td>
                                             <td>
                                                 <input type="number"
-                                                    wire:model.live.debounce.500ms='numerical_rating.{{ $item->id }}'
+                                                    wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
                                                     step="1" placeholder="Enter number 1-5">
                                                 @error('numerical_rating.'.$item->id)
@@ -63,10 +74,16 @@
                                             </td>
                                             <td>=</td>
                                             <td class="result">
-                                                <span>
+                                                <span wire:loading.remove
+                                                    wire:target='numerical_rating.{{ $item->id }}'>
                                                     {{ isset($numerical_rating[$item->id]) ?
                                                     (int)$numerical_rating[$item->id] * (int)$item->point_allocation : 0
                                                     }}
+                                                </span>
+                                                <span wire:loading wire:target='numerical_rating.{{ $item->id }}'>
+                                                    <div class="spinner-grow spinner-grow-sm text-secondary"
+                                                        role="status">
+                                                    </div>
                                                 </span>
 
                                             </td>
@@ -89,7 +106,10 @@
                             </div>
                             @endforelse
                             <button type="button" class="btn btn-primary" onclick="nextStep(2)"
-                                wire:click="setActiveTab(2)">Next</button>
+                                wire:click="setActiveTab(2)"><span wire:loading.remove
+                                    wire:target='setActiveTab(2)'>Next</span><span wire:loading
+                                    wire:target='setActiveTab(2)'><span
+                                        class="spinner-border spinner-border-sm"></span></span></button>
                         </div>
                         <!-- Step 2 -->
                         <div class="tab-pane fade {{ $activeTab === 2 ? 'show active' : '' }}" id="step2"
@@ -102,7 +122,9 @@
                                     </strong></label>
                                 <table class="table table-bordered table-hover">
                                     <thead>
-                                        <td>Performance Indications</td>
+                                        <td>
+                                            Performance Indications
+                                        </td>
                                         <td class="text-center align-middle">Point Allocation</td>
                                         <td></td>
                                         <td class="text-center align-middle">Numerical Rating</td>
@@ -113,12 +135,16 @@
                                         @forelse ($evaluation->evaluationItems as $index => $item)
                                         <tr wire:key='{{ $item->id }}'>
 
-                                            <td>{{ $item->performance_indications }}</td>
+                                            <td>
+                                                <div
+                                                    style="min-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    {{ $item->performance_indications }}</div>
+                                            </td>
                                             <td class="multiplier">{{ $item->point_allocation }}</td>
                                             <td>x</td>
                                             <td>
                                                 <input type="number"
-                                                    wire:model.live.debounce.500ms='numerical_rating.{{ $item->id }}'
+                                                    wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
                                                     step="1" placeholder="Enter number 1-5">
                                                 @error('numerical_rating.'.$item->id)
@@ -128,10 +154,16 @@
                                             </td>
                                             <td>=</td>
                                             <td class="result">
-                                                <span>
+                                                <span wire:loading.remove
+                                                    wire:target='numerical_rating.{{ $item->id }}'>
                                                     {{ isset($numerical_rating[$item->id]) ?
                                                     (int)$numerical_rating[$item->id] * (int)$item->point_allocation : 0
                                                     }}
+                                                </span>
+                                                <span wire:loading wire:target='numerical_rating.{{ $item->id }}'>
+                                                    <div class="spinner-grow spinner-grow-sm text-secondary"
+                                                        role="status">
+                                                    </div>
                                                 </span>
 
                                             </td>
@@ -172,12 +204,16 @@
                                         @forelse ($evaluation->evaluationItems as $index => $item)
                                         <tr wire:key='{{ $item->id }}'>
 
-                                            <td>{{ $item->performance_indications }}</td>
+                                            <td>
+                                                <div
+                                                    style="min-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    {{ $item->performance_indications }}</div>
+                                            </td>
                                             <td class="multiplier">{{ $item->point_allocation }}</td>
                                             <td>x</td>
                                             <td>
                                                 <input type="number"
-                                                    wire:model.live.debounce.500ms='numerical_rating.{{ $item->id }}'
+                                                    wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
                                                     step="1" placeholder="Enter number 1-5">
                                                 @error('numerical_rating.'.$item->id)
@@ -187,10 +223,16 @@
                                             </td>
                                             <td>=</td>
                                             <td class="result">
-                                                <span>
+                                                <span wire:loading.remove
+                                                    wire:target='numerical_rating.{{ $item->id }}'>
                                                     {{ isset($numerical_rating[$item->id]) ?
                                                     (int)$numerical_rating[$item->id] * (int)$item->point_allocation : 0
                                                     }}
+                                                </span>
+                                                <span wire:loading wire:target='numerical_rating.{{ $item->id }}'>
+                                                    <div class="spinner-grow spinner-grow-sm text-secondary"
+                                                        role="status">
+                                                    </div>
                                                 </span>
 
                                             </td>
@@ -231,12 +273,16 @@
                                         @forelse ($evaluation->evaluationItems as $index => $item)
                                         <tr wire:key='{{ $item->id }}'>
 
-                                            <td>{{ $item->performance_indications }}</td>
+                                            <td>
+                                                <div
+                                                    style="min-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    {{ $item->performance_indications }}</div>
+                                            </td>
                                             <td class="multiplier">{{ $item->point_allocation }}</td>
                                             <td>x</td>
                                             <td>
                                                 <input type="number"
-                                                    wire:model.live.debounce.500ms='numerical_rating.{{ $item->id }}'
+                                                    wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
                                                     step="1" placeholder="Enter number 1-5">
                                                 @error('numerical_rating.'.$item->id)
@@ -246,10 +292,16 @@
                                             </td>
                                             <td>=</td>
                                             <td class="result">
-                                                <span>
+                                                <span wire:loading.remove
+                                                    wire:target='numerical_rating.{{ $item->id }}'>
                                                     {{ isset($numerical_rating[$item->id]) ?
                                                     (int)$numerical_rating[$item->id] * (int)$item->point_allocation : 0
                                                     }}
+                                                </span>
+                                                <span wire:loading wire:target='numerical_rating.{{ $item->id }}'>
+                                                    <div class="spinner-grow spinner-grow-sm text-secondary"
+                                                        role="status">
+                                                    </div>
                                                 </span>
 
                                             </td>
@@ -290,12 +342,16 @@
                                         @forelse ($evaluation->evaluationItems as $index => $item)
                                         <tr wire:key='{{ $item->id }}'>
 
-                                            <td>{{ $item->performance_indications }}</td>
+                                            <td>
+                                                <div
+                                                    style="min-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    {{ $item->performance_indications }}</div>
+                                            </td>
                                             <td class="multiplier">{{ $item->point_allocation }}</td>
                                             <td>x</td>
                                             <td>
                                                 <input type="number"
-                                                    wire:model.live.debounce.500ms='numerical_rating.{{ $item->id }}'
+                                                    wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
                                                     step="1" placeholder="Enter number 1-5">
                                                 @error('numerical_rating.'.$item->id)
@@ -305,10 +361,16 @@
                                             </td>
                                             <td>=</td>
                                             <td class="result">
-                                                <span>
+                                                <span wire:loading.remove
+                                                    wire:target='numerical_rating.{{ $item->id }}'>
                                                     {{ isset($numerical_rating[$item->id]) ?
                                                     (int)$numerical_rating[$item->id] * (int)$item->point_allocation : 0
                                                     }}
+                                                </span>
+                                                <span wire:loading wire:target='numerical_rating.{{ $item->id }}'>
+                                                    <div class="spinner-grow spinner-grow-sm text-secondary"
+                                                        role="status">
+                                                    </div>
                                                 </span>
 
                                             </td>
@@ -333,7 +395,10 @@
                             <button type="button" class="btn btn-secondary" onclick="prevStep(1)"
                                 wire:click="setActiveTab(1)">Previous</button>
                             <button type="button" class="btn btn-primary" onclick="nextStep(3)"
-                                wire:click="setActiveTab(3)">Next</button>
+                                wire:click="setActiveTab(3)"><span wire:loading.remove
+                                    wire:target='setActiveTab(3)'>Next</span><span wire:loading
+                                    wire:target='setActiveTab(3)'><span
+                                        class="spinner-border spinner-border-sm"></span></span></button>
                         </div>
                         <!-- Step 3 -->
                         <div class="tab-pane fade {{ $activeTab === 3 ? 'show active' : '' }}" id="step3"
@@ -364,7 +429,7 @@
                                             <td rowspan="6">x</td>
                                             <td rowspan="6">
                                                 <input type="number"
-                                                    wire:model.live.debounce.500ms='numerical_rating.{{ $item->id }}'
+                                                    wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
                                                     step="1" placeholder="Enter number 1-5">
                                                 @error('numerical_rating.'.$item->id)
@@ -374,10 +439,16 @@
                                             </td>
                                             <td rowspan="6">=</td>
                                             <td rowspan="6" class="result">
-                                                <span>
+                                                <span wire:loading.remove
+                                                    wire:target='numerical_rating.{{ $item->id }}'>
                                                     {{ isset($numerical_rating[$item->id]) ?
                                                     (int)$numerical_rating[$item->id] * (int)$item->point_allocation : 0
                                                     }}
+                                                </span>
+                                                <span wire:loading wire:target='numerical_rating.{{ $item->id }}'>
+                                                    <div class="spinner-grow spinner-grow-sm text-secondary"
+                                                        role="status">
+                                                    </div>
                                                 </span>
 
                                             </td>

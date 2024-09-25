@@ -41,7 +41,7 @@
 
                                 $years = $diff->y;
                                 $months = $diff->m;
-                                $formattedDifference = "{$years} year(s) and {$months} month(s)";
+                                $formattedDifference = $years !== 0 ? "{$years} years and {$months} months" : "{$months} months";
                                 @endphp
                                 {{ $formattedDifference }}
                             </div>
@@ -232,15 +232,15 @@
                             {{ $total_weight_score }} <br> {{ number_format($user_total_points, 1) }}
                             <br>
                             <span>
-                                @if ($user_total_points >= 91 || $user_total_points >= 100)
-                            APR
-                            @elseif ($user_total_points <= 81 && $user_total_points >= 90.99)
+                                @if ($user_total_points >= 91 && $user_total_points <= 100)
                             OS
-                            @elseif ($user_total_points <= 71 && $user_total_points >= 80.99)
+                            @elseif ($user_total_points >= 81 && $user_total_points <= 90.99)
+                            VS
+                            @elseif ($user_total_points >= 71 && $user_total_points <= 80.99)
                             SF
-                            @elseif ($user_total_points <= 70.99)
+                            @elseif ($user_total_points >= 0.01 &&$user_total_points <= 70.99)
                             PR
-                            @elseif($user_total_points === 0)
+                            @else
                             No rating yet
                             @endif
                             </span>

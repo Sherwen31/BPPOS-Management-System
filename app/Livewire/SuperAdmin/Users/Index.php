@@ -52,7 +52,7 @@ class Index extends Component
             'unit_id'                   =>                  ['required', 'exists:units,id'],
             'rank'                      =>                  ['required'],
             'police_id'                 =>                  ['required'],
-            'year_attended'             =>                  ['date', 'required'],
+            'year_attended'             =>                  ['date', 'required', 'before_or_equal:today'],
             'username'                  =>                  ['required', 'unique:users,username'],
             'password'                  =>                  ['required', 'min:6', 'max:50'],
             'email'                     =>                  ['email', 'unique:users,email', 'required']
@@ -142,7 +142,7 @@ class Index extends Component
             'unit_id'                   =>                  ['required', 'exists:units,id'],
             'rank'                      =>                  ['required'],
             'police_id'                 =>                  ['required'],
-            'year_attended'             =>                  ['date', 'required'],
+            'year_attended'             =>                  ['date', 'required', 'before_or_equal:today'],
             'username'                  =>                  ['required', 'unique:users,username,' . $this->userData->id],
             'email'                     =>                  ['email', 'unique:users,email,' . $this->userData->id, 'required']
         ]);

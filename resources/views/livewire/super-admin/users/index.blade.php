@@ -18,7 +18,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Position</th>
                             <th scope="col">Unit Assigned</th>
-                            <th scope="col">Current Position</th>
+                            <th scope="col">Rank</th>
                             <th scope="col">Position Duration</th>
                             <th scope="col">Role</th>
                             <th scope="col">Status</th>
@@ -56,7 +56,7 @@
 
                                 $years = $diff->y;
                                 $months = $diff->m;
-                                $formattedDifference = "{$years} years and {$months} months";
+                                $formattedDifference = $years !== 0 ? "{$years} years and {$months} months" : "{$months} months";
                                 @endphp
                                 {{ $formattedDifference }}
                             </td>
@@ -93,7 +93,7 @@
                                     <button class="btn btn-warning btn-sm"
                                         wire:confirm='Are you sure you want to verify this user?'
                                         wire:click='verified({{ $user->id }})'><i class="far fa-check"></i>
-                                        Verified</button>
+                                        Verify</button>
                                     @endif
                                 </div>
                                 {{-- Manage Modal --}}
@@ -274,9 +274,23 @@
                                                         </div>
                                                     </div>
                                                     @else
-                                                    <div class="d-flex justify-content-center">
-                                                        <span class="spinner-border spinner-border-sm"></span>
-                                                    </div>
+                                                    <p class="placeholder-glow" style="width: 460px;">
+                                                        <span class="placeholder col-12"></span>
+                                                        <span class="placeholder col-4"></span>
+                                                        <span class="placeholder col-8"></span>
+                                                        <span class="placeholder col-12"></span>
+                                                        <span class="placeholder col-13"></span>
+                                                        <span class="placeholder col-12"></span>
+                                                        <span class="placeholder col-4"></span>
+                                                        <span class="placeholder col-8"></span>
+                                                        <span class="placeholder col-12"></span>
+                                                        <span class="placeholder col-13"></span>
+                                                        <span class="placeholder col-12"></span>
+                                                        <span class="placeholder col-4"></span>
+                                                        <span class="placeholder col-8"></span>
+                                                        <span class="placeholder col-12"></span>
+                                                        <span class="placeholder col-13"></span>
+                                                    </p>
                                                     @endif
                                                 </div>
                                                 <div class="modal-footer">

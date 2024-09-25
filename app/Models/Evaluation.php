@@ -13,6 +13,6 @@ class Evaluation extends Model
 
     public function evaluationItems()
     {
-        return $this->hasMany(EvaluationItem::class);
+        return $this->hasMany(EvaluationItem::class)->chaperone();
     }
 }

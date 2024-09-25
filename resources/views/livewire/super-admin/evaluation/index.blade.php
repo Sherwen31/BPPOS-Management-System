@@ -125,7 +125,7 @@
                             <th scope="col">Police ID</th>
                             <th scope="col">Position</th>
                             <th scope="col">Unit Assigned</th>
-                            <th scope="col">Current Position</th>
+                            <th scope="col">Rank</th>
                             <th scope="col">Position Duration</th>
                             <th scope="col">Role</th>
                             <th scope="col">Last Evaluated</th>
@@ -160,7 +160,7 @@
 
                                 $years = $diff->y;
                                 $months = $diff->m;
-                                $formattedDifference = "{$years} years and {$months} months";
+                                $formattedDifference = $years !== 0 ? "{$years} years and {$months} months" : "{$months} months";
                                 @endphp
                                 {{ $formattedDifference }}
                             </td>
@@ -195,13 +195,33 @@
                                         data-bs-target="#manageUserModal{{ $user->id }}">
                                         <i class="far fa-gears"></i> Manage
                                     </button>
-                                    <a href="/super-admin/evaluation/user-evaluation/{{ $user->id }}/{{ $user->police_id }}"
-                                        wire:navigate class="btn btn-primary btn-sm">
+
+                                    @php
+                                    $hasEvaluationRating = \App\Models\EvaluationRating::where('user_id', $user->id)
+                                    ->whereDate('created_at', today())
+                                    ->exists();
+                                    @endphp
+                                    <a @if ($hasEvaluationRating)
+                                        wire:click='userHasEvaluation({{ $user->id }})'
+                                        @else
+                                        wire:navigate
+                                        href="/super-admin/evaluation/user-evaluation/{{ $user->id }}/{{
+                                        $user->police_id }}"
+                                        @endif
+                                        class="btn btn-primary btn-sm">
                                         <i class="far fa-file-circle-plus"></i> Evaluate
                                     </a>
-                                    <a class="btn btn-warning btn-sm" wire:navigate href="/super-admin/print/printing-details/preview/{{ $user->id }}/{{ $user->police_id }}/info">
+                                    @if ($hasEvaluationRating)
+                                    <a class="btn btn-warning btn-sm" target="_blank"
+                                        href="/super-admin/print/printing-details/preview/{{ $user->id }}/{{ $user->police_id }}/info">
                                         <i class="far fa-print"></i> Print
                                     </a>
+                                    @else
+                                    <button class="btn bg-warning-subtle btn-sm" style="cursor: not-allowed"
+                                        wire:click='cantPrint'>
+                                        <i class="far fa-print"></i> Print
+                                    </button>
+                                    @endif
                                 </div>
                                 {{-- Manage Modal --}}
                                 <div wire:ignore.self class="modal fade" id="manageUserModal{{ $user->id }}"
@@ -382,9 +402,23 @@
                                                         </div>
                                                     </div>
                                                     @else
-                                                    <div class="d-flex justify-content-center">
-                                                        <span class="spinner-border spinner-border-sm"></span>
-                                                    </div>
+                                                    <p class="placeholder-glow" style="width: 460px;">
+                                                        <span class="placeholder col-12"></span>
+                                                        <span class="placeholder col-4"></span>
+                                                        <span class="placeholder col-8"></span>
+                                                        <span class="placeholder col-12"></span>
+                                                        <span class="placeholder col-13"></span>
+                                                        <span class="placeholder col-12"></span>
+                                                        <span class="placeholder col-4"></span>
+                                                        <span class="placeholder col-8"></span>
+                                                        <span class="placeholder col-12"></span>
+                                                        <span class="placeholder col-13"></span>
+                                                        <span class="placeholder col-12"></span>
+                                                        <span class="placeholder col-4"></span>
+                                                        <span class="placeholder col-8"></span>
+                                                        <span class="placeholder col-12"></span>
+                                                        <span class="placeholder col-13"></span>
+                                                    </p>
                                                     @endif
                                                 </div>
                                                 <div class="modal-footer">

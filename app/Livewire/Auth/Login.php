@@ -63,7 +63,13 @@ class Login extends Component
     public function render()
     {
         if (auth()->check()) {
-            $this->redirect('/users/home', navigate: true);
+            if(auth()->user()->hasRole('super_admin')) {
+                $this->redirect('/super-admin/dashboard', navigate: true);
+            } elseif(auth()->user()->hasRole('admin')) {
+                $this->redirect('/admin/dashboard', navigate: true);
+            } else {
+                $this->redirect('/users/home', navigate: true);
+            }
         }
         return view('livewire.auth.login');
     }
