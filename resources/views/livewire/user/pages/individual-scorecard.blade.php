@@ -16,7 +16,11 @@
                         <h1><strong>INDIVIDUAL SCORECARD</strong></h1>
                     </div>
                     <div class="scorecard-header" id="scorecard-header">
-                        <!-- Dynamic data will be injected here -->
+                        <span>Rank/Name: <strong>{{ auth()->user()->rank }} {{ auth()->user()->first_name }} {{
+                                auth()->user()->middle_name }} {{ auth()->user()->last_name }} {{
+                                auth()->user()->police_id }}</strong></span>
+                        <br>
+                        <span>Position: <strong>{{ auth()->user()->position->position_name }}</strong></span>
                     </div>
                     <div class="scorecard-table">
                         <table>

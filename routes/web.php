@@ -13,6 +13,7 @@ use App\Livewire\SuperAdmin\Users\Index as SuperAdminUsersIndex;
 // ADMIN SIDE
 use App\Livewire\Admin\Pages\Dashboard as AdminPagesDashboard;
 use App\Livewire\Admin\Pages\Profile as AdminPagesProfile;
+use App\Livewire\Admin\Pages\IndividualScorecard as AdminPagesIndividualScorecard;
 use App\Livewire\Admin\Users\Index as AdminUsersIndex;
 use App\Livewire\Admin\Evaluation\RatingIndicator as AdminEvaluationRatingIndicator;
 use App\Livewire\Admin\Evaluation\Index as AdminEvaluationIndex;
@@ -53,6 +54,7 @@ Route::group(['middleware' => ['auth', 'verified', 'role:super_admin']], functio
 Route::group(['middleware' => ['auth', 'verified', 'role:admin|super_admin']], function () {
     Route::get('/admin/dashboard', AdminPagesDashboard::class);
     Route::get('/admin/account-management', AdminPagesProfile::class);
+    Route::get('/admin/individual-scorecard', AdminPagesIndividualScorecard::class);
     Route::get('/admin/user-account-management', AdminUsersIndex::class);
     Route::get('/admin/evaluation/rating-indicator', AdminEvaluationRatingIndicator::class);
     Route::get('/admin/evaluation/user-evaluation', AdminEvaluationIndex::class);
