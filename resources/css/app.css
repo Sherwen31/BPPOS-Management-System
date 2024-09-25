@@ -27,7 +27,7 @@ body {
     min-height: 100vh;
 }
 
-.containerMod ul li {
+.containerMod .ul .li {
     list-style-type: none;
     margin-left: -30px;
 }

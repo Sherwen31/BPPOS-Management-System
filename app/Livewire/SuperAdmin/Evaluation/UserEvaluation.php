@@ -16,6 +16,7 @@ class UserEvaluation extends Component
     public $numerical_rating = [];
     public $user;
     public $activeTab = 1;
+    public $hasEvaluationRating;
 
     public function listEvaluations()
     {
@@ -30,7 +31,11 @@ class UserEvaluation extends Component
 
         $this->user = $user;
 
-        if (!$user) {
+        $this->hasEvaluationRating = EvaluationRating::where('user_id', $user->id)
+        ->whereDate('created_at', today())
+        ->exists();
+
+        if (!$user || $this->hasEvaluationRating) {
             $this->redirect('/super-admin/evaluation/user-evaluation', navigate: true);
         }
     }
@@ -71,6 +76,8 @@ class UserEvaluation extends Component
         ]);
 
         $this->reset();
+
+        $this->redirect('/super-admin/evaluation/user-evaluation', navigate: true);
     }
 
     public function render()

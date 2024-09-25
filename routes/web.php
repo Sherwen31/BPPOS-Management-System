@@ -1,17 +1,28 @@
 <?php
 
+// SUPER ADMIN SIDE
 use App\Livewire\SuperAdmin\Pages\Profile as SuperAdminPagesProfile;
 use App\Livewire\SuperAdmin\Pages\Dashboard as SuperAdminPagesDashboard;
+use App\Livewire\SuperAdmin\UnitAndPosition\UnitAndPosition as SuperAdminUnitAndPositionManagement;
 use App\Livewire\SuperAdmin\Evaluation\RatingIndicator as SuperAdminEvaluationRatingIndicator;
 use App\Livewire\SuperAdmin\Evaluation\Index as SuperAdminEvaluationIndex;
 use App\Livewire\SuperAdmin\Evaluation\UserEvaluation as SuperAdminEvaluationUserEvaluation;
 use App\Livewire\SuperAdmin\Pages\PrintDetails as SuperAdminPagesPrintDetails;
 use App\Livewire\SuperAdmin\Users\Index as SuperAdminUsersIndex;
-use App\Livewire\Admin\Pages\Index as AdminPagesIndex;
+
+// ADMIN SIDE
+use App\Livewire\Admin\Pages\Dashboard as AdminPagesDashboard;
+
+// USER SIDE
 use App\Livewire\User\Pages\Index as UserPagesIndex;
+
+// GLOBAL
 use App\Livewire\Global\Pages\Landing;
+
+// AUTH
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Landing::class);
@@ -21,6 +32,7 @@ Route::fallback(Login::class);
 
 Route::group(['middleware' => ['auth', 'verified', 'role:super_admin']], function () {
     Route::get('/super-admin/dashboard', SuperAdminPagesDashboard::class);
+    Route::get('/super-admin/unit-and-position-management', SuperAdminUnitAndPositionManagement::class);
     Route::get('/super-admin/account-management', SuperAdminPagesProfile::class);
     Route::get('/super-admin/user-account-management', SuperAdminUsersIndex::class);
     Route::get('/super-admin/evaluation/rating-indicator', SuperAdminEvaluationRatingIndicator::class);
@@ -30,7 +42,7 @@ Route::group(['middleware' => ['auth', 'verified', 'role:super_admin']], functio
 });
 
 Route::group(['middleware' => ['auth', 'verified', 'role:admin|super_admin']], function () {
-    Route::get('/admin/dashboard', AdminPagesIndex::class);
+    Route::get('/admin/dashboard', AdminPagesDashboard::class);
 });
 
 

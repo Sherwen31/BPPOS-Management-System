@@ -54,6 +54,6 @@ class User extends Authenticatable
 
     public function evaluationRatings()
     {
-        return $this->hasMany(EvaluationRating::class);
+        return $this->hasMany(EvaluationRating::class)->chaperone();
     }
 }

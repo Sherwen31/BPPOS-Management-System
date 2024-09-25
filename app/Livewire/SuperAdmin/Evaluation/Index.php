@@ -4,6 +4,7 @@ namespace App\Livewire\SuperAdmin\Evaluation;
 
 use App\Models\Evaluation;
 use App\Models\EvaluationItem;
+use App\Models\EvaluationRating;
 use App\Models\Position;
 use App\Models\Unit;
 use App\Models\User;
@@ -41,6 +42,7 @@ class Index extends Component
     public $evaluation_item_id;
     public $evaluations = [];
     public $evaluation_items = [];
+    public $hasEvaluationRating;
 
     public function listings()
     {
@@ -68,7 +70,7 @@ class Index extends Component
             'unit_id'                   =>                  ['required', 'exists:units,id'],
             'rank'                      =>                  ['required'],
             'police_id'                 =>                  ['required'],
-            'year_attended'             =>                  ['date', 'required'],
+            'year_attended'             =>                  ['date', 'required', 'before_or_equal:today'],
             'username'                  =>                  ['required', 'unique:users,username'],
             'password'                  =>                  ['required', 'min:6', 'max:50'],
             'email'                     =>                  ['email', 'unique:users,email', 'required']
@@ -158,7 +160,7 @@ class Index extends Component
             'unit_id'                   =>                  ['required', 'exists:units,id'],
             'rank'                      =>                  ['required'],
             'police_id'                 =>                  ['required'],
-            'year_attended'             =>                  ['date', 'required'],
+            'year_attended'             =>                  ['date', 'required', 'before_or_equal:today'],
             'username'                  =>                  ['required', 'unique:users,username,' . $this->userData->id],
             'email'                     =>                  ['email', 'unique:users,email,' . $this->userData->id, 'required']
         ]);
@@ -281,6 +283,40 @@ class Index extends Component
         $this->dispatch('toastr', [
             'type'              =>          'success',
             'message'           =>          'Evaluation Item created successfully',
+        ]);
+    }
+
+    public function userHasEvaluation($userId)
+    {
+        $user = User::find($userId);
+
+        if (!$user) {
+            $this->dispatch('toastr', [
+                'type'          =>              'error',
+                'message'       =>              'No user found or deleted',
+            ]);
+
+            return;
+        } else {
+
+            $this->hasEvaluationRating = EvaluationRating::with('user')->where('user_id', $user->id)
+            ->whereDate('created_at', today())
+            ->exists();
+
+            if($this->hasEvaluationRating) {
+                $this->dispatch('toastr', [
+                    'type'          =>          'error',
+                    'message'       =>          'Evaluation already submitted. You can evaluate another tomorrow',
+                ]);
+            }
+        }
+    }
+
+    public function cantPrint()
+    {
+        $this->dispatch('toastr', [
+            'type'          =>          'error',
+            'message'       =>          'Sorry print is unavailable because this user is no evaluation yet',
         ]);
     }
 
