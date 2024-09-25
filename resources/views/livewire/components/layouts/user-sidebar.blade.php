@@ -9,17 +9,17 @@
                 <span class="nav-item">Home</span>
                 <span class="sideNavToolTip">Home</span>
             </a></li>
-        <li><a href="/users/">
+        <li><a href="/users/individual-scorecard" wire:navigate>
                 <i class="fas fa-clipboard"></i>
                 <span class="nav-item">Individual Scorecard</span>
                 <span class="sideNavToolTip">Individual Scorecard</span>
             </a></li>
-        <li><a href="HistoryScorecard.html">
+        <li><a href="/users/scorecard-history">
                 <i class="fas fa-history"></i>
                 <span class="nav-item">History of Scorecard</span>
                 <span class="sideNavToolTip">History of Scorecard</span>
             </a></li>
-        <li><a href="AccountManagement.html">
+        <li><a href="/users/account-management">
                 <i class="fas fa-users-cog"></i>
                 <span class="nav-item">Account Management</span>
                 <span class="sideNavToolTip">Account Management</span>

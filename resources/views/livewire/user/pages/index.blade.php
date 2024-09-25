@@ -6,7 +6,7 @@
                 <button id="toggle-button">
                     <i class="fas fa-bars"></i>
                 </button>
-                <div class="header-titleModed">
+                <div class="header-title">
                     <h4><strong>BPPO-Police Scorecard Management System</strong></h4>
                 </div>
             </div>
