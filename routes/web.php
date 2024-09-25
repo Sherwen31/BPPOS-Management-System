@@ -21,6 +21,9 @@ use App\Livewire\Admin\Pages\PrintDetails as AdminPagesPrintDetails;
 
 // USER SIDE
 use App\Livewire\User\Pages\Index as UserPagesIndex;
+use App\Livewire\User\Pages\IndividualScorecard as UserPagesIndividualScorecard;
+use App\Livewire\User\Pages\ScorecardHistory as UserPagesScorecardHistory;
+use App\Livewire\User\Pages\AccountManagement as UserPagesAccountManagement;
 
 // GLOBAL
 use App\Livewire\Global\Pages\Landing;
@@ -60,4 +63,16 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin|super_admin']], f
 
 Route::group(['middleware' => ['auth', 'verified', 'role:user|admin|super_admin']], function () {
     Route::get('/users/home', UserPagesIndex::class);
+});
+
+Route::group(['middleware' => ['auth', 'verified', 'role:user|admin|super_admin']], function () {
+    Route::get('/users/individual-scorecard', UserPagesIndividualScorecard::class);
+});
+
+Route::group(['middleware' => ['auth', 'verified', 'role:user|admin|super_admin']], function () {
+    Route::get('/users/scorecard-history', UserPagesScorecardHistory::class);
+});
+
+Route::group(['middleware' => ['auth', 'verified', 'role:user|admin|super_admin']], function () {
+    Route::get('/users/account-management', UserPagesAccountManagement::class);
 });
