@@ -40,6 +40,9 @@
 
 <body>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @role('user')
+    @vite(['resources/css/user.css'])
+    @endrole
     {{ $slot }}
 
     @livewireScripts
