@@ -5,7 +5,6 @@ namespace App\Livewire\SuperAdmin\Evaluation;
 use App\Models\Evaluation;
 use App\Models\EvaluationRating;
 use App\Models\User;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class UserEvaluation extends Component

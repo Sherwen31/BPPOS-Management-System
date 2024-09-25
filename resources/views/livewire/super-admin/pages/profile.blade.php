@@ -175,7 +175,7 @@
                                                 <option disabled>Select gender</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
-                                                <option value="Others">Others</option>
+                                                <option value="Not selected">Rather not to say</option>
                                             </select>
                                             @error('gender')
                                             <small class="text-danger">{{ $message }}</small>

@@ -4,7 +4,7 @@
             <img src="/images/logo.png" alt="">
             <span class="nav-item">PSMS</span>
         </span>
-        @role('super-admin')
+        @role('super_admin')
         <ul class="ul">
             <li class="li">
                 <a wire:navigate href="/super-admin/dashboard"
