@@ -112,18 +112,29 @@
             <div class="mainMod-top">
                 <h1>User Evaluation Management</h1>
             </div>
+            <div class="d-flex justify-content-start">
+                <div>
+                    <input type="search" wire:model.live.debounce.200ms="search" class="form-control"
+                        placeholder="Search...">
+                </div>
+            </div>
             @role('super_admin')
-            <div class="d-flex justify-content-end">
-                <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#evaluationModal">
-                    <i class="far fa-file-plus"></i> Create Evaluation
-                </a>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <input type="search" wire:model.live.debounce.200ms="search" class="form-control"
+                        placeholder="Search...">
+                </div>
+                <div>
+                    <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#evaluationModal">
+                        <i class="far fa-file-plus"></i> Create Evaluation
+                    </a>
+                </div>
             </div>
             @endrole
             <div class="mainMod-skills">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
                             <th scope="col">Police ID</th>
                             <th scope="col">Position</th>
                             <th scope="col">Unit Assigned</th>
@@ -138,9 +149,6 @@
                     <tbody>
                         @forelse ($users as $user)
                         <tr>
-                            <th scope="row">
-                                {{ $user->id }}
-                            </th>
                             <td>
                                 {{ $user->police_id }}
                             </td>
@@ -162,7 +170,8 @@
 
                                 $years = $diff->y;
                                 $months = $diff->m;
-                                $formattedDifference = $years !== 0 ? "{$years} years and {$months} months" : "{$months} months";
+                                $formattedDifference = $years !== 0 ? "{$years} years and {$months} months" : "{$months}
+                                months";
                                 @endphp
                                 {{ $formattedDifference }}
                             </td>
@@ -192,25 +201,20 @@
                             </td>
                             <td>
                                 <div class="d-flex gap-1 flex-wrap">
-                                    <button wire:click='manageUser({{ $user->id }})' type="button"
+                                    {{-- <button wire:click='manageUser({{ $user->id }})' type="button"
                                         class="btn btn-primary manage-btn btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#manageUserModal{{ $user->id }}">
                                         <i class="far fa-gears"></i> Manage
-                                    </button>
+                                    </button> --}}
 
                                     @php
                                     $hasEvaluationRating = \App\Models\EvaluationRating::where('user_id', $user->id)
                                     ->whereDate('created_at', today())
                                     ->exists();
                                     @endphp
-                                    <a @if ($hasEvaluationRating)
-                                        wire:click='userHasEvaluation({{ $user->id }})'
-                                        @else
-                                        wire:navigate
-                                        href="/admin/evaluation/user-evaluation/{{ $user->id }}/{{
-                                        $user->police_id }}"
-                                        @endif
-                                        class="btn btn-primary btn-sm">
+                                    <a @if ($hasEvaluationRating) wire:click='userHasEvaluation({{ $user->id }})' @else
+                                        wire:navigate href="/admin/evaluation/user-evaluation/{{ $user->id }}/{{
+                                        $user->police_id }}" @endif class="btn btn-primary btn-sm">
                                         <i class="far fa-file-circle-plus"></i> Evaluate
                                     </a>
                                     @if ($hasEvaluationRating)
@@ -226,7 +230,7 @@
                                     @endif
                                 </div>
                                 {{-- Manage Modal --}}
-                                <div wire:ignore.self class="modal fade" id="manageUserModal{{ $user->id }}"
+                                {{-- <div wire:ignore.self class="modal fade" id="manageUserModal{{ $user->id }}"
                                     tabindex="-1" aria-labelledby="manageUserModal{{ $user->id }}Label"
                                     aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -438,12 +442,17 @@
                                             </div>
                                         </form>
                                     </div>
-                                </div>
+                                </div> --}}
                             </td>
 
                         </tr>
                         @empty
 
+                        <tr>
+                            <td colspan="9">
+                                <p class="text-center mt-2"><strong>No users yet</strong></p>
+                            </td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>

@@ -43,12 +43,24 @@ class Index extends Component
     public $evaluations = [];
     public $evaluation_items = [];
     public $hasEvaluationRating;
+    public $search = '';
 
     public function listings()
     {
-        $this->users = User::with(['position', 'unit', 'roles', 'evaluationRatings'])->whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'super_admin')->orWhere('name', 'user');
-        })
+        $this->users = User::with(['position', 'unit', 'roles', 'evaluationRatings'])
+            ->where(function ($query) {
+                $query->where('police_id', 'like', '%' . $this->search . '%')
+                    ->orWhere('rank', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('position', function ($query) {
+                        $query->where('position_name', 'like', '%' . $this->search . '%');
+                    })
+                    ->orWhereHas('unit', function ($query) {
+                        $query->where('unit_assignment', 'like', '%' . $this->search . '%');
+                    });
+            })
+            ->whereDoesntHave('roles', function ($query) {
+                $query->where('name', 'super_admin')->orWhere('name', 'user');
+            })
             ->where('id', '!=', auth()->user()->id)
             ->orderBy('id', 'asc')->get();
 
@@ -265,8 +277,7 @@ class Index extends Component
 
         $exists = EvaluationItem::where('evaluation_id', $this->evaluation_id)->where('performance_indications', $this->performance_indications)->exists();
 
-        if ($exists)
-        {
+        if ($exists) {
             $this->validate([
                 'performance_indications'       =>                  ['required', 'max:255', 'min:1', 'unique:evaluation_items,performance_indications'],
             ]);
@@ -300,10 +311,10 @@ class Index extends Component
         } else {
 
             $this->hasEvaluationRating = EvaluationRating::with('user')->where('user_id', $user->id)
-            ->whereDate('created_at', today())
-            ->exists();
+                ->whereDate('created_at', today())
+                ->exists();
 
-            if($this->hasEvaluationRating) {
+            if ($this->hasEvaluationRating) {
                 $this->dispatch('toastr', [
                     'type'          =>          'error',
                     'message'       =>          'Evaluation already submitted. You can evaluate another tomorrow',

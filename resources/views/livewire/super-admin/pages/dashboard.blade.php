@@ -68,7 +68,7 @@
                             <div class="d-flex align-items-start">
                                 <div class="flex-grow-1">
                                     <h3 class="mb-2">{{ $total_not_evaluated_users }}</h3>
-                                    <p class="mb-2">Total Not Evaluated User</p>
+                                    <p class="mb-2">Total Unevaluated User</p>
                                     <div class="mb-0"><span
                                             class="badge bg-success-subtle text-success me-2 badge">{{ number_format($not_evaluated_monthly_percentage, 2) }}%</span><span
                                             class="text-muted">This month</span></div>

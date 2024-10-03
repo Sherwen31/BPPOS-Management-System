@@ -8,13 +8,20 @@
             <div class="mainMod-top">
                 <h1>User Account Management</h1>
             </div>
-            <div class="createUserBtn"><button wire:click='resetData' class="btn mb-2 btn-sm" data-bs-toggle="modal"
-                    data-bs-target="#createUserModal"><i class="far fa-user-plus"></i> Create User</button></div>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <input type="search" wire:model.live.debounce.200ms="search" class="form-control"
+                        placeholder="Search...">
+                </div>
+                <div>
+                    <button wire:click='resetData' class="btn mb-2 btn-sm btn-dark" data-bs-toggle="modal"
+                        data-bs-target="#createUserModal"><i class="far fa-user-plus"></i> Create User</button>
+                </div>
+            </div>
             <div class="mainMod-skills">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Position</th>
                             <th scope="col">Unit Assigned</th>
@@ -28,15 +35,13 @@
                     <tbody>
                         @forelse ($users as $user)
                         <tr>
-                            <th scope="row">
-                                {{ $user->id }}
-                            </th>
                             <td>
                                 @if ($user->last_name)
                                 {{ $user->last_name }},
                                 @endif {{ $user->first_name }} {{ $user->middle_name }}
                                 <br>
-                                <strong style="font-size: 12px;"><span class="text-muted fst-italic">Username:</span> {{ $user->username }}</strong>
+                                <strong style="font-size: 12px;"><span class="text-muted fst-italic">Username:</span> {{
+                                    $user->username }}</strong>
                             </td>
                             <td>
                                 {{ $user->position->position_name }}
@@ -56,7 +61,8 @@
 
                                 $years = $diff->y;
                                 $months = $diff->m;
-                                $formattedDifference = $years !== 0 ? "{$years} years and {$months} months" : "{$months} months";
+                                $formattedDifference = $years !== 0 ? "{$years} years and {$months} months" : "{$months}
+                                months";
                                 @endphp
                                 {{ $formattedDifference }}
                             </td>
@@ -314,6 +320,11 @@
                         </tr>
                         @empty
 
+                        <tr>
+                            <td colspan="8">
+                                <p class="text-center mt-2"><strong>No users yet</strong></p>
+                            </td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>

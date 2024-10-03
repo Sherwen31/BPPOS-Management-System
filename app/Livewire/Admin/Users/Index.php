@@ -28,12 +28,27 @@ class Index extends Component
     public $password;
     public $email;
     public $userData;
+    public $search = '';
 
     public function listings()
     {
-        $this->users = User::with(['position', 'unit', 'roles'])->whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'super_admin')->orWhere('name', 'admin');
-        })
+        $this->users = User::with(['position', 'unit', 'roles'])
+            ->where(function ($query) {
+                $query->where('first_name', 'like', '%' . $this->search . '%')
+                    ->orWhere('last_name', 'like', '%' . $this->search . '%')
+                    ->orWhere('middle_name', 'like', '%' . $this->search . '%')
+                    ->orWhere('username', 'like', '%' . $this->search . '%')
+                    ->orWhere('rank', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('position', function ($query) {
+                        $query->where('position_name', 'like', '%' . $this->search . '%');
+                    })
+                    ->orWhereHas('unit', function ($query) {
+                        $query->where('unit_assignment', 'like', '%' . $this->search . '%');
+                    });
+            })
+            ->whereDoesntHave('roles', function ($query) {
+                $query->where('name', 'super_admin')->orWhere('name', 'admin');
+            })
             ->where('id', '!=', auth()->user()->id)
             ->orderBy('id', 'asc')->get();
 
@@ -184,8 +199,7 @@ class Index extends Component
     {
 
         $user = User::find($id);
-        if(!$user)
-        {
+        if (!$user) {
             $this->dispatch('toastr', [
                 'type'          =>              'error',
                 'message'       =>              'No user found or deleted',

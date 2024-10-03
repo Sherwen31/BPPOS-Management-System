@@ -37,7 +37,7 @@
                         <label for="police_id">Police Id</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="far fa-user-police"></i></span>
-                            <input type="text" class="form-control" id="police_id" placeholder="Enter Polic Id"
+                            <input type="text" class="form-control" id="police_id" placeholder="Enter Police Id"
                                 wire:model='police_id'>
                         </div>
                         @error('police_id')
