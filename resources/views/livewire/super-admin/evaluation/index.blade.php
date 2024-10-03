@@ -448,6 +448,7 @@
                     </tbody>
                 </table>
             </div>
+            {{ $users->links() }}
         </section>
     </div>
 

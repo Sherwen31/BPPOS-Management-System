@@ -7,12 +7,15 @@ use App\Models\Unit;
 use App\Models\User;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+
+    use WithPagination;
+
     #[Title('Admin | User Account Management')]
 
-    public $users = [];
     public $positions = [];
     public $roles = [];
     public $units = [];
@@ -32,7 +35,7 @@ class Index extends Component
 
     public function listings()
     {
-        $this->users = User::with(['position', 'unit', 'roles'])
+        $users = User::with(['position', 'unit', 'roles'])
             ->where(function ($query) {
                 $query->where('first_name', 'like', '%' . $this->search . '%')
                     ->orWhere('last_name', 'like', '%' . $this->search . '%')
@@ -50,11 +53,13 @@ class Index extends Component
                 $query->where('name', 'super_admin')->orWhere('name', 'admin');
             })
             ->where('id', '!=', auth()->user()->id)
-            ->orderBy('id', 'asc')->get();
+            ->orderBy('id', 'asc')->paginate(10);
 
         $this->positions = Position::all();
 
         $this->units = Unit::all();
+
+        return compact('users');
     }
 
     public function createUser()
@@ -240,8 +245,6 @@ class Index extends Component
     }
     public function render()
     {
-        return view('livewire.admin.users.index', [
-            $this->listings()
-        ]);
+        return view('livewire.admin.users.index', $this->listings());
     }
 }
