@@ -3,9 +3,27 @@
         <div class="header-title">
             <h3>POLICE SCORECARD MANAGEMENT SYSTEM</h3>
         </div>
+        @guest
         <div class="header-auth">
             <a href="/login" class="btn btn-success btn-sm" wire:navigate>Log In</a>
         </div>
+        @else
+        @role('admin')
+        <div class="header-auth">
+            <a href="/admin/dashboard" class="btn btn-success btn-sm" wire:navigate>Dashboard</a>
+        </div>
+        @endrole
+        @role('super_admin')
+        <div class="header-auth">
+            <a href="/super-admin/dashboard" class="btn btn-success btn-sm" wire:navigate>Dashboard</a>
+        </div>
+        @endrole
+        @role('user')
+        <div class="header-auth">
+            <a href="/users/home" class="btn btn-success btn-sm" wire:navigate>Home</a>
+        </div>
+        @endrole
+        @endguest
     </div>
     <div class="body">
         <img src="images/bp_bg.jpg" alt="Background">
