@@ -133,7 +133,7 @@
             @endrole
             <div class="mainMod-skills">
                 <table class="table">
-                    <thead>
+                    <thead class="table-dark">
                         <tr>
                             <th scope="col">Police ID</th>
                             <th scope="col">Position</th>
@@ -153,10 +153,10 @@
                                 {{ $user->police_id }}
                             </td>
                             <td>
-                                {{ $user->position->position_name }}
+                                {{ $user->position?->position_name }}
                             </td>
                             <td>
-                                {{ $user->unit->unit_assignment }}
+                                {{ $user->unit?->unit_assignment }}
                             </td>
                             <td>
                                 {{ $user->rank }}
@@ -214,7 +214,7 @@
                                     @endphp
                                     <a @if ($hasEvaluationRating) wire:click='userHasEvaluation({{ $user->id }})' @else
                                         wire:navigate href="/admin/evaluation/user-evaluation/{{ $user->id }}/{{
-                                        $user->police_id }}" @endif class="btn btn-primary btn-sm">
+                                        $user->police_id }}" @endif class="btn {{ $hasEvaluationRating ? 'bg-primary-subtle' : 'btn-primary' }} btn-sm">
                                         <i class="far fa-file-circle-plus"></i> Evaluate
                                     </a>
                                     @if ($hasEvaluationRating)
@@ -450,7 +450,7 @@
 
                         <tr>
                             <td colspan="9">
-                                <p class="text-center mt-2"><strong>No users yet</strong></p>
+                                <p class="text-center mt-2"><strong>{{ $search ? 'No "' . $search . '" users found' : 'No users yet' }}</strong></p>
                             </td>
                         </tr>
                         @endforelse

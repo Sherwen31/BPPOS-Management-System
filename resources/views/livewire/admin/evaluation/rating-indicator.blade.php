@@ -12,7 +12,7 @@
 
                 <div class="">
                     <table class="table table-bordered table-hover">
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th>Numerical Rating</th>
                                 <th>Rating Criteria</th>
@@ -47,7 +47,7 @@
                     <h3>Rating Table for Personal Traits</h3>
                 </div>
                 <table class="table table-bordered table-hover">
-                    <thead>
+                    <thead class="table-dark">
                         <tr>
                             <th>Numerical Rating</th>
                             <th>Number of Traits</th>
@@ -81,7 +81,7 @@
                     <h3>NPR-APR Table</h3>
                 </div>
                 <table class="table table-bordered table-hover">
-                    <thead>
+                    <thead class="table-dark">
                         <tr>
                             <th>Numerical Performance Rating (NPR)</th>
                             <th>Adjectival Performance Rating (APR)</th>

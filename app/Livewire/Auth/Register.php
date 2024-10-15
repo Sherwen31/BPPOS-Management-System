@@ -15,7 +15,9 @@ class Register extends Component
 
     #[Title('Register')]
 
-    public $name;
+    public $first_name;
+    public $last_name;
+    public $middle_name;
     public $username;
     public $police_id;
     public $contact_number;
@@ -27,8 +29,10 @@ class Register extends Component
     public function register()
     {
         $this->validate([
-            'name'                      =>              ['required', 'min:4', 'max:50'],
-            'username'                  =>              ['required', 'min:4', 'max:20', 'regex:/^[a-zA-Z0-9_]+$/', 'unique:users,username'],
+            'first_name'                =>              ['required', 'min:1', 'max:50'],
+            'last_name'                 =>              ['required', 'min:1', 'max:50'],
+            'middle_name'               =>              ['required', 'min:1', 'max:50'],
+            'username'                  =>              ['required', 'min:1', 'max:20', 'regex:/^[a-zA-Z0-9_]+$/', 'unique:users,username'],
             'police_id'                 =>              ['required', 'min:1', 'max:100', 'unique:users,police_id'],
             'contact_number'            =>              ['required', 'numeric', 'digits:11'],
             'address'                   =>              ['required', 'min:4', 'max:100'],
@@ -37,7 +41,9 @@ class Register extends Component
         ]);
 
         $user = User::create([
-            'name'                      =>              $this->name,
+            'first_name'                =>              $this->first_name,
+            'last_name'                 =>              $this->last_name,
+            'middle_name'               =>              $this->middle_name,
             'username'                  =>              $this->username,
             'police_id'                 =>              $this->police_id,
             'contact_number'            =>              $this->contact_number,
@@ -52,7 +58,7 @@ class Register extends Component
 
         $this->dispatch('swal', [
             'title'       =>          'Registered',
-            'text'        =>          $user->name . 'registered successfully.',
+            'text'        =>          $user->email . ' registered successfully.',
             'icon'        =>          'success'
         ]);
 

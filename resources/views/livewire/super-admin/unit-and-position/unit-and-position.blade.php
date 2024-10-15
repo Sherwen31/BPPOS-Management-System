@@ -23,7 +23,7 @@
                                         Add</button>
                                 </div>
                                 <table class="table table-hover">
-                                    <thead>
+                                    <thead class="table-dark">
                                         <tr>
                                             <th scope="col">ID</th>
                                             <th scope="col">Unit assignments</th>
@@ -71,7 +71,7 @@
                                             class="far fa-plus"></i>
                                         Add</button></div>
                                 <table class="table table-hover">
-                                    <thead>
+                                    <thead class="table-dark">
                                         <tr>
                                             <th scope="col">ID</th>
                                             <th scope="col">Position name</th>

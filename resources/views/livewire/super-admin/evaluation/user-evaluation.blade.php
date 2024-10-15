@@ -47,7 +47,7 @@
                                         {{ $evaluation->title }}({{ $evaluation->sub_title }} points)
                                     </strong></label>
                                 <table class="table table-bordered table-hover">
-                                    <thead>
+                                    <thead class="table-dark">
                                         <td>Performance Indications</td>
                                         <td class="text-center align-middle">Point Allocation</td>
                                         <td></td>
@@ -121,7 +121,7 @@
                                         {{ $evaluation->title }}({{ $evaluation->sub_title }} points)
                                     </strong></label>
                                 <table class="table table-bordered table-hover">
-                                    <thead>
+                                    <thead class="table-dark">
                                         <td>
                                             Performance Indications
                                         </td>
@@ -192,7 +192,7 @@
                                         {{ $evaluation->title }}({{ $evaluation->sub_title }} points)
                                     </strong></label>
                                 <table class="table table-bordered table-hover">
-                                    <thead>
+                                    <thead class="table-dark">
                                         <td>Performance Indications</td>
                                         <td class="text-center align-middle">Point Allocation</td>
                                         <td></td>
@@ -261,7 +261,7 @@
                                         {{ $evaluation->title }}({{ $evaluation->sub_title }} points)
                                     </strong></label>
                                 <table class="table table-bordered table-hover">
-                                    <thead>
+                                    <thead class="table-dark">
                                         <td>Performance Indications</td>
                                         <td class="text-center align-middle">Point Allocation</td>
                                         <td></td>
@@ -330,7 +330,7 @@
                                         {{ $evaluation->title }}({{ $evaluation->sub_title }} points)
                                     </strong></label>
                                 <table class="table table-bordered table-hover">
-                                    <thead>
+                                    <thead class="table-dark">
                                         <td>Performance Indications</td>
                                         <td class="text-center align-middle">Point Allocation</td>
                                         <td></td>
@@ -409,7 +409,7 @@
                                         <h3>Dimension</h3>{{ $evaluation->title }}({{ $evaluation->sub_title }} points)
                                     </strong></label>
                                 <table class="table table-bordered" class="text-center align-middle">
-                                    <thead>
+                                    <thead class="table-dark">
                                         <td colspan="4">Performance Indications</td>
                                         <td>Point Allocation</td>
                                         <td></td>

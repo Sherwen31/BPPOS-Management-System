@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('police_id')->nullable();
             $table->string('contact_number')->nullable();
             $table->string('rank')->nullable();
-            $table->foreignId('position_id')->nullabe();
-            $table->foreignId('unit_id')->nulalble();
+            $table->foreignId('position_id')->constrained()->nullabe();
+            $table->foreignId('unit_id')->constrained()->nulalble();
             $table->string('address')->nullable();
             $table->string('year_attended')->nullabe();
             $table->string('email')->unique();

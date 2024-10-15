@@ -40,7 +40,7 @@
                         <span class="spinner-grow spinner-grow-sm"></span>
                     </div>
                 </button>
-                <a href="#">Forgot Password?</a>
+                <a wire:navigate href="/forgot-password">Forgot Password?</a>
                 <hr>
                 <p class="text-center">
                     Don't have an account?

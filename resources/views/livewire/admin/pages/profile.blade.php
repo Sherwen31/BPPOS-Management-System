@@ -201,9 +201,9 @@
                                         </div>
                                     </div>
                                     <button type="button" wire:loading.attr='disabled' wire:click='updateProfile'
-                                        class="btn btn-primary mt-3">
-                                        <span wire:loading wire:target='updateProfile'>Saving...</span>
-                                        <span wire:loading.remove wire:target='updateProfile'>Save changes</span>
+                                        class="btn btn-sm btn-primary mt-3">
+                                        <span wire:loading wire:target='updateProfile'><span class="spinner-border-sm spinner-border"></span> Saving...</span>
+                                        <span wire:loading.remove wire:target='updateProfile'><i class="far fa-save"></i> Save</span>
                                     </button>
                                 </form>
                             </div>
@@ -244,9 +244,9 @@
                                     @enderror
                                 </div>
                                 <button type="button" wire:click.prevent='passwordChange' wire:loading.attr='disabled'
-                                    class="btn btn-primary">
-                                    <span wire:loading wire:target='passwordChange'>Saving...</span>
-                                    <span wire:loading.remove wire:target='passwordChange'>Save Changes</span>
+                                    class="btn btn-sm btn-primary">
+                                    <span wire:loading wire:target='passwordChange'><span class="spinner-border-sm spinner-border"></span> Saving...</span>
+                                    <span wire:loading.remove wire:target='passwordChange'><i class="far fa-save"></i> Save</span>
                                 </button>
                             </div>
                         </div>

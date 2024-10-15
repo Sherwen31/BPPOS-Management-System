@@ -31,8 +31,8 @@ class UserEvaluation extends Component
         $this->user = $user;
 
         $this->hasEvaluationRating = EvaluationRating::where('user_id', $user->id)
-        ->whereDate('created_at', today())
-        ->exists();
+            ->whereDate('created_at', today())
+            ->exists();
 
         if (!$user || $this->hasEvaluationRating) {
             $this->redirect('/super-admin/evaluation/user-evaluation', navigate: true);
@@ -50,6 +50,9 @@ class UserEvaluation extends Component
             'numerical_rating.*'        =>      ['required', 'numeric', 'min:1', 'max:5'],
         ]);
 
+
+        $evalutionData = [];
+
         foreach ($this->evaluations as $evaluation) {
             foreach ($evaluation->evaluationItems as $evaluationItem) {
                 if (!isset($this->numerical_rating[$evaluationItem->id]) || $this->numerical_rating[$evaluationItem->id] === null) {
@@ -59,14 +62,18 @@ class UserEvaluation extends Component
                     ]);
                     return;
                 } else {
-                    EvaluationRating::create([
+                    $evalutionData[] = [
                         'user_id'                       =>      $this->user->id,
                         'evaluation_item_id'            =>      $evaluationItem->id,
                         'numerical_rating'              =>      $this->numerical_rating[$evaluationItem->id],
                         'weight_score'                  =>      $evaluationItem->point_allocation * $this->numerical_rating[$evaluationItem->id],
-                    ]);
+                    ];
                 }
             }
+        }
+
+        foreach ($evalutionData as $data) {
+            EvaluationRating::create($data);
         }
 
         $this->dispatch('toastr', [

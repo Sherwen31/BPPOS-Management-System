@@ -20,7 +20,7 @@
             </div>
             <div class="mainMod-skills">
                 <table class="table">
-                    <thead>
+                    <thead class="table-dark">
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Position</th>
@@ -44,10 +44,10 @@
                                     $user->username }}</strong>
                             </td>
                             <td>
-                                {{ $user->position->position_name }}
+                                {{ $user->position?->position_name }}
                             </td>
                             <td>
-                                {{ $user->unit->unit_assignment }}
+                                {{ $user->unit?->unit_assignment }}
                             </td>
                             <td>
                                 {{ $user->rank }}
@@ -322,7 +322,7 @@
 
                         <tr>
                             <td colspan="8">
-                                <p class="text-center mt-2"><strong>No users yet</strong></p>
+                                <p class="text-center mt-2"><strong>{{ $search ? 'No "' . $search . '" users found' : 'No users yet' }}</strong></p>
                             </td>
                         </tr>
                         @endforelse

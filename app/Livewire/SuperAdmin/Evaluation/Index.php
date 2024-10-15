@@ -249,6 +249,7 @@ class Index extends Component
         $this->password = '';
         $this->email = '';
         $this->userData = '';
+
     }
 
     public function createEvaluation()

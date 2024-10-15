@@ -26,6 +26,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'temporary_password',
         'remember_token',
     ];
 
@@ -39,6 +40,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'temporary_password' => 'hashed',
         ];
     }
 
@@ -55,5 +57,10 @@ class User extends Authenticatable
     public function evaluationRatings()
     {
         return $this->hasMany(EvaluationRating::class)->chaperone();
+    }
+
+    public function performanceReportRatings()
+    {
+        return $this->hasMany(PerformanceReportRating::class);
     }
 }

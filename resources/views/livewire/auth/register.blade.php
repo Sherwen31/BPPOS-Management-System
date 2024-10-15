@@ -10,13 +10,37 @@
             <div class="signup-form">
                 <div class="d-flex gap-1">
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="first_name">First Name</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="far fa-user"></i></span>
-                            <input type="text" class="form-control" id="name" placeholder="Enter Name"
-                                wire:model='name'>
+                            <input type="text" class="form-control" id="first_name" placeholder="Enter First Name"
+                                wire:model='first_name'>
                         </div>
-                        @error('name')
+                        @error('first_name')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-user"></i></span>
+                            <input type="text" class="form-control" id="last_name" placeholder="Enter Last Name"
+                                wire:model='last_name'>
+                        </div>
+                        @error('last_name')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="d-flex gap-1">
+                    <div class="form-group">
+                        <label for="middle_name">Middle Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-user"></i></span>
+                            <input type="text" class="form-control" id="middle_name" placeholder="Enter Middle Name"
+                                wire:model='middle_name'>
+                        </div>
+                        @error('middle_name')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -190,15 +214,14 @@
         document.addEventListener('livewire:navigated', ()=>{
 
         @this.on('swal',(event)=>{
-            const data=event
+            const data = event
             swal.fire({
-                icon:data[0]['icon'],
-                title:data[0]['title'],
-                text:data[0]['text'],
-                html: "You will redirected to Login page <br>Thank you!",
+                icon: data[0]['icon'],
+                title: data[0]['title'],
+                html: `${data[0]['text']}<br>You will be redirected to the Login page.<br>Thank you!`,
             }).then(function () {
                 Livewire.navigate('/login');
-        });
+            });
         })
     })
     </script>

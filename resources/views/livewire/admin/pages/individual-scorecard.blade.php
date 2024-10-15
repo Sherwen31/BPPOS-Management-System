@@ -13,13 +13,18 @@
                         <h1><strong>INDIVIDUAL SCORECARD</strong></h1>
                     </div>
                     <div class="scorecard-header" id="scorecard-header">
-                        <span>Rank/Name: <strong>{{ auth()->user()->rank }} {{ auth()->user()->first_name }} {{ auth()->user()->middle_name }} {{ auth()->user()->last_name }} {{ auth()->user()->police_id }}</strong></span>
+                        <span>Rank/Name: <strong>{{ auth()->user()->rank }} {{ auth()->user()->first_name }} {{
+                                auth()->user()->middle_name }} {{ auth()->user()->last_name }} {{
+                                auth()->user()->police_id }}</strong></span>
                         <br>
                         <span>Position: <strong>{{ auth()->user()->position->position_name }}</strong></span>
+                        <br>
+                        <span>Date Covered: <strong>{{ $dateCovered->start_date->format('F j') }} -
+                                {{ $dateCovered->end_date->format('j, Y') }}</strong></span>
                     </div>
                     <div class="scorecard-table">
                         <table>
-                            <thead>
+                            <thead class="table-dark">
                                 <tr>
                                     <th rowspan="2">
                                         SUB-ACTIVITY<br />&lpar;Enabling Actions&rpar;
@@ -42,7 +47,26 @@
                                 </tr>
                             </thead>
                             <tbody id="scorecard-body">
-                                <!-- Dynamic rows will be injected here -->
+                                @foreach ($performanceItems as $item)
+                                <tr>
+                                    <td>{{ $item->activity }}
+                                    </td>
+                                    <td>{{ $item->measures }}</td>
+                                    <td class="text-center">{{ $item->targets }}</td>
+                                    @foreach ($item->performanceReportRatings as $rating)
+                                    <td class="text-center">{{ $rating->monday }}</td>
+                                    <td class="text-center">{{ $rating->tuesday }}</td>
+                                    <td class="text-center">{{ $rating->wednesday }}</td>
+                                    <td class="text-center">{{ $rating->thursday }}</td>
+                                    <td class="text-center">{{ $rating->friday }}</td>
+                                    <td class="text-center">{{ $rating->saturday }}</td>
+                                    <td class="text-center">{{ $rating->sunday }}</td>
+                                    <td class="text-center">{{ $rating->total }}</td>
+                                    <td class="text-center">{{ $rating->cost }}</td>
+                                    @endforeach
+                                    <td class="text-center">{{ $item->remarks }}</td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -51,7 +75,6 @@
         </div>
     </div>
     <style>
-
         .sec {
             display: flex;
             flex-direction: column;
@@ -59,8 +82,10 @@
         }
 
         .scorecard {
-            margin-left: 100px;
-            margin-top: 30px;
+            padding: 0px 70px;
+            margin-top: 10px;
+            overflow-x: auto;
+            padding-bottom: 20px;
         }
 
         .scorecard-header {
@@ -70,19 +95,19 @@
         .scorecard-table table {
             border: 1px solid black;
             border-collapse: collapse;
-            width: 90%;
+            width: 95%;
             margin-top: 20px;
         }
 
         .scorecard-table th,
         td {
-            border: 1px solid black;
+            border: 1px solid rgb(108, 108, 108);
             padding: 8px;
             text-align: left;
         }
 
         .scorecard-table th {
-            background-color: #2f343d;
+            background-color: #212529;
             text-align: center;
             color: whitesmoke;
         }
