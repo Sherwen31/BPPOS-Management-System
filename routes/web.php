@@ -36,6 +36,7 @@ use App\Livewire\User\Pages\Index as UserPagesIndex;
 use App\Livewire\User\Pages\IndividualScorecard as UserPagesIndividualScorecard;
 use App\Livewire\User\Pages\ScorecardHistory as UserPagesScorecardHistory;
 use App\Livewire\User\Pages\AccountManagement as UserPagesAccountManagement;
+use App\Livewire\User\ScoreCard\MyScorecard as UserScoreCardMyScorecard;
 
 // GLOBAL
 use App\Livewire\Global\Pages\Landing;
@@ -92,4 +93,5 @@ Route::group(['middleware' => ['auth', 'verified', 'role:user|admin|super_admin'
     Route::get('/users/individual-scorecard', UserPagesIndividualScorecard::class);
     Route::get('/users/scorecard-history', UserPagesScorecardHistory::class);
     Route::get('/users/account-management', UserPagesAccountManagement::class);
+    Route::get('/users/my-scorecard/{startDate}/{endDate}', UserScoreCardMyScorecard::class);
 });

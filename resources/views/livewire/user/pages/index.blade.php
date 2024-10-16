@@ -22,8 +22,8 @@
                             Track your progress, set new goals, and stay on top of your achievements.
                             Thank you for your service!</p>
                         <div class="wpc-btn">
-                            <button onclick="window.location.href='IndividualScorecard.html';">View your scorecard <i
-                                    class="fas fa-angle-double-right"></i></button>
+                            <a href="/users/individual-scorecard" wire:navigate>View your scorecard <i
+                                    class="fas fa-angle-double-right"></i></a>
                         </div>
                     </div>
                     <div class="welcome-pageModed-svg">
@@ -119,7 +119,8 @@
             margin-top: 10px;
         }
 
-        .wpc-btn button {
+        .wpc-btn a {
+            display: inline-block;
             cursor: pointer;
             background-color: #4D6A9B;
             color: whitesmoke;

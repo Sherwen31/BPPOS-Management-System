@@ -115,7 +115,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7">
+                                <td colspan="13">
                                     <p class="text-center">No performance data added yet.</p>
                                 </td>
                             </tr>

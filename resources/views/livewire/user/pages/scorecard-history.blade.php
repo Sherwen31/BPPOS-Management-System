@@ -15,12 +15,6 @@
                     <div class="history">
                         <div class="history-scorecard">
                             <h1><strong>HISTORY OF SCORECARD</strong></h1>
-                            <div class="search">
-                                <div class="searchinput">
-                                    <input type="text" id="search" placeholder="Search scorecard...">
-                                    <button onclick="">Search</button>
-                                </div>
-                            </div>
                             <table id="historyTable">
                                 <thead>
                                     <tr>
@@ -29,15 +23,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Table rows will be dynamically inserted here -->
+                                    @forelse ($groupedPerformanceReports as $item)
+                                        <tr>
+                                            <td scope="row">{{ $item->start_date->format('F j') }} -
+                                                {{ $item->end_date->format('j, Y') }}</td>
+                                            <td>
+                                                <a wire:navigate
+                                                    href="/users/my-scorecard/{{ $item->start_date }}/{{ $item->end_date }}"
+                                                    class="btn btn-primary manage-btn btn-sm">
+                                                    <i class="far fa-eye"></i> View my Score
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="2" class="text-center">
+                                                <p>This user is no performance data added yet.</p>
+                                            </td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
-                            <div class="pagination-container">
-                                <button id="prev" class="pagination-btn"><i class="fas fa-angle-left"></i></button>
-                                <span id="pagination-numbers" class="pagination-numbers"></span>
-                                <button id="next" class="pagination-btn"><i
-                                        class="fas fa-angle-right"></i></button>
-                            </div>
+                            {{ $groupedPerformanceReports->links() }}
                         </div>
                         <div class="history-promotion">
                             <h1><strong>RECENT PROMOTIONS</strong></h1>

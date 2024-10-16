@@ -157,22 +157,26 @@
         @endrole
         @role('user')
         <ul class="ul">
-            <li class="li"><a href="/users/home" wire:navigate>
+            <li class="li"><a href="/users/home" wire:navigate
+                class="{{ 'users/home' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-home"></i>
                     <span class="nav-item">Home</span>
                     <span class="sideNavToolTip">Home</span>
                 </a></li>
-            <li class="li"><a href="/users/individual-scorecard" wire:navigate>
+            <li class="li"><a href="/users/individual-scorecard" wire:navigate
+                class="{{ 'users/individual-scorecard' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-clipboard"></i>
                     <span class="nav-item">Individual Scorecard</span>
                     <span class="sideNavToolTip">Individual Scorecard</span>
                 </a></li>
-            <li class="li"><a href="/users/scorecard-history" wire:navigate>
+            <li class="li"><a href="/users/scorecard-history" wire:navigate
+                class="{{ 'users/scorecard-history' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-history"></i>
                     <span class="nav-item">History of Scorecard</span>
                     <span class="sideNavToolTip">History of Scorecard</span>
                 </a></li>
-            <li class="li"><a href="/users/account-management" wire:navigate>
+            <li class="li"><a href="/users/account-management" wire:navigate
+                class="{{ 'users/account-management' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-users-cog"></i>
                     <span class="nav-item">Account Management</span>
                     <span class="sideNavToolTip">Account Management</span>

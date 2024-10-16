@@ -85,14 +85,6 @@ td {
     color: whitesmoke;
 }
 
-.history-scorecard button {
-    cursor: pointer;
-    background-color: #4d6a9b;
-    color: whitesmoke;
-    padding: 5px;
-    border-radius: 5px;
-}
-
 .history-promotion {
     padding-left: 100px;
 }
@@ -113,23 +105,6 @@ select {
     border-radius: 5px;
     padding: 5px;
     border: #eeeef3 1px solid;
-}
-
-.pagination-container {
-    display: flex;
-    align-items: center;
-    margin-top: 15px;
-    justify-content: end;
-}
-
-.pagination-container button {
-    background-color: #1e4057;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    margin: 0 5px;
-    border-radius: 2px;
-    cursor: pointer;
 }
 
 .history-promotion {
@@ -252,4 +227,9 @@ select {
 
 .btn-cancel:hover{
   background-color: #222222;
+}
+
+.active_sidebar {
+    background: whitesmoke;
+    color: #2f343d !important;
 }
