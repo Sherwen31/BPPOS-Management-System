@@ -32,6 +32,12 @@ class AccountManagement extends Component
         $this->reset(['new_password', 'new_password_confirmation']);
     }
 
+    public function resetForm()
+    {
+        $this->reset(['new_password', 'new_password_confirmation']);
+        $this->resetErrorBag(); // Clears validation errors
+    }
+
     public function render()
     {
         return view('livewire.user.pages.account-management');

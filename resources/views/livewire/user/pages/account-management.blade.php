@@ -53,17 +53,17 @@
                                         <label for="password"><strong>New Password</strong></label>
                                         <input wire:model='new_password' id="password" name="password" type="password"
                                             placeholder="New Password" style="margin-bottom: 10px;">
-                                        @error('new_password')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                         <label for="cpassword"><strong>Confirm Password</strong></label>
                                         <input wire:model='new_password_confirmation' id="cpassword" name="cpassword"
                                             type="password" placeholder="Confirm New Password"
                                             style="margin-bottom: 10px;">
                                     </div>
                                 </div>
+                                @error('new_password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                                 <div class="account-btn">
-                                    <button class="btn-cancel">CANCEL</button>
+                                    <button class="btn-cancel" wire:click='resetForm'>RESET</button>
                                     <button type="submit" class="btn-save">SAVE CHANGES</button>
                                 </div>
                             </form>
