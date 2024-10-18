@@ -25,7 +25,7 @@
                         <span>Date Covered: <strong>{{ $dateCovered?->start_date->format('F j') }} -
                                 {{ $dateCovered?->end_date->format('j, Y') }}</strong></span>
                     </div>
-                    <div class="scorecard-table">
+                    <div class="scorecard-table mb-5">
                         <table>
                             <thead>
                                 <tr>
