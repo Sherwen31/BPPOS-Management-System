@@ -214,11 +214,12 @@
                                     @endphp
                                     <a @if ($hasEvaluationRating) wire:click='userHasEvaluation({{ $user->id }})' @else
                                         wire:navigate href="/admin/evaluation/user-evaluation/{{ $user->id }}/{{
-                                        $user->police_id }}" @endif class="btn {{ $hasEvaluationRating ? 'bg-primary-subtle' : 'btn-primary' }} btn-sm">
+                                        $user->police_id }}" @endif
+                                        class="btn {{ $hasEvaluationRating ? 'bg-primary-subtle' : 'btn-primary' }} btn-sm">
                                         <i class="far fa-file-circle-plus"></i> Evaluate
                                     </a>
                                     @if ($hasEvaluationRating)
-                                    <a class="btn btn-warning btn-sm" target="_blank"
+                                    <a class="btn btn-warning btn-sm" wire:navigate
                                         href="/admin/print/printing-details/preview/{{ $user->id }}/{{ $user->police_id }}/info">
                                         <i class="far fa-print"></i> Print
                                     </a>
@@ -450,7 +451,8 @@
 
                         <tr>
                             <td colspan="9">
-                                <p class="text-center mt-2"><strong>{{ $search ? 'No "' . $search . '" users found' : 'No users yet' }}</strong></p>
+                                <p class="text-center mt-2"><strong>{{ $search ? 'No "' . $search . '" users found' :
+                                        'No users yet' }}</strong></p>
                             </td>
                         </tr>
                         @endforelse

@@ -356,4 +356,11 @@
             text-align: center;
         }
     </style>
+
+    <script>
+        window.print();
+        window.onafterprint = function() {
+            Livewire.navigate('/super-admin/evaluation/user-evaluation'); // Go back to the previous page after printing
+        };
+    </script>
 </div>
