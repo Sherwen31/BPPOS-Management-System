@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Password;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\Title;
 
 class ResetPassword extends Component
 {
@@ -15,6 +16,8 @@ class ResetPassword extends Component
     public $password_confirmation;
     public $errorMessage = '';
     public $successMessage = '';
+
+    #[Title('Reset Password')]
 
     public function mount()
     {
