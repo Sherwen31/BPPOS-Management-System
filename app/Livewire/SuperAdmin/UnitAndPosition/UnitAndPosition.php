@@ -19,8 +19,8 @@ class UnitAndPosition extends Component
 
     public function listings()
     {
-        $positions = Position::orderBy('created_at', 'desc')->paginate(10, ['*'], 'positionPage');
-        $units = Unit::orderBy('created_at', 'desc')->paginate(10, ['*'], 'unitPage');
+        $positions = Position::orderBy('created_at', 'asc')->paginate(10, ['*'], 'positionPage');
+        $units = Unit::orderBy('created_at', 'asc')->paginate(10, ['*'], 'unitPage');
 
         return compact('positions', 'units');
     }

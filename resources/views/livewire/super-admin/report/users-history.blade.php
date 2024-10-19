@@ -80,7 +80,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="text-center">
+                                <td colspan="7" class="text-center">
                                     <p class="text-center mt-2"><strong>{{ $search ? 'No "' . $search . '" users found' : 'No users yet' }}</strong></p>
                                 </td>
                             </tr>

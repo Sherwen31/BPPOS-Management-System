@@ -1,5 +1,8 @@
 <div>
     <div class="reset-password-card shadow-sm mt-5">
+        <div class="text-center mb-4">
+            <i class="fas fa-lock fa-3x text-primary"></i>
+        </div>
         <h2 class="text-center mb-4">Reset Your Password</h2>
         <form wire:submit.prevent="resetPassword" class="p-4 rounded">
             @if ($errorMessage)

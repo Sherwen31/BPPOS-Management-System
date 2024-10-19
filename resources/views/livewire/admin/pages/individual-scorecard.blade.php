@@ -53,7 +53,7 @@
                                         </td>
                                         <td>{{ $item->measures }}</td>
                                         <td class="text-center">{{ $item->targets }}</td>
-                                        @foreach ($item->performanceReportRatings as $rating)
+                                        @forelse ($item->performanceReportRatings as $rating)
                                             <td class="text-center">{{ $rating->monday }}</td>
                                             <td class="text-center">{{ $rating->tuesday }}</td>
                                             <td class="text-center">{{ $rating->wednesday }}</td>
@@ -63,7 +63,9 @@
                                             <td class="text-center">{{ $rating->sunday }}</td>
                                             <td class="text-center">{{ $rating->total }}</td>
                                             <td class="text-center">{{ $rating->cost }}</td>
-                                        @endforeach
+                                            @empty
+                                            <td class="text-center" colspan="9">No ratings added yet</td>
+                                        @endforelse
                                         <td class="text-center">{{ $item->remarks }}</td>
                                     </tr>
                                 @empty
