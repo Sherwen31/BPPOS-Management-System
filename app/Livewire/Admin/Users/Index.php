@@ -43,7 +43,6 @@ class Index extends Component
                     ->orWhere('last_name', 'like', '%' . $this->search . '%')
                     ->orWhere('middle_name', 'like', '%' . $this->search . '%')
                     ->orWhere('username', 'like', '%' . $this->search . '%')
-                    ->orWhere('rank', 'like', '%' . $this->search . '%')
                     ->orWhereHas('rank', function ($query) {
                         $query->where('rank_name', 'like', '%' . $this->search . '%');
                     })

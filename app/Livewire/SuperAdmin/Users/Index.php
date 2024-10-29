@@ -45,7 +45,6 @@ class Index extends Component
                     ->orWhere('last_name', 'like', '%' . $this->search . '%')
                     ->orWhere('middle_name', 'like', '%' . $this->search . '%')
                     ->orWhere('username', 'like', '%' . $this->search . '%')
-                    ->orWhere('rank', 'like', '%' . $this->search . '%')
                     ->orWhereHas('position', function ($query) {
                         $query->where('position_name', 'like', '%' . $this->search . '%');
                     })
@@ -90,7 +89,6 @@ class Index extends Component
             'position_id'               =>                  $this->position_id,
             'unit_id'                   =>                  $this->unit_id,
             'rank_id'                   =>                  $this->rank_id,
-            'rank'                      =>                  $this->rank,
             'police_id'                 =>                  $this->police_id,
             'year_attended'             =>                  $this->year_attended,
             'username'                  =>                  $this->username,
@@ -168,7 +166,6 @@ class Index extends Component
             'position_id'               =>                  ['required', 'exists:positions,id'],
             'unit_id'                   =>                  ['required', 'exists:units,id'],
             'rank_id'                   =>                  ['required', 'exists:ranks,id'],
-            'rank'                      =>                  ['required'],
             'police_id'                 =>                  ['required', 'unique:users,police_id,' . $this->userData->id],
             'year_attended'             =>                  ['date', 'required', 'before_or_equal:today'],
             'username'                  =>                  ['required', 'unique:users,username,' . $this->userData->id],
