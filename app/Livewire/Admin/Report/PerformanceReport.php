@@ -45,7 +45,8 @@ class PerformanceReport extends Component
         $this->user = $user;
 
         $this->hasPerformanceReport = PerformanceReportRating::where('user_id', $user->id)
-            ->whereBetween('created_at', [now()->startOfWeek(Carbon::MONDAY), now()->endOfWeek(Carbon::SUNDAY)])
+            ->where('start_date', '<=', now()->endOfWeek())
+            ->where('end_date', '>=', now()->startOfWeek())
             ->exists();
 
         if (!$user || $this->hasPerformanceReport) {
@@ -141,7 +142,7 @@ class PerformanceReport extends Component
 
         $this->reset();
 
-        $this->redirect('/admin/performance-report', navigate: true);
+        $this->redirect('/admin/individual-scorecard', navigate: true);
     }
     public function render()
     {

@@ -36,77 +36,82 @@
                         </thead>
                         <tbody>
                             @forelse ($users as $user)
-                                <tr>
-                                    {{-- <th scope="row">
+                            <tr>
+                                {{-- <th scope="row">
                                     {{ $user->id }}
                                 </th> --}}
-                                    <td>
-                                        @if ($user->last_name)
-                                            {{ $user->last_name }},
-                                        @endif {{ $user->first_name }} {{ $user->middle_name }}
-                                        <br>
-                                        <strong style="font-size: 12px;"><span
-                                                class="text-muted fst-italic">Username:</span>
-                                            {{ $user->username }}</strong>
-                                    </td>
+                                <td>
+                                    @if ($user->last_name)
+                                    {{ $user->last_name }},
+                                    @endif {{ $user->first_name }} {{ $user->middle_name }}
+                                    <br>
+                                    <strong style="font-size: 12px;"><span
+                                            class="text-muted fst-italic">Username:</span>
+                                        {{ $user->username }}</strong>
+                                </td>
 
-                                    <td>
-                                        {{ $user->position?->position_name }}
-                                    </td>
-                                    <td>
-                                        {{ $user->unit?->unit_assignment }}
-                                    </td>
-                                    <td>
-                                        {{ $user->rank->rank_name }}
-                                    </td>
-                                    <td>
-                                        @php
-                                            $startDate = \Carbon\Carbon::parse($user->year_attended);
-                                            $endDate = \Carbon\Carbon::now();
+                                <td>
+                                    {{ $user->position?->position_name }}
+                                </td>
+                                <td>
+                                    {{ $user->unit?->unit_assignment }}
+                                </td>
+                                <td>
+                                    {{ $user->rank->rank_name }}
+                                </td>
+                                <td>
+                                    @php
+                                    $startDate = \Carbon\Carbon::parse($user->year_attended);
+                                    $endDate = \Carbon\Carbon::now();
 
-                                            $diff = $startDate->diff($endDate);
+                                    $diff = $startDate->diff($endDate);
 
-                                            $years = $diff->y;
-                                            $months = $diff->m;
-                                            $formattedDifference =
-                                                $years !== 0
-                                                    ? "{$years} years and {$months} months"
-                                                    : "{$months}
+                                    $years = $diff->y;
+                                    $months = $diff->m;
+                                    $formattedDifference =
+                                    $years !== 0
+                                    ? "{$years} years and {$months} months"
+                                    : "{$months}
                                     months";
-                                        @endphp
-                                        {{ $formattedDifference }}
-                                    </td>
+                                    @endphp
+                                    {{ $formattedDifference }}
+                                </td>
 
-                                    <td>
-                                        @php
-                                            $hasPerformanceReport = \App\Models\PerformanceReportRating::where(
-                                                'user_id',
-                                                $user->id,
-                                            )
-                                                ->whereBetween('created_at', [
-                                                    now()->startOfWeek(Illuminate\Support\Carbon::MONDAY),
-                                                    now()->endOfWeek(Illuminate\Support\Carbon::SUNDAY),
-                                                ])
-                                                ->exists();
-                                        @endphp
-                                        <a wire:navigate
-                                            @if ($hasPerformanceReport) wire:click='hasPerformanceReportData'
+                                <td>
+                                    {{-- @php
+                                    $hasPerformanceReport = \App\Models\PerformanceReportRating::where(
+                                    'user_id',
+                                    $user->id,
+                                    )
+                                    ->whereBetween('created_at', [
+                                    now()->startOfWeek(Illuminate\Support\Carbon::MONDAY),
+                                    now()->endOfWeek(Illuminate\Support\Carbon::SUNDAY),
+                                    ])
+                                    ->exists();
+                                    @endphp
+                                    <a wire:navigate @if ($hasPerformanceReport) wire:click='hasPerformanceReportData'
                                         @else
-                                        href="/super-admin/performance-report/{{ $user->id }}/{{ $user->police_id }}" @endif
-                                            class="btn btn-sm manage-btn {{ $hasPerformanceReport ? 'bg-primary-subtle' : 'btn-primary' }}">
-                                            <i class="fad fa-chart-simple"></i> Report
-                                        </a>
+                                        href="/super-admin/performance-report/{{ $user->id }}/{{ $user->police_id }}"
+                                        @endif
+                                        class="btn btn-sm manage-btn {{ $hasPerformanceReport ? 'bg-primary-subtle' : 'btn-primary' }}">
+                                        <i class="fad fa-chart-simple"></i> Report
+                                    </a> --}}
+                                    <a wire:navigate href="/super-admin/history/{{ $user->id }}/{{ $user->police_id }}"
+                                        class="btn btn-primary manage-btn btn-sm">
+                                        <i class="far fa-eye"></i> View Reports
+                                    </a>
 
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
                             @empty
-                                <tr>
-                                    <td colspan="6" class="text-center">
-                                        <p class="text-center mt-2">
-                                            <strong>{{ $search ? 'No "' . $search . '" users found' : 'No users yet' }}</strong>
-                                        </p>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    <p class="text-center mt-2">
+                                        <strong>{{ $search ? 'No "' . $search . '" users found' : 'No users yet'
+                                            }}</strong>
+                                    </p>
+                                </td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -132,7 +137,7 @@
                                 placeholder="Activity">
                             <label for="activity" class="form-label">Activity</label>
                             @error('activity')
-                                <span class="text-danger text-sm">{{ $message }}</span>
+                            <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-3 form-floating">
@@ -140,7 +145,7 @@
                                 placeholder="Measures">
                             <label for="measures" class="form-label">Measures</label>
                             @error('measures')
-                                <span class="text-danger text-sm">{{ $message }}</span>
+                            <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-3 form-floating">
@@ -148,7 +153,7 @@
                                 placeholder="Targets">
                             <label for="targets" class="form-label">Targets</label>
                             @error('targets')
-                                <span class="text-danger text-sm">{{ $message }}</span>
+                            <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-3 form-floating">
@@ -156,7 +161,7 @@
                                 placeholder="Remarks">
                             <label for="remarks" class="form-label">Remarks</label>
                             @error('remarks')
-                                <span class="text-danger text-sm">{{ $message }}</span>
+                            <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>

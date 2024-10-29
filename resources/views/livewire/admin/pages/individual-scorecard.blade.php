@@ -10,7 +10,11 @@
                 </div>
                 <div class="scorecard">
                     <div class="scorecard-title">
-                        <h1><strong>INDIVIDUAL SCORECARD</strong></h1>
+                        <h1><strong>INDIVIDUAL SCORECARD @if ($noRatings === false)
+                                - <a wire:navigate
+                                    href="/admin/performance-report/{{ auth()->user()->id }}/{{ auth()->user()->police_id }}"
+                                    class="btn btn-sm btn-primary">Input Score Card</a>
+                                @endif</strong></h1>
                     </div>
                     <div class="scorecard-header" id="scorecard-header">
                         <span>Rank/Name: <strong>{{ auth()->user()->rank->rank_name }} {{ auth()->user()->first_name }}
@@ -48,32 +52,32 @@
                             </thead>
                             <tbody id="scorecard-body">
                                 @forelse ($performanceItems as $item)
-                                    <tr>
-                                        <td>{{ $item->activity }}
-                                        </td>
-                                        <td>{{ $item->measures }}</td>
-                                        <td class="text-center">{{ $item->targets }}</td>
-                                        @forelse ($item->performanceReportRatings as $rating)
-                                            <td class="text-center">{{ $rating->monday }}</td>
-                                            <td class="text-center">{{ $rating->tuesday }}</td>
-                                            <td class="text-center">{{ $rating->wednesday }}</td>
-                                            <td class="text-center">{{ $rating->thursday }}</td>
-                                            <td class="text-center">{{ $rating->friday }}</td>
-                                            <td class="text-center">{{ $rating->saturday }}</td>
-                                            <td class="text-center">{{ $rating->sunday }}</td>
-                                            <td class="text-center">{{ $rating->total }}</td>
-                                            <td class="text-center">{{ $rating->cost }}</td>
-                                            @empty
-                                            <td class="text-center" colspan="9">No ratings added yet</td>
-                                        @endforelse
-                                        <td class="text-center">{{ $item->remarks }}</td>
-                                    </tr>
+                                <tr>
+                                    <td>{{ $item->activity }}
+                                    </td>
+                                    <td>{{ $item->measures }}</td>
+                                    <td class="text-center">{{ $item->targets }}</td>
+                                    @forelse ($item->performanceReportRatings as $rating)
+                                    <td class="text-center">{{ $rating->monday }}</td>
+                                    <td class="text-center">{{ $rating->tuesday }}</td>
+                                    <td class="text-center">{{ $rating->wednesday }}</td>
+                                    <td class="text-center">{{ $rating->thursday }}</td>
+                                    <td class="text-center">{{ $rating->friday }}</td>
+                                    <td class="text-center">{{ $rating->saturday }}</td>
+                                    <td class="text-center">{{ $rating->sunday }}</td>
+                                    <td class="text-center">{{ $rating->total }}</td>
+                                    <td class="text-center">{{ $rating->cost }}</td>
+                                    @empty
+                                    <td class="text-center" colspan="9">No ratings added yet</td>
+                                    @endforelse
+                                    <td class="text-center">{{ $item->remarks }}</td>
+                                </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="13">
-                                            <p class="text-center">No performance data added yet.</p>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="13">
+                                        <p class="text-center">No performance data added yet.</p>
+                                    </td>
+                                </tr>
                                 @endforelse
                             </tbody>
                         </table>

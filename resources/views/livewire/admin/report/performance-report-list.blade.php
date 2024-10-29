@@ -76,7 +76,7 @@
                                 </td>
 
                                 <td>
-                                    @php
+                                    {{-- @php
                                     $hasPerformanceReport = \App\Models\PerformanceReportRating::where('user_id',
                                     $user->id)
                                     ->whereBetween('created_at', [now()->startOfWeek(Illuminate\Support\Carbon::MONDAY),
@@ -84,11 +84,14 @@
                                     ->exists();
                                     @endphp
                                     <a wire:navigate @if ($hasPerformanceReport) wire:click='hasPerformanceReportData'
-                                        @else
-                                        href="/admin/performance-report/{{ $user->id }}/{{ $user->police_id }}"
+                                        @else href="/admin/performance-report/{{ $user->id }}/{{ $user->police_id }}"
                                         @endif
                                         class="btn btn-sm btn-primary manage-btn {{ $hasPerformanceReport ? 'bg-primary-subtle' : 'btn-primary' }}">
                                         <i class="fad fa-chart-simple"></i> Report
+                                    </a> --}}
+                                    <a wire:navigate href="/admin/history/{{ $user->id }}/{{ $user->police_id }}"
+                                        class="btn btn-primary manage-btn btn-sm">
+                                        <i class="far fa-eye"></i> View Reports
                                     </a>
 
                                 </td>
@@ -96,7 +99,8 @@
                             @empty
                             <tr>
                                 <td colspan="6" class="text-center">
-                                    <p class="text-center mt-2"><strong>{{ $search ? 'No "' . $search . '" users found' : 'No users yet' }}</strong></p>
+                                    <p class="text-center mt-2"><strong>{{ $search ? 'No "' . $search . '" users found'
+                                            : 'No users yet' }}</strong></p>
                                 </td>
                             </tr>
                             @endforelse
