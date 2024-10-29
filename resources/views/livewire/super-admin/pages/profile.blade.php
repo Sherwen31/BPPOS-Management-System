@@ -94,7 +94,7 @@
                                     <div class="row g-3 mb-2">
                                         <div class="col-md-6">
                                             <label for="rank" class="form-label">Rank</label>
-                                            <select wire:model='rank' class="form-select"
+                                            <select wire:model='rank_id' class="form-select"
                                                 aria-label="Default select example" name="rank">
                                                 <option selected hidden>Select rank</option>
                                                 <option disabled>Select rank</option>
@@ -128,7 +128,7 @@
                                                 <option value="Chief Constable">Chief Constable</option>
                                                 <option value="Chief of Police">Chief of Police</option>
                                             </select>
-                                            @error('rank')
+                                            @error('rank_id')
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>

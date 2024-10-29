@@ -51,7 +51,6 @@ class PerformanceReportList extends Component
         $users = User::with(['position', 'unit', 'roles'])
             ->where(function ($query) {
                 $query->where('police_id', 'like', '%' . $this->search . '%')
-                    ->orWhere('rank', 'like', '%' . $this->search . '%')
                     ->orWhere('first_name', 'like', '%' . $this->search . '%')
                     ->orWhere('last_name', 'like', '%' . $this->search . '%')
                     ->orWhere('middle_name', 'like', '%' . $this->search . '%')

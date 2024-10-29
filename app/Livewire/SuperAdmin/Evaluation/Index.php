@@ -54,7 +54,6 @@ class Index extends Component
         $users = User::with(['position', 'rank', 'unit', 'roles', 'evaluationRatings'])
             ->where(function ($query) {
                 $query->where('police_id', 'like', '%' . $this->search . '%')
-                    ->orWhere('rank', 'like', '%' . $this->search . '%')
                     ->orWhereHas('position', function ($query) {
                         $query->where('position_name', 'like', '%' . $this->search . '%');
                     })

@@ -273,7 +273,7 @@
                                                             (Optional)</label>
                                                     </div>
                                                     <div class="mb-3 form-floating">
-                                                        <select wire:model='rank' class="form-select"
+                                                        <select wire:model='rank_id' class="form-select"
                                                             aria-label="Default select example" name="rank">
                                                             <option selected hidden>Select rank</option>
                                                             <option disabled>Select rank</option>
@@ -307,7 +307,7 @@
                                                             <option value="Chief Constable">Chief Constable</option>
                                                             <option value="Chief of Police">Chief of Police</option>
                                                         </select>
-                                                        @error('rank')
+                                                        @error('rank_id')
                                                         <small class="text-danger">{{ $message }}</small>
                                                         @enderror
                                                         <label for="formGroupExampleInput" class="form-label">Enter
@@ -493,7 +493,7 @@
                             <label for="lnameInput" class="form-label">Middle Name (Optional)</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <select wire:model='rank' class="form-select" aria-label="Default select example"
+                            <select wire:model='rank_id' class="form-select" aria-label="Default select example"
                                 name="rank">
                                 <option selected hidden>Select rank</option>
                                 <option disabled>Select rank</option>
@@ -522,7 +522,7 @@
                                 <option value="Chief Constable">Chief Constable</option>
                                 <option value="Chief of Police">Chief of Police</option>
                             </select>
-                            @error('rank')
+                            @error('rank_id')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
                             <label for="formGroupExampleInput" class="form-label">Enter Current Rank</label>
