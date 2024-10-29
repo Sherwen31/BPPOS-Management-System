@@ -183,7 +183,7 @@
                                 @php
                                 $latestRating = $user->evaluationRatings->sortByDesc('created_at')->first();
                                 @endphp
-                                {{ $latestRating ? $latestRating->created_at->diffForHumans() : 'Not Evaluated Yet' }}
+                                {{ $latestRating ? $latestRating->created_at->diffForHumans() : 'Not Evaluated' }}
                             </td>
                             <td>
                                 @if ($user->email_verified_at === null)
@@ -202,16 +202,18 @@
 
                                     @php
                                     $hasEvaluationRating = \App\Models\EvaluationRating::where('user_id', $user->id)
-                                    ->whereDate('created_at', today())
-                                    ->exists();
+                                    ->orderBy('created_at', 'desc')
+                                    ->first();
+                                    $sixMonthsAgo = Illuminate\Support\Carbon::today()->subMonths(6);
+                                    $canEvaluate = $hasEvaluationRating?->created_at >= $sixMonthsAgo;
                                     @endphp
-                                    <a @if ($hasEvaluationRating) wire:click='userHasEvaluation({{ $user->id }})' @else
+                                    <a @if ($canEvaluate) wire:click='userHasEvaluation({{ $user->id }})' @else
                                         wire:navigate href="/super-admin/evaluation/user-evaluation/{{ $user->id }}/{{
                                         $user->police_id }}" @endif
-                                        class="btn {{ $hasEvaluationRating ? 'bg-primary-subtle' : 'btn-primary' }} btn-sm">
-                                        <i class="far fa-file-circle-plus"></i> Evaluate
+                                        class="btn {{ $canEvaluate ? 'bg-primary-subtle' : 'btn-primary' }} btn-sm">
+                                        <i class="far fa-file-circle-plus"></i> {{ $canEvaluate ? 'Evaluated' : 'Evaluate' }}
                                     </a>
-                                    @if ($hasEvaluationRating)
+                                    @if ($canEvaluate)
                                     <a class="btn btn-warning btn-sm" wire:navigate
                                         href="/super-admin/print/printing-details/preview/{{ $user->id }}/{{ $user->police_id }}/info">
                                         <i class="far fa-print"></i> Print

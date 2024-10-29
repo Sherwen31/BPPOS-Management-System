@@ -5,6 +5,7 @@ namespace App\Livewire\SuperAdmin\Evaluation;
 use App\Models\Evaluation;
 use App\Models\EvaluationRating;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 
 class UserEvaluation extends Component
@@ -31,12 +32,15 @@ class UserEvaluation extends Component
         $this->user = $user;
 
         $this->hasEvaluationRating = EvaluationRating::where('user_id', $user->id)
-            ->whereDate('created_at', today())
-            ->exists();
+                ->orderBy('created_at', 'desc')
+                ->first();
 
-        if (!$user || $this->hasEvaluationRating) {
-            $this->redirect('/super-admin/evaluation/user-evaluation', navigate: true);
-        }
+            if (!$user || $this->hasEvaluationRating) {
+                $sixMonthsAgo = Carbon::today()->subMonths(6);
+                if ($this->hasEvaluationRating->created_at >= $sixMonthsAgo) {
+                    $this->redirect('/super-admin/evaluation/user-evaluation', navigate: true);
+                }
+            }
     }
 
     public function setActiveTab($tabIndex)

@@ -8,11 +8,11 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="mainMod-top">
-                <h1>Unit and Rank Management</h1>
+                <h1>Rank Management</h1>
             </div>
             <div class="mainMod-skills">
                 <div class="container-fluid">
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-12 col-sm-12">
                         <div class="table-responsive" style="height: 480px;">
                             <div class="manageRank float-end"><button class="btn mb-2 btn-dark rounded btn-sm"
                                     data-bs-toggle="modal" data-bs-target="#manageRank"><i class="far fa-plus"></i>

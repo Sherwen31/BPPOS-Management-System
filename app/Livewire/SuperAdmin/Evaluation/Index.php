@@ -9,6 +9,7 @@ use App\Models\Position;
 use App\Models\Rank;
 use App\Models\Unit;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -320,16 +321,19 @@ class Index extends Component
 
             return;
         } else {
-
-            $this->hasEvaluationRating = EvaluationRating::with('user')->where('user_id', $user->id)
-                ->whereDate('created_at', today())
-                ->exists();
+            $this->hasEvaluationRating = EvaluationRating::where('user_id', $user->id)
+                ->orderBy('created_at', 'desc')
+                ->first();
 
             if ($this->hasEvaluationRating) {
-                $this->dispatch('toastr', [
-                    'type'          =>          'error',
-                    'message'       =>          'Evaluation already submitted. You can evaluate another tomorrow',
-                ]);
+                $sixMonthsAgo = Carbon::today()->subMonths(6);
+                if ($this->hasEvaluationRating->created_at >= $sixMonthsAgo) {
+                    $this->dispatch('toastr', [
+                        'type'          =>          'error',
+                        'message'       =>          'Evaluation already submitted. You can evaluate another after 6 months',
+                    ]);
+                    return;
+                }
             }
         }
     }

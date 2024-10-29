@@ -76,6 +76,24 @@ class Index extends Component
         $this->dispatch('closeModal');
     }
 
+    public function deleteRank($id)
+    {
+        $rank = Rank::find($id);
+        if (!$rank) {
+            $this->dispatch('toastr', [
+                'type'                  =>                      'error',
+                'message'               =>                      'No rank name found or deleted',
+            ]);
+        } else {
+            $rank->delete();
+            $this->dispatch('toastr', [
+                'type'                  =>                      'success',
+                'message'               =>                      'Rank name deleted successfully',
+            ]);
+        }
+    }
+
+
     #[On('resetData')]
     public function resetData()
     {
