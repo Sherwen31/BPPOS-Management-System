@@ -23,8 +23,8 @@ class IndividualScorecard extends Component
         $performanceItems = PerformanceReportItem::with([
             'performanceReportRatings' => function ($query) use ($userId, $dateCovered) {
                 $query->where('user_id', $userId)
-                    ->whereStartDate($dateCovered->start_date)
-                    ->whereEndDate($dateCovered->end_date);
+                    ->whereStartDate($dateCovered?->start_date)
+                    ->whereEndDate($dateCovered?->end_date);
             }
         ])->orderBy('activity', 'asc')->get();
 
