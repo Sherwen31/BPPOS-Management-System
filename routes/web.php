@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin|super_admin']], f
     Route::get('/admin/evaluation/user-evaluation', AdminEvaluationIndex::class);
     Route::get('/admin/evaluation/user-evaluation/{userId}/{policeId}', AdminEvaluationUserEvaluation::class);
     Route::get('/admin/print/printing-details/preview/{userId}/{policeId}/info', AdminPagesPrintDetails::class);
-    Route::get('/admin/performance-report/{userId}/{policeId}', AdminReportPerformanceReport::class);
+    Route::get('/input-scorecard/performance-report/{userId}/{policeId}', AdminReportPerformanceReport::class);
     Route::get('/admin/performance-report', AdminReportPerformanceReportList::class);
     Route::get('/admin/history', AdminReportUsersHistory::class);
     Route::get('/admin/history/{userId}/{policeId}', AdminReportHistory::class);
@@ -96,4 +96,5 @@ Route::group(['middleware' => ['auth', 'verified', 'role:user|admin|super_admin'
     Route::get('/users/scorecard-history', UserPagesScorecardHistory::class);
     Route::get('/users/account-management', UserPagesAccountManagement::class);
     Route::get('/users/my-scorecard/{startDate}/{endDate}', UserScoreCardMyScorecard::class);
+    Route::get('/input-scorecard/performance-report/{userId}/{policeId}', AdminReportPerformanceReport::class);
 });

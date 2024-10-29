@@ -1,8 +1,9 @@
 <div>
     <div class="container mt-5">
         <div class="mb-5">
-            <a href="/admin/performance-report" class="btn btn-sm btn-default mt-3 text-dark bg-dark-subtle"
-                wire:navigate><i class="far fa-arrow-left"></i> Back to performance report</a>
+            <a @if(auth()->user()->hasRole('admin')) href="/admin/individual-scorecard" @else
+                href="/users/individual-scorecard" @endif class="btn btn-sm btn-default mt-3 text-dark bg-dark-subtle"
+                wire:navigate><i class="far fa-arrow-left"></i> Back to individual scorecard</a>
         </div>
 
         <div class="card mb-5">

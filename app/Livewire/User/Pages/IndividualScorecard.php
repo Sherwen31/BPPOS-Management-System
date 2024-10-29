@@ -11,14 +11,14 @@ class IndividualScorecard extends Component
 {
     #[Title('User | Individual Scorecard')]
 
+    public $noRatings = false;
+
     public function listing()
     {
         $userId = auth()->user()->id;
         $policeId = auth()->user()->police_id;
 
-        $dateCovered = PerformanceReportRating::where('user_id', $userId)
-            ->orderBy('start_date', 'desc')
-            ->first();
+        $dateCovered = PerformanceReportRating::where('user_id', $userId)->where('start_date', '<=', now()->endOfWeek())->where('end_date', '>=', now()->startOfWeek())->first();
 
         $performanceItems = PerformanceReportItem::with([
             'performanceReportRatings' => function ($query) use ($userId, $dateCovered) {
@@ -27,6 +27,8 @@ class IndividualScorecard extends Component
                     ->whereEndDate($dateCovered?->end_date);
             }
         ])->orderBy('activity', 'asc')->get();
+
+        $this->noRatings = PerformanceReportRating::where('user_id', $userId)->where('start_date', '<=', now()->endOfWeek())->where('end_date', '>=', now()->startOfWeek())->exists();
 
         return compact('dateCovered', 'performanceItems');
     }

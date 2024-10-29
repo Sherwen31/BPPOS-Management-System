@@ -142,7 +142,11 @@ class PerformanceReport extends Component
 
         $this->reset();
 
-        $this->redirect('/admin/individual-scorecard', navigate: true);
+        if (auth()->user()->hasRole('admin')) {
+            $this->redirect('/admin/individual-scorecard', navigate: true);
+        } else {
+            $this->redirect('/users/individual-scorecard', navigate: true);
+        }
     }
     public function render()
     {

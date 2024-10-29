@@ -12,7 +12,7 @@
                     <div class="scorecard-title">
                         <h1><strong>INDIVIDUAL SCORECARD @if ($noRatings === false)
                                 - <a wire:navigate
-                                    href="/admin/performance-report/{{ auth()->user()->id }}/{{ auth()->user()->police_id }}"
+                                    href="/input-scorecard/performance-report/{{ auth()->user()->id }}/{{ auth()->user()->police_id }}"
                                     class="btn btn-sm btn-primary">Input Score Card</a>
                                 @endif</strong></h1>
                     </div>
