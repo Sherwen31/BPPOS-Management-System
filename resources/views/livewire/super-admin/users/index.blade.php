@@ -120,7 +120,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     @if ($userData)
-                                                    <div class="d-flex gap-2 align-items-start">
+                                                    <div class="d-flex gap-2 align-items-center">
                                                         <div class="mb-3 form-floating">
                                                             <input wire:model='first_name' type="text"
                                                                 class="form-control" id="fnameInput"
@@ -234,8 +234,103 @@
                                                                 *</label>
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex gap-2 align-items-start">
+                                                    <div class="d-flex gap-2 align-items-center">
                                                         <div class="mb-3 form-floating">
+                                                            <input wire:model='contact_number' type="number"
+                                                                class="form-control" id="cnumInput"
+                                                                placeholder="Contact Number">
+                                                            @error('contact_number')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
+                                                            <label for="cnumInput" class="form-label">Contact
+                                                                Number</label>
+                                                        </div>
+                                                        <div class="mb-3 form-floating">
+                                                            <input wire:model='age' type="number" class="form-control"
+                                                                id="lnameInput" name="ageInput" placeholder="Age">
+                                                            @error('age')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
+                                                            <label for="ageInput" class="form-label">Age</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2 align-items-center">
+                                                        <div class="mb-3 col-6 form-floating">
+                                                            <input wire:model='nationality' type="text"
+                                                                class="form-control" id="NaInput"
+                                                                placeholder="Nationality">
+                                                            @error('nationality')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
+                                                            <label for="NaInput" class="form-label">Nationality</label>
+                                                        </div>
+                                                        <div class="mb-3 col-6 form-floating">
+                                                            <input wire:model='religion' type="text"
+                                                                class="form-control" id="lnameInput" name="rInput"
+                                                                placeholder="Religion">
+                                                            @error('religion')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
+                                                            <label for="rInput" class="form-label">Religion</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2 align-items-center">
+                                                        <div class="mb-3 col-6 form-floating">
+                                                            <input wire:model='address' type="text" class="form-control"
+                                                                id="" placeholder="Address">
+                                                            @error('address')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
+                                                            <label for="" class="form-label">Address</label>
+                                                        </div>
+                                                        <div class="mb-3 col-6 form-floating">
+                                                            <input wire:model='date_of_birth' type="date"
+                                                                class="form-control" id="lnameInput" name="rInput"
+                                                                placeholder="Date of Birth">
+                                                            @error('date_of_birth')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
+                                                            <label for="rInput" class="form-label">Date of Birth</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2 align-items-center">
+                                                        <div class="mb-3 col-6 form-floating">
+                                                            <select wire:model='civil_status' class="form-select"
+                                                                aria-label="Default select example" name="">
+                                                                <option selected hidden>Select Civil Status</option>
+                                                                <option disabled>Select Civil Status</option>
+                                                                <option value="Married">Married</option>
+                                                                <option value="Single">Single</option>
+                                                                <option value="Widowed">Widowed</option>
+                                                                <option value="Divorced">Divorced</option>
+                                                                <option value="Separated">Separated</option>
+                                                                <option value="Engaged">Engaged</option>
+                                                                <option value="Not selected">Rather not to say</option>
+                                                            </select>
+                                                            @error('civil_status')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
+                                                            <label for="formGroupExampleInput" class="form-label">Select
+                                                                Civil Status</label>
+                                                        </div>
+                                                        <div class="mb-3 col-6 form-floating">
+                                                            <select wire:model='gender' class="form-select"
+                                                                aria-label="Default select example" name="">
+                                                                <option selected hidden>Select Gender</option>
+                                                                <option disabled>Select Gender</option>
+                                                                <option value="Male">Male</option>
+                                                                <option value="Female">Female</option>
+                                                                <option value="Not selected">Rather not to say</option>
+                                                            </select>
+                                                            @error('gender')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
+                                                            <label for="formGroupExampleInput" class="form-label">Select
+                                                                Gender</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2 align-items-center">
+                                                        <div class="mb-3 col-6 form-floating">
                                                             <input wire:model='username' type="text"
                                                                 class="form-control" id="usernameInput"
                                                                 placeholder="Enter Username" name="usernameInput">
@@ -245,7 +340,7 @@
                                                             <label for="usernameInput" class="form-label">Enter Username
                                                                 *</label>
                                                         </div>
-                                                        <div wire class="mb-3 form-floating">
+                                                        <div wire class="mb-3 col-6 form-floating">
                                                             <input wire:model='password' type="password"
                                                                 class="form-control" id="passwordInput"
                                                                 placeholder="Enter Password" name="passwordInput">
@@ -322,7 +417,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="d-flex gap-2 align-items-start">
+                        <div class="d-flex gap-2 align-items-center">
                             <div class="mb-3 form-floating">
                                 <input wire:model='first_name' type="text" class="form-control" id="fnameInput"
                                     placeholder="First Name">
@@ -422,8 +517,96 @@
                                 <label for="usernameInput" class="form-label">Enter Email *</label>
                             </div>
                         </div>
-                        <div class="d-flex gap-2 align-items-start">
+                        <div class="d-flex gap-2 align-items-center">
                             <div class="mb-3 form-floating">
+                                <input wire:model='contact_number' type="number" class="form-control" id="cnumInput"
+                                    placeholder="Contact Number">
+                                @error('contact_number')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <label for="cnumInput" class="form-label">Contact Number</label>
+                            </div>
+                            <div class="mb-3 form-floating">
+                                <input wire:model='age' type="number" class="form-control" id="lnameInput"
+                                    name="ageInput" placeholder="Age">
+                                @error('age')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <label for="ageInput" class="form-label">Age</label>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="mb-3 col-6 form-floating">
+                                <input wire:model='nationality' type="text" class="form-control" id="NaInput"
+                                    placeholder="Nationality">
+                                @error('nationality')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <label for="NaInput" class="form-label">Nationality</label>
+                            </div>
+                            <div class="mb-3 col-6 form-floating">
+                                <input wire:model='religion' type="text" class="form-control" id="lnameInput"
+                                    name="rInput" placeholder="Religion">
+                                @error('religion')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <label for="rInput" class="form-label">Religion</label>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="mb-3 col-6 form-floating">
+                                <input wire:model='address' type="text" class="form-control" id=""
+                                    placeholder="Address">
+                                @error('address')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <label for="" class="form-label">Address</label>
+                            </div>
+                            <div class="mb-3 col-6 form-floating">
+                                <input wire:model='date_of_birth' type="date" class="form-control" id="lnameInput"
+                                    name="rInput" placeholder="Date of Birth">
+                                @error('date_of_birth')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <label for="rInput" class="form-label">Date of Birth</label>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="mb-3 col-6 form-floating">
+                                <select wire:model='civil_status' class="form-select"
+                                    aria-label="Default select example" name="">
+                                    <option selected hidden>Select Civil Status</option>
+                                    <option disabled>Select Civil Status</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Widowed">Widowed</option>
+                                    <option value="Divorced">Divorced</option>
+                                    <option value="Separated">Separated</option>
+                                    <option value="Engaged">Engaged</option>
+                                    <option value="Not selected">Rather not to say</option>
+                                </select>
+                                @error('civil_status')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <label for="formGroupExampleInput" class="form-label">Select Civil Status</label>
+                            </div>
+                            <div class="mb-3 col-6 form-floating">
+                                <select wire:model='gender' class="form-select" aria-label="Default select example"
+                                    name="">
+                                    <option selected hidden>Select Gender</option>
+                                    <option disabled>Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Not selected">Rather not to say</option>
+                                </select>
+                                @error('gender')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <label for="formGroupExampleInput" class="form-label">Select Gender</label>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="mb-3 col-6 form-floating">
                                 <input wire:model='username' type="text" class="form-control" id="usernameInput"
                                     placeholder="Enter Username" name="usernameInput">
                                 @error('username')
@@ -431,7 +614,7 @@
                                 @enderror
                                 <label for="usernameInput" class="form-label">Enter Username *</label>
                             </div>
-                            <div wire class="mb-3 form-floating">
+                            <div wire class="mb-3 col-6 form-floating">
                                 <input wire:model='password' type="password" class="form-control" id="passwordInput"
                                     placeholder="Enter Password" name="passwordInput">
                                 @error('password')

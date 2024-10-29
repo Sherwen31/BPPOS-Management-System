@@ -32,6 +32,14 @@ class Index extends Component
     public $username;
     public $password;
     public $email;
+    public $contact_number;
+    public $age;
+    public $nationality;
+    public $religion;
+    public $address;
+    public $date_of_birth;
+    public $civil_status;
+    public $gender;
     public $userData;
     public $search = '';
 
@@ -95,6 +103,14 @@ class Index extends Component
             'username'                  =>                  $this->username,
             'password'                  =>                  bcrypt($this->password),
             'email'                     =>                  $this->email,
+            'contact_number'            =>                  $this->contact_number,
+            'age'                       =>                  $this->age,
+            'nationality'               =>                  $this->nationality,
+            'religion'                  =>                  $this->religion,
+            'address'                   =>                  $this->address,
+            'date_of_birth'             =>                  $this->date_of_birth,
+            'civil_status'              =>                  $this->civil_status,
+            'gender'                    =>                  $this->gender,
             'email_verified_at'         =>                  now()
         ]);
 
@@ -133,6 +149,14 @@ class Index extends Component
             $this->email = $user->email;
             $this->username = $user->username;
             $this->year_attended = $user->year_attended;
+            $this->age = $user->age;
+            $this->nationality = $user->nationality;
+            $this->religion = $user->religion;
+            $this->address = $user->address;
+            $this->date_of_birth = $user->date_of_birth;
+            $this->civil_status = $user->civil_status;
+            $this->gender = $user->gender;
+            $this->contact_number = $user->contact_number;
         }
     }
 
@@ -193,7 +217,15 @@ class Index extends Component
             'police_id'                 =>                  $this->police_id,
             'year_attended'             =>                  $this->year_attended,
             'username'                  =>                  $this->username,
-            'email'                     =>                  $this->email
+            'email'                     =>                  $this->email,
+            'contact_number'            =>                  $this->contact_number,
+            'age'                       =>                  $this->age,
+            'nationality'               =>                  $this->nationality,
+            'religion'                  =>                  $this->religion,
+            'address'                   =>                  $this->address,
+            'date_of_birth'             =>                  $this->date_of_birth,
+            'civil_status'              =>                  $this->civil_status,
+            'gender'                    =>                  $this->gender,
         ]);
 
         $this->dispatch('toastr', [
@@ -241,6 +273,14 @@ class Index extends Component
         $this->password = '';
         $this->email = '';
         $this->userData = '';
+        $this->contact_number = '';
+        $this->age = '';
+        $this->nationality = '';
+        $this->religion = '';
+        $this->address = '';
+        $this->date_of_birth = '';
+        $this->civil_status = '';
+        $this->gender = '';
     }
 
     public function messages()
