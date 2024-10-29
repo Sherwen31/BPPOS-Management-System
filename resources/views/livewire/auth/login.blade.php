@@ -41,12 +41,12 @@
                     </div>
                 </button>
                 <a wire:navigate href="/forgot-password">Forgot Password?</a>
-                <hr>
+                {{-- <hr>
                 <p class="text-center">
                     Don't have an account?
                     <a href="/sign-up" class="" wire:navigate> Sign Up
                     </a>
-                </p>
+                </p> --}}
             </div>
         </form>
         <div class="signup-footer">
