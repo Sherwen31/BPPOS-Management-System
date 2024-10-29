@@ -40,7 +40,7 @@
                                             style="margin-bottom: 10px;" readonly>
                                         <label for="rank"><strong>Rank</strong></label>
                                         <input id="rank" name="rank" class="read-only" type="text"
-                                            value="{{ Auth::user()->rank }}" style="margin-bottom: 10px;" readonly>
+                                            value="{{ Auth::user()->rank->rank_name }}" style="margin-bottom: 10px;" readonly>
                                         <label for="years"><strong>Years</strong></label>
 
                                         @php

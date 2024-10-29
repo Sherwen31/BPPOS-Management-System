@@ -50,7 +50,7 @@
                                 {{ $user->unit->unit_assignment }}
                             </td>
                             <td>
-                                {{ $user->rank }}
+                                {{ $user->rank->rank_name }}
                             </td>
                             <td>
                                 @php
@@ -151,41 +151,18 @@
                                                             (Optional)</label>
                                                     </div>
                                                     <div class="mb-3 form-floating">
-                                                        <select wire:model='rank' class="form-select"
+                                                        <select wire:model='rank_id' class="form-select"
                                                             aria-label="Default select example" name="rank">
                                                             <option selected hidden>Select rank</option>
                                                             <option disabled>Select rank</option>
-                                                            <option value="Constable">Constable</option>
-                                                            <option value="Police Executive Master Sergeant">Police
-                                                                Executive Master Sergeant</option>
-                                                            <option value="Police Executive Major">Police Executive
-                                                                Major</option>
-                                                            <option value="Director-General">Director-General</option>
-                                                            <option value="Police Officer">Police Officer</option>
-                                                            <option value="Sergeant">Sergeant</option>
-                                                            <option value="Lieutenant">Lieutenant</option>
-                                                            <option value="Captain">Captain</option>
-                                                            <option value="Major">Major</option>
-                                                            <option value="Colonel">Colonel</option>
-                                                            <option value="Assistant Chief">Assistant Chief</option>
-                                                            <option value="Deputy Chief">Deputy Chief</option>
-                                                            <option value="Chief">Chief</option>
-                                                            <option value="Commissioner">Commissioner</option>
-                                                            <option value="Superintendent">Superintendent</option>
-                                                            <option value="Inspector">Inspector</option>
-                                                            <option value="Chief Superintendent">Chief Superintendent
+                                                            @forelse ($ranks as $rank)
+                                                            <option value="{{ $rank->id }}">{{ $rank->rank_name }}
                                                             </option>
-                                                            <option value="Director">Director</option>
-                                                            <option value="Assistant Commissioner">Assistant
-                                                                Commissioner</option>
-                                                            <option value="Deputy Commissioner">Deputy Commissioner
-                                                            </option>
-                                                            <option value="Chief Commissioner">Chief Commissioner
-                                                            </option>
-                                                            <option value="Chief Constable">Chief Constable</option>
-                                                            <option value="Chief of Police">Chief of Police</option>
+                                                            @empty
+                                                            <option>No ranks founded</option>
+                                                            @endforelse
                                                         </select>
-                                                        @error('rank')
+                                                        @error('rank_id')
                                                         <small class="text-danger">{{ $message }}</small>
                                                         @enderror
                                                         <label for="formGroupExampleInput" class="form-label">Enter
@@ -322,7 +299,8 @@
 
                         <tr>
                             <td colspan="8">
-                                <p class="text-center mt-2"><strong>{{ $search ? 'No "' . $search . '" users found' : 'No users yet' }}</strong></p>
+                                <p class="text-center mt-2"><strong>{{ $search ? 'No "' . $search . '" users found' :
+                                        'No users yet' }}</strong></p>
                             </td>
                         </tr>
                         @endforelse
@@ -371,36 +349,17 @@
                             <label for="lnameInput" class="form-label">Middle Name (Optional)</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <select wire:model='rank' class="form-select" aria-label="Default select example"
+                            <select wire:model='rank_id' class="form-select" aria-label="Default select example"
                                 name="rank">
                                 <option selected hidden>Select rank</option>
                                 <option disabled>Select rank</option>
-                                <option value="Constable">Constable</option>
-                                <option value="Police Executive Master Sergeant">Police Executive Master Sergeant
-                                </option>
-                                <option value="Police Executive Major">Police Executive Major</option>
-                                <option value="Director-General">Director-General</option>
-                                <option value="Police Officer">Police Officer</option>
-                                <option value="Sergeant">Sergeant</option>
-                                <option value="Lieutenant">Lieutenant</option>
-                                <option value="Captain">Captain</option>
-                                <option value="Major">Major</option>
-                                <option value="Colonel">Colonel</option>
-                                <option value="Assistant Chief">Assistant Chief</option>
-                                <option value="Deputy Chief">Deputy Chief</option>
-                                <option value="Chief">Chief</option>
-                                <option value="Commissioner">Commissioner</option>
-                                <option value="Superintendent">Superintendent</option>
-                                <option value="Inspector">Inspector</option>
-                                <option value="Chief Superintendent">Chief Superintendent</option>
-                                <option value="Director">Director</option>
-                                <option value="Assistant Commissioner">Assistant Commissioner</option>
-                                <option value="Deputy Commissioner">Deputy Commissioner</option>
-                                <option value="Chief Commissioner">Chief Commissioner</option>
-                                <option value="Chief Constable">Chief Constable</option>
-                                <option value="Chief of Police">Chief of Police</option>
+                                @forelse ($ranks as $rank)
+                                <option value="{{ $rank->id }}">{{ $rank->rank_name }}</option>
+                                @empty
+                                <option>No ranks founded</option>
+                                @endforelse
                             </select>
-                            @error('rank')
+                            @error('rank_id')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
                             <label for="formGroupExampleInput" class="form-label">Enter Current Rank</label>

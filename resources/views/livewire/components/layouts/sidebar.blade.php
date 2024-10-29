@@ -23,6 +23,14 @@
                 </a>
             </li>
             <li class="li">
+                <a wire:navigate href="/super-admin/rank-management"
+                    class="{{ 'super-admin/rank-management' === request()->path() ? 'active_sidebar' : '' }}">
+                    <i class="fas fa-ranking-star"></i>
+                    <span class="nav-item">Rank Management</span>
+                    <span class="sideNavToolTip">Rank Management</span>
+                </a>
+            </li>
+            <li class="li">
                 <a wire:navigate href="/super-admin/user-account-management"
                     class="{{ 'super-admin/user-account-management' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-users"></i>

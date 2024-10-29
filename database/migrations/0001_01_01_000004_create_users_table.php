@@ -13,19 +13,21 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->longText('profile_picture')->nullable();
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
             $table->string('username')->nullable();
             $table->string('police_id')->nullable();
             $table->string('contact_number')->nullable();
-            $table->string('rank')->nullable();
             $table->foreignId('position_id')->constrained()->nullabe();
             $table->foreignId('unit_id')->constrained()->nulalble();
+            $table->foreignId('rank_id')->constrained()->nulalble();
             $table->string('address')->nullable();
             $table->string('year_attended')->nullabe();
             $table->string('email')->unique();
             $table->string('date_of_birth')->nullable();
+            $table->enum('civil_status', ['Married', 'Single', 'Widowed', 'Divorced', 'Not selected'])->nullable();
             $table->enum('gender', ['Male', 'Female', 'Not selected'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

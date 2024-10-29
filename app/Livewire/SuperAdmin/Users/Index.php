@@ -3,6 +3,7 @@
 namespace App\Livewire\SuperAdmin\Users;
 
 use App\Models\Position;
+use App\Models\Rank;
 use App\Models\Unit;
 use App\Models\User;
 use Livewire\Attributes\Title;
@@ -19,12 +20,13 @@ class Index extends Component
     public $positions = [];
     public $roles = [];
     public $units = [];
+    public $ranks = [];
     public $first_name;
     public $last_name;
     public $middle_name;
     public $position_id;
     public $unit_id;
-    public $rank;
+    public $rank_id;
     public $police_id;
     public $year_attended;
     public $username;
@@ -35,7 +37,7 @@ class Index extends Component
 
     public function listings()
     {
-        $users = User::with(['position', 'unit', 'roles'])->whereDoesntHave('roles', function ($query) {
+        $users = User::with(['position', 'rank', 'unit', 'roles'])->whereDoesntHave('roles', function ($query) {
             $query->where('name', 'super_admin')->orWhere('name', 'user');
         })
             ->where(function ($query) {
@@ -47,6 +49,9 @@ class Index extends Component
                     ->orWhereHas('position', function ($query) {
                         $query->where('position_name', 'like', '%' . $this->search . '%');
                     })
+                    ->orWhereHas('rank', function ($query) {
+                        $query->where('rank_name', 'like', '%' . $this->search . '%');
+                    })
                     ->orWhereHas('unit', function ($query) {
                         $query->where('unit_assignment', 'like', '%' . $this->search . '%');
                     });
@@ -55,6 +60,8 @@ class Index extends Component
             ->orderBy('id', 'asc')->paginate(10);
 
         $this->positions = Position::all();
+
+        $this->ranks = Rank::all();
 
         $this->units = Unit::all();
 
@@ -68,7 +75,7 @@ class Index extends Component
             'last_name'                 =>                  ['required'],
             'position_id'               =>                  ['required', 'exists:positions,id'],
             'unit_id'                   =>                  ['required', 'exists:units,id'],
-            'rank'                      =>                  ['required'],
+            'rank_id'                   =>                  ['required', 'exists:ranks,id'],
             'police_id'                 =>                  ['required', 'unique:users,police_id'],
             'year_attended'             =>                  ['date', 'required', 'before_or_equal:today'],
             'username'                  =>                  ['required', 'unique:users,username'],
@@ -82,12 +89,14 @@ class Index extends Component
             'middle_name'               =>                  $this->middle_name,
             'position_id'               =>                  $this->position_id,
             'unit_id'                   =>                  $this->unit_id,
+            'rank_id'                   =>                  $this->rank_id,
             'rank'                      =>                  $this->rank,
             'police_id'                 =>                  $this->police_id,
             'year_attended'             =>                  $this->year_attended,
             'username'                  =>                  $this->username,
             'password'                  =>                  bcrypt($this->password),
-            'email'                     =>                  $this->email
+            'email'                     =>                  $this->email,
+            'email_verified_at'         =>                  now(),
         ]);
 
         $user->assignRole('admin');
@@ -120,7 +129,7 @@ class Index extends Component
             $this->middle_name = $user->middle_name;
             $this->position_id = $user->position_id;
             $this->unit_id = $user->unit_id;
-            $this->rank = $user->rank;
+            $this->rank_id = $user->rank_id;
             $this->police_id = $user->police_id;
             $this->email = $user->email;
             $this->username = $user->username;
@@ -158,6 +167,7 @@ class Index extends Component
             'last_name'                 =>                  ['required'],
             'position_id'               =>                  ['required', 'exists:positions,id'],
             'unit_id'                   =>                  ['required', 'exists:units,id'],
+            'rank_id'                   =>                  ['required', 'exists:ranks,id'],
             'rank'                      =>                  ['required'],
             'police_id'                 =>                  ['required', 'unique:users,police_id,' . $this->userData->id],
             'year_attended'             =>                  ['date', 'required', 'before_or_equal:today'],
@@ -181,7 +191,7 @@ class Index extends Component
             'middle_name'               =>                  $this->middle_name,
             'position_id'               =>                  $this->position_id,
             'unit_id'                   =>                  $this->unit_id,
-            'rank'                      =>                  $this->rank,
+            'rank_id'                   =>                  $this->rank_id,
             'police_id'                 =>                  $this->police_id,
             'year_attended'             =>                  $this->year_attended,
             'username'                  =>                  $this->username,
@@ -226,7 +236,7 @@ class Index extends Component
         $this->middle_name = '';
         $this->position_id = '';
         $this->unit_id = '';
-        $this->rank = '';
+        $this->rank_id = '';
         $this->police_id = '';
         $this->year_attended = '';
         $this->username = '';
@@ -240,6 +250,7 @@ class Index extends Component
         return [
             'position_id.required'         =>              'The Position is required',
             'unit_id.required'             =>              'The Unit Assigned is required',
+            'rank_id.required'             =>              'The Rank is required',
         ];
     }
 

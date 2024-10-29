@@ -13,7 +13,7 @@
                         <h1><strong>INDIVIDUAL SCORECARD</strong></h1>
                     </div>
                     <div class="scorecard-header" id="scorecard-header">
-                        <span>Rank/Name: <strong>{{ auth()->user()->rank }} {{ auth()->user()->first_name }}
+                        <span>Rank/Name: <strong>{{ auth()->user()->rank->rank_name }} {{ auth()->user()->first_name }}
                                 {{ auth()->user()->middle_name }} {{ auth()->user()->last_name }}
                                 {{ auth()->user()->police_id }}</strong></span>
                         <br>

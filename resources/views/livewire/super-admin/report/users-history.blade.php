@@ -51,7 +51,7 @@
                                     {{ $user->unit->unit_assignment }}
                                 </td>
                                 <td>
-                                    {{ $user->rank }}
+                                    {{ $user->rank->rank_name }}
                                 </td>
                                 <td>
                                     @php

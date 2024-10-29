@@ -13,12 +13,12 @@
                     <input type="search" wire:model.live.debounce.200ms="search" class="form-control"
                         placeholder="Search...">
                 </div>
-                <div>
+                {{-- <div>
                     <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                         data-bs-target="#performanceReportModal">
                         <i class="far fa-file-plus"></i> Create Performance Report
                     </a>
-                </div>
+                </div> --}}
             </div>
             <div class="mainMod-skills">
                 <div class="w-100">
@@ -57,7 +57,7 @@
                                         {{ $user->unit?->unit_assignment }}
                                     </td>
                                     <td>
-                                        {{ $user->rank }}
+                                        {{ $user->rank->rank_name }}
                                     </td>
                                     <td>
                                         @php

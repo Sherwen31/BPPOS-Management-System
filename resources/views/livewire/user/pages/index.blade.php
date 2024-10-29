@@ -17,7 +17,7 @@
                     </div>
                     <div class="welcome-pageModed-content">
                         <!-- Need data for the Name -->
-                        <h4><strong>Welcome to your Scorecard Portal, {{ Auth::user()->rank }} {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}!</strong></h4> <br>
+                        <h4><strong>Welcome to your Scorecard Portal, {{ Auth::user()->rank->rank_name }} {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}!</strong></h4> <br>
                         <p>Access and review your performance scores with ease.
                             Track your progress, set new goals, and stay on top of your achievements.
                             Thank you for your service!</p>

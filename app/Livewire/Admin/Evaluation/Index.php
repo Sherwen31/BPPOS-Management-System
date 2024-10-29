@@ -6,6 +6,7 @@ use App\Models\Evaluation;
 use App\Models\EvaluationItem;
 use App\Models\EvaluationRating;
 use App\Models\Position;
+use App\Models\Rank;
 use App\Models\Unit;
 use App\Models\User;
 use Livewire\Attributes\Title;
@@ -21,12 +22,13 @@ class Index extends Component
     public $positions = [];
     public $roles = [];
     public $units = [];
+    public $ranks = [];
     public $first_name;
     public $last_name;
     public $middle_name;
     public $position_id;
     public $unit_id;
-    public $rank;
+    public $rank_id;
     public $police_id;
     public $year_attended;
     public $username;
@@ -48,10 +50,12 @@ class Index extends Component
 
     public function listings()
     {
-        $users = User::with(['position', 'unit', 'roles', 'evaluationRatings'])
+        $users = User::with(['position', 'rank', 'unit', 'roles', 'evaluationRatings'])
             ->where(function ($query) {
                 $query->where('police_id', 'like', '%' . $this->search . '%')
-                    ->orWhere('rank', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('rank', function ($query) {
+                        $query->where('rank_name', 'like', '%' . $this->search . '%');
+                    })
                     ->orWhereHas('position', function ($query) {
                         $query->where('position_name', 'like', '%' . $this->search . '%');
                     })
@@ -69,6 +73,8 @@ class Index extends Component
 
         $this->units = Unit::all();
 
+        $this->ranks = Rank::all();
+
         $this->evaluations = Evaluation::all();
 
         $this->evaluation_items = EvaluationItem::all();
@@ -83,7 +89,7 @@ class Index extends Component
             'last_name'                 =>                  ['required'],
             'position_id'               =>                  ['required', 'exists:positions,id'],
             'unit_id'                   =>                  ['required', 'exists:units,id'],
-            'rank'                      =>                  ['required'],
+            'rank_id'                   =>                  ['required', 'exists:ranks,id'],
             'police_id'                 =>                  ['required', 'unique:users,police_id'],
             'year_attended'             =>                  ['date', 'required', 'before_or_equal:today'],
             'username'                  =>                  ['required', 'unique:users,username'],
@@ -97,12 +103,13 @@ class Index extends Component
             'middle_name'               =>                  $this->middle_name,
             'position_id'               =>                  $this->position_id,
             'unit_id'                   =>                  $this->unit_id,
-            'rank'                      =>                  $this->rank,
+            'rank_id'                   =>                  $this->rank_id,
             'police_id'                 =>                  $this->police_id,
             'year_attended'             =>                  $this->year_attended,
             'username'                  =>                  $this->username,
             'password'                  =>                  bcrypt($this->password),
-            'email'                     =>                  $this->email
+            'email'                     =>                  $this->email,
+            'email_verified_at'         =>                  now()
         ]);
 
         $user->assignRole('admin');
@@ -135,7 +142,7 @@ class Index extends Component
             $this->middle_name = $user->middle_name;
             $this->position_id = $user->position_id;
             $this->unit_id = $user->unit_id;
-            $this->rank = $user->rank;
+            $this->rank_id = $user->rank_id;
             $this->police_id = $user->police_id;
             $this->email = $user->email;
             $this->username = $user->username;
@@ -173,7 +180,7 @@ class Index extends Component
             'last_name'                 =>                  ['required'],
             'position_id'               =>                  ['required', 'exists:positions,id'],
             'unit_id'                   =>                  ['required', 'exists:units,id'],
-            'rank'                      =>                  ['required'],
+            'rank_id'                   =>                  ['required', 'exists:ranks,id'],
             'police_id'                 =>                  ['required', 'unique:users,police_id,' . $this->userData->id],
             'year_attended'             =>                  ['date', 'required', 'before_or_equal:today'],
             'username'                  =>                  ['required', 'unique:users,username,' . $this->userData->id],
@@ -196,7 +203,7 @@ class Index extends Component
             'middle_name'               =>                  $this->middle_name,
             'position_id'               =>                  $this->position_id,
             'unit_id'                   =>                  $this->unit_id,
-            'rank'                      =>                  $this->rank,
+            'rank_id'                   =>                  $this->rank_id,
             'police_id'                 =>                  $this->police_id,
             'year_attended'             =>                  $this->year_attended,
             'username'                  =>                  $this->username,
@@ -241,7 +248,7 @@ class Index extends Component
         $this->middle_name = '';
         $this->position_id = '';
         $this->unit_id = '';
-        $this->rank = '';
+        $this->rank_id = '';
         $this->police_id = '';
         $this->year_attended = '';
         $this->username = '';
@@ -339,6 +346,7 @@ class Index extends Component
         return [
             'position_id.required'         =>              'The Position is required',
             'unit_id.required'             =>              'The Unit Assigned is required',
+            'rank_id.required'             =>              'The Rank is required',
             'evaluation_id.required'       =>              'The Evaluation Title is required',
         ];
     }

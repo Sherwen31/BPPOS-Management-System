@@ -20,7 +20,7 @@ class Profile extends Component
     public $gender;
     public $police_id;
     public $contact_number;
-    public $rank;
+    public $rank_id;
     public $position_id;
     public $unit_id;
     public $address;
@@ -43,7 +43,7 @@ class Profile extends Component
         $this->gender = $user->gender;
         $this->police_id = $user->police_id;
         $this->contact_number = $user->contact_number;
-        $this->rank = $user->rank;
+        $this->rank_id = $user->rank_id;
         $this->position_id = $user->position_id;
         $this->unit_id = $user->unit_id;
         $this->address = $user->address;
@@ -67,10 +67,9 @@ class Profile extends Component
             'date_of_birth'                   =>              ['required', 'date', 'before_or_equal:2024-12-31'],
             'gender'                          =>              ['required', 'in:Male,Female,Not selected'],
             'police_id'                       =>              ['required', 'min:1', 'max:99'],
-            'contact_number'                  =>              ['required', 'numeric', 'digits:11'],
-            'rank'                            =>              ['required', 'in:Constable,Police Executive Master Sergeant,Police Executive Major,Director-General,Police Officer,Sergeant,Lieutenant,Captain,Major,Colonel,Assistant Chief,Deputy Chief,Chief,Commissioner,Superintendent,Inspector,Chief Superintendent,Director,Assistant Commissioner,Deputy Commissioner,Chief Commissioner,Chief Constable,Chief of Police'],
-            'email'                           =>              ['required', 'email', 'regex:/^\S+@\S+\.\S+$/', 'unique:users,email,' . $user->id],
+            'contact_number'                  =>              ['required', 'numeric', 'digits:11'],'email'                           =>              ['required', 'email', 'regex:/^\S+@\S+\.\S+$/', 'unique:users,email,' . $user->id],
             'position_id'                     =>              ['required', 'exists:positions,id'],
+            'rank_id'                         =>              ['required', 'exists:ranks,id'],
             'unit_id'                         =>              ['required', 'exists:units,id'],
             'address'                         =>              ['min:1', 'max:100'],
             'year_attended'                   =>              ['required', 'date', 'before_or_equal:today'],
@@ -85,7 +84,7 @@ class Profile extends Component
             'gender'                              =>              $this->gender,
             'police_id'                           =>              $this->police_id,
             'contact_number'                      =>              $this->contact_number,
-            'rank'                                =>              $this->rank,
+            'rank_id'                             =>              $this->rank_id,
             'email'                               =>              $this->email,
             'position_id'                         =>              $this->position_id,
             'unit_id'                             =>              $this->unit_id,
@@ -109,6 +108,7 @@ class Profile extends Component
         return [
             'date_of_birth.before_or_equal'         =>              'The date of birth must be on or before 2024',
             'position_id.required'                  =>              'The Position is required',
+            'rank_id.required'                      =>              'The Rank is required',
             'unit_id.required'                      =>              'The Unit Assigned is required',
         ];
     }

@@ -11,7 +11,7 @@
                 <form wire:submit.prevent='save'>
                     <div class="container mb-5">
                         <h6><strong>Rank:</strong>
-                            {{ $user->rank }}
+                            {{ $user->rank->rank_name }}
                         </h6>
                         <h6><strong>Name:</strong>
                             {{ $user->first_name }}

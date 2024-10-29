@@ -14,6 +14,7 @@ use App\Livewire\SuperAdmin\Report\PerformanceReportList as SuperAdminReportPerf
 use App\Livewire\SuperAdmin\Report\History as SuperAdminReportHistory;
 use App\Livewire\SuperAdmin\Report\UsersHistory as SuperAdminReportUsersHistory;
 use App\Livewire\SuperAdmin\ScoreCard\UserScorecard as SuperAdminScoreCardUserScorecard;
+use App\Livewire\SuperAdmin\Rank\Index as SuperAdminRankManagement;
 
 // ADMIN SIDE
 use App\Livewire\Admin\Pages\Dashboard as AdminPagesDashboard;
@@ -58,6 +59,7 @@ Route::fallback(Login::class);
 Route::group(['middleware' => ['auth', 'verified', 'role:super_admin']], function () {
     Route::get('/super-admin/dashboard', SuperAdminPagesDashboard::class);
     Route::get('/super-admin/unit-and-position-management', SuperAdminUnitAndPositionManagement::class);
+    Route::get('/super-admin/rank-management', SuperAdminRankManagement::class);
     Route::get('/super-admin/account-management', SuperAdminPagesProfile::class);
     Route::get('/super-admin/user-account-management', SuperAdminUsersIndex::class);
     Route::get('/super-admin/evaluation/rating-indicator', SuperAdminEvaluationRatingIndicator::class);

@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Pages;
 
 use App\Models\Position;
+use App\Models\Rank;
 use App\Models\Unit;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Title;
@@ -20,7 +21,7 @@ class Profile extends Component
     public $gender;
     public $police_id;
     public $contact_number;
-    public $rank;
+    public $rank_id;
     public $position_id;
     public $unit_id;
     public $address;
@@ -31,6 +32,7 @@ class Profile extends Component
     public $current_password;
     public $units = [];
     public $positions = [];
+    public $ranks = [];
 
     public function profile()
     {
@@ -43,7 +45,7 @@ class Profile extends Component
         $this->gender = $user->gender;
         $this->police_id = $user->police_id;
         $this->contact_number = $user->contact_number;
-        $this->rank = $user->rank;
+        $this->rank_id = $user->rank_id;
         $this->position_id = $user->position_id;
         $this->unit_id = $user->unit_id;
         $this->address = $user->address;
@@ -51,6 +53,8 @@ class Profile extends Component
         $this->email = $user->email;
 
         $this->positions = Position::all();
+
+        $this->ranks = Rank::all();
 
         $this->units = Unit::all();
     }
@@ -68,7 +72,7 @@ class Profile extends Component
             'gender'                          =>              ['required', 'in:Male,Female,Not selected'],
             'police_id'                       =>              ['required', 'min:1', 'max:99'],
             'contact_number'                  =>              ['required', 'numeric', 'digits:11'],
-            'rank'                            =>              ['required', 'in:Constable,Police Executive Master Sergeant,Police Executive Major,Director-General,Police Officer,Sergeant,Lieutenant,Captain,Major,Colonel,Assistant Chief,Deputy Chief,Chief,Commissioner,Superintendent,Inspector,Chief Superintendent,Director,Assistant Commissioner,Deputy Commissioner,Chief Commissioner,Chief Constable,Chief of Police'],
+            'rank_id'                         =>              ['required', 'exists:ranks,id'],
             'email'                           =>              ['required', 'email', 'regex:/^\S+@\S+\.\S+$/', 'unique:users,email,' . $user->id],
             'position_id'                     =>              ['required', 'exists:positions,id'],
             'unit_id'                         =>              ['required', 'exists:units,id'],
@@ -85,7 +89,7 @@ class Profile extends Component
             'gender'                              =>              $this->gender,
             'police_id'                           =>              $this->police_id,
             'contact_number'                      =>              $this->contact_number,
-            'rank'                                =>              $this->rank,
+            'rank_id'                             =>              $this->rank_id,
             'email'                               =>              $this->email,
             'position_id'                         =>              $this->position_id,
             'unit_id'                             =>              $this->unit_id,
@@ -109,6 +113,7 @@ class Profile extends Component
         return [
             'date_of_birth.before_or_equal'         =>              'The date of birth must be on or before 2024',
             'position_id.required'                  =>              'The Position is required',
+            'rank_id.required'                      =>              'The Rank is required',
             'unit_id.required'                      =>              'The Unit Assigned is required',
         ];
     }
