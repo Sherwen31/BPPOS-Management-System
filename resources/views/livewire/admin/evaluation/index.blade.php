@@ -135,6 +135,7 @@
                 <table class="table">
                     <thead class="table-dark">
                         <tr>
+                            <th>Name</th>
                             <th scope="col">Police ID</th>
                             <th scope="col">Position</th>
                             <th scope="col">Unit Assigned</th>
@@ -149,6 +150,14 @@
                     <tbody>
                         @forelse ($users as $user)
                         <tr>
+                            <td>
+                                @if ($user->last_name)
+                                {{ $user->last_name }},
+                                @endif {{ $user->first_name }} {{ $user->middle_name }}
+                                <br>
+                                <strong style="font-size: 12px;"><span class="text-muted fst-italic">Username:</span> {{
+                                    $user->username }}</strong>
+                            </td>
                             <td>
                                 {{ $user->police_id }}
                             </td>

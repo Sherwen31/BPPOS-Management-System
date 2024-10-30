@@ -7,16 +7,21 @@ use App\Models\EvaluationRating;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class UserEvaluation extends Component
 {
+    use WithFileUploads;
 
     public $police_id;
     public $evaluations;
     public $numerical_rating = [];
+    public $attachment = [];
+    public $user_reviewer_id;
     public $user;
     public $activeTab = 1;
     public $hasEvaluationRating;
+    public $reviewers;
 
     public function listEvaluations()
     {
@@ -26,6 +31,10 @@ class UserEvaluation extends Component
     public function mount($userId, $policeId)
     {
         $user = User::where('id', $userId)->where('police_id', $policeId)->first();
+
+        $this->reviewers = User::where('id', '!=', auth()->user()->id)->where('id', '!=', $userId)->whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'user');
+        })->get();
 
         $this->police_id = $user->police_id;
 
@@ -67,6 +76,8 @@ class UserEvaluation extends Component
     {
         $this->validate([
             'numerical_rating.*'        =>      ['required', 'numeric', 'min:1', 'max:5'],
+            'attachment.*'              =>      ['required'],
+            'user_reviewer_id'          =>      ['required'],
         ]);
 
         foreach ($this->evaluations as $evaluation) {
@@ -78,10 +89,19 @@ class UserEvaluation extends Component
                     ]);
                     return;
                 } else {
+                    $attachmentPath = null;
+
+                    if (isset($this->attachment[$evaluationItem->id]) && $this->attachment[$evaluationItem->id]) {
+
+                        $attachmentPath = $this->attachment[$evaluationItem->id]->store('uploaded-attachments');
+                    }
                     EvaluationRating::create([
                         'user_id'                       =>      $this->user->id,
+                        'user_reviewer_id'              =>      $this->user_reviewer_id,
+                        'user_rater_id'                 =>      auth()->user()->id,
                         'evaluation_item_id'            =>      $evaluationItem->id,
                         'numerical_rating'              =>      $this->numerical_rating[$evaluationItem->id],
+                        'attachment'                    =>      $attachmentPath ?: null,
                         'weight_score'                  =>      $evaluationItem->point_allocation * $this->numerical_rating[$evaluationItem->id],
                     ]);
                 }
@@ -96,6 +116,13 @@ class UserEvaluation extends Component
         $this->reset();
 
         $this->redirect('/admin/evaluation/user-evaluation', navigate: true);
+    }
+
+    public function message()
+    {
+        return [
+            'user_reviewer_id.required'  =>      'Please select reviewer first',
+        ];
     }
 
     public function render()
