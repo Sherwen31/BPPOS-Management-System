@@ -235,7 +235,7 @@
                                         class="btn {{ $canEvaluate ? 'btn-primary' : 'bg-primary-subtle' }} btn-sm">
                                         <i class="far fa-file-circle-plus"></i> {{ $canEvaluate ? 'Evaluate' : 'Evaluated' }}
                                     </a>
-                                    @if ($hasEvaluationRating)
+                                    @if (!$canEvaluate)
                                     <a class="btn btn-warning btn-sm" wire:navigate
                                         href="/super-admin/print/printing-details/preview/{{ $user->id }}/{{ $user->police_id }}/info">
                                         <i class="far fa-print"></i> Print

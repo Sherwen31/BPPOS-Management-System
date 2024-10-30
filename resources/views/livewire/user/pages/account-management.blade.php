@@ -20,27 +20,139 @@
                             <form action="" wire:submit.prevent='passwordChange'>
                                 <div class="profile-container">
                                     <div class="profile-photo">
+                                        @if ($profile_picture)
+                                        <img src="{{ $profile_picture->temporaryUrl() }}" alt="Profile Photo"
+                                            id="profileImg">
+                                        @else
+                                        @if (auth()->user()->profile_picture === null)
                                         <img src="/images/police-512.png" alt="Profile Photo" id="profileImg">
+                                        @else
+                                        <img src="{{ Storage::url(auth()->user()->profile_picture) }}"
+                                            alt="Profile Photo" id="profileImg">
+                                        @endif
+                                        @endif
                                     </div>
-                                    {{-- <label class="change-photo-label" for="fileInput">
-                                        Change Photo
-                                        <input type="file" id="fileInput" accept="image/*" style="display: none;"
-                                            onchange="previewImage(event)">
-                                    </label> --}}
+                                    <label class="change-photo-label" for="fileInput">
+                                        <span wire:loading.remove wire:target='profile_picture'>Change photo</span>
+                                        <span wire:loading wire:target='profile_picture'>Changing...</span>
+                                        <input wire:model='profile_picture' type="file" id="fileInput" accept="image/*"
+                                            style="display: none;" onchange="previewImage(event)">
+                                    </label>
+                                    <br>
+                                    @error('profile_picture')
+                                    <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="account-inputs">
                                     <div class="input-readonly">
                                         <label for="first_name"><strong>First Name</strong></label>
-                                        <input id="first_name" class="read-only" type="text" wire:model='first_name' style="margin-bottom: 10px;">
+                                        <input id="first_name" type="text" wire:model='first_name'
+                                            style="margin-bottom: 10px;">
+                                        @error('first_name')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror
                                         <label for="middle_name"><strong>Middle Name</strong></label>
-                                        <input id="middle_name" class="read-only" type="text" wire:model='middle_name' style="margin-bottom: 10px;">
+                                        <input id="middle_name" type="text" wire:model='middle_name'
+                                            style="margin-bottom: 10px;">
+                                        @error('middle_name')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror
+                                        <label for="nationality"><strong>Nationality</strong></label>
+                                        <input id="nationality" type="text" wire:model='nationality'
+                                            style="margin-bottom: 10px;">
+                                        @error('nationality')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror
+                                        <label for="contact_number"><strong>Contact Number</strong></label>
+                                        <input id="contact_number" type="number" wire:model='contact_number'
+                                            style="margin-bottom: 10px;">
+                                        @error('contact_number')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror
+                                        <label for="civil_status"><strong>Civil Status</strong></label>
+                                        <select id="civil_status" wire:model='civil_status'
+                                            style="margin-bottom: 10px;">
+                                            <option hidden selected>Select Civil Status</option>
+                                            <option disabled>Select Civil Status</option>
+                                            <option value="Married">Married</option>
+                                            <option value="Single">Single</option>
+                                            <option value="Widowed">Widowed</option>
+                                            <option value="Divorced">Divorced</option>
+                                            <option value="Separated">Separated</option>
+                                            <option value="Engaged">Engaged</option>
+                                            <option value="Not selected">Rather not to say</option>
+                                        </select>
+                                        @error('civil_status')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror
                                         <label for="position"><strong>Position</strong></label>
                                         <input id="position" name="position" class="read-only" type="text"
                                             value="{{ Auth::user()->position->position_name }}"
                                             style="margin-bottom: 10px;" readonly>
+                                        <label for="unit_assignment"><strong>Unit Assignment</strong></label>
+                                        <input id="unit_assignment" name="unit_assignment" class="read-only" type="text"
+                                            value="{{ Auth::user()->unit->unit_assignment }}"
+                                            style="margin-bottom: 10px;" readonly>
                                         <label for="rank"><strong>Rank</strong></label>
                                         <input id="rank" name="rank" class="read-only" type="text"
-                                            value="{{ Auth::user()->rank->rank_name }}" style="margin-bottom: 10px;" readonly>
+                                            value="{{ Auth::user()->rank->rank_name }}" style="margin-bottom: 10px;"
+                                            readonly>
+
+                                        <label for="password"><strong>New Password</strong></label>
+                                        <input wire:model='new_password' id="password" name="password" type="password"
+                                            placeholder="New Password" style="margin-bottom: 10px;">
+
+                                        @error('new_password')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="input-enter">
+                                        <label for="last_name"><strong>Last Name</strong></label>
+                                        <input id="last_name" type="text" wire:model='last_name'
+                                            style="margin-bottom: 10px;">
+                                        @error('last_name')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror
+                                        <label for="username"><strong>Username</strong></label>
+                                        <input id="username" wire:model='username' name="username" type="text"
+                                            style="margin-bottom: 10px;">
+                                        @error('username')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror
+                                        <label for="religion"><strong>Religion</strong></label>
+                                        <input id="religion" wire:model='religion' name="religion" type="text"
+                                            style="margin-bottom: 10px;">
+                                        @error('religion')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror
+                                        <label for="age"><strong>Age</strong></label>
+                                        <input id="age" name="age" wire:model='age' type="number"
+                                            style="margin-bottom: 10px;">
+                                        @error('age')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror
+                                        <label for="gender"><strong>Civil Gender</strong></label>
+                                        <select id="gender" wire:model='gender' style="margin-bottom: 10px;">
+                                            <option selected hidden>Select Gender</option>
+                                            <option disabled>Select Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Not selected">Rather not to say</option>
+                                        </select>
+                                        @error('gender')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror <label for="email"><strong>Email</strong></label>
+                                        <input id="email" wire:model='email' name="email" type="email"
+                                            style="margin-bottom: 10px;">
+                                        @error('email')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror
+                                        <label for="date_of_birth"><strong>Date of Birth</strong></label>
+                                        <input id="date_of_birth" wire:model='date_of_birth' name="date_of_birth"
+                                            type="date" style="margin-bottom: 10px;">
+                                        @error('date_of_birth')
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        @enderror
                                         <label for="years"><strong>Years</strong></label>
 
                                         @php
@@ -57,28 +169,16 @@
                                         @endphp
                                         <input id="years" name="years" class="read-only" type="text"
                                             value="{{ $formattedDifference }}" style="margin-bottom: 10px;" readonly>
-                                    </div>
-                                    <div class="input-enter">
-                                        <label for="last_name"><strong>Last Name</strong></label>
-                                        <input id="last_name" class="read-only" type="text" wire:model='last_name' style="margin-bottom: 10px;">
-                                        <label for="username"><strong>Username</strong></label>
-                                        <input id="username" name="username" type="text"
-                                            value="{{ Auth::user()->username }}" class="read-only"
-                                            style="margin-bottom: 10px;" readonly>
-                                        <label for="email"><strong>Email</strong></label>
-                                        <input id="email" name="email" type="email" value="{{ Auth::user()->email }}"
-                                            class="read-only" style="margin-bottom: 10px;" readonly>
-                                        <label for="password"><strong>New Password</strong></label>
-                                        <input wire:model='new_password' id="password" name="password" type="password"
-                                            placeholder="New Password" style="margin-bottom: 10px;">
                                         <label for="cpassword"><strong>Confirm Password</strong></label>
                                         <input wire:model='new_password_confirmation' id="cpassword" name="cpassword"
                                             type="password" placeholder="Confirm New Password"
                                             style="margin-bottom: 10px;">
                                     </div>
                                 </div>
-                                @error('new_password')
-                                <span class="text-danger">{{ $message }}</span>
+                                <label for="address"><strong>Address</strong></label>
+                                <textarea name="" id="" wire:model='address' cols="30" rows="3"></textarea>
+                                @error('address')
+                                <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
                                 @enderror
                                 <div class="account-btn">
                                     <button class="btn-cancel" wire:click='resetForm'>RESET</button>

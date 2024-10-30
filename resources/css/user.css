@@ -149,6 +149,12 @@ select {
     border: #eeeef3 1px solid;
 }
 
+.account-inputs select {
+    padding: 10px;
+    border-radius: 10px;
+    border: #eeeef3 1px solid;
+}
+
 .profile-container {
     text-align: center;
     margin-top: 10px;
@@ -172,13 +178,17 @@ select {
 .change-photo-label {
     display: inline-block;
     margin-top: 10px;
-    color: #333;
+    color: white;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
+    background-color: rgb(13, 110, 253);
+    padding: 3px 5px;
+    border-radius: 10px;
 }
 
 .change-photo-label:hover {
-    color: #222222;
+    color: white;
+    background-color: rgb(14, 100, 230);
 }
 
 .change-photo-label input {
@@ -192,7 +202,17 @@ select {
     width: 100%;
 }
 
+.read-only {
+    cursor: not-allowed;
+}
+
 .input-enter {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+textarea {
     display: flex;
     flex-direction: column;
     width: 100%;

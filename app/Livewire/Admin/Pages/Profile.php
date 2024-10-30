@@ -8,9 +8,13 @@ use App\Models\Unit;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Profile extends Component
 {
+
+    use WithFileUploads;
+
     #[Title('Admin | Account Management')]
 
     public $first_name;
@@ -27,6 +31,11 @@ class Profile extends Component
     public $address;
     public $year_attended;
     public $email;
+    public $age;
+    public $nationality;
+    public $religion;
+    public $civil_status;
+    public $profile_picture;
     public $new_password;
     public $new_password_confirmation;
     public $current_password;
@@ -45,12 +54,16 @@ class Profile extends Component
         $this->gender = $user->gender;
         $this->police_id = $user->police_id;
         $this->contact_number = $user->contact_number;
-        $this->rank_id = $user->rank_id;
+        $this->rank_id = $user->rank->id;
         $this->position_id = $user->position_id;
         $this->unit_id = $user->unit_id;
         $this->address = $user->address;
         $this->year_attended = $user->year_attended;
         $this->email = $user->email;
+        $this->age = $user->age;
+        $this->nationality = $user->nationality;
+        $this->religion = $user->religion;
+        $this->civil_status = $user->civil_status;
 
         $this->positions = Position::all();
 
@@ -71,12 +84,16 @@ class Profile extends Component
             'date_of_birth'                   =>              ['required', 'date', 'before_or_equal:2024-12-31'],
             'gender'                          =>              ['required', 'in:Male,Female,Not selected'],
             'police_id'                       =>              ['required', 'min:1', 'max:99'],
+            'age'                             =>              ['required', 'numeric'],
             'contact_number'                  =>              ['required', 'numeric', 'digits:11'],
             'rank_id'                         =>              ['required', 'exists:ranks,id'],
             'email'                           =>              ['required', 'email', 'regex:/^\S+@\S+\.\S+$/', 'unique:users,email,' . $user->id],
             'position_id'                     =>              ['required', 'exists:positions,id'],
             'unit_id'                         =>              ['required', 'exists:units,id'],
+            'civil_status'                    =>              ['required', 'in:Single,Married,Separated,Divorced,Engaged,Widowed,Not selected'],
             'address'                         =>              ['min:1', 'max:100'],
+            'religion'                        =>              ['required'],
+            'nationality'                     =>              ['required'],
             'year_attended'                   =>              ['required', 'date', 'before_or_equal:today'],
         ]);
 
@@ -95,12 +112,36 @@ class Profile extends Component
             'unit_id'                             =>              $this->unit_id,
             'address'                             =>              $this->address,
             'year_attended'                       =>              $this->year_attended,
+            'age'                                 =>              $this->age,
+            'nationality'                         =>              $this->nationality,
+            'religion'                            =>              $this->religion,
+            'civil_status'                        =>              $this->civil_status,
         ];
 
 
         $user->update($updateData);
 
         $user->save();
+
+        $this->dispatch('toastr', [
+            'type'          =>          'success',
+            'message'       =>          'Profile updated successfully',
+        ]);
+    }
+
+    public function profilePictureChange()
+    {
+        $user = auth()->user();
+
+        $this->validate([
+            'profile_picture'               =>                  ['image', 'mimes:jpg,jpeg,png,webp,ico,gif', 'max:2048']
+        ]);
+
+        $profileImage = $this->profile_picture ? $this->profile_picture->store('profile_attachments', 'public') : null;
+
+        $user->update([
+            'profile_picture'               =>              $profileImage
+        ]);
 
         $this->dispatch('toastr', [
             'type'          =>          'success',

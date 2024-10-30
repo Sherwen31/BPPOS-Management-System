@@ -44,24 +44,23 @@ class UserEvaluation extends Component
             ->orderBy('created_at', 'desc')
             ->first();
 
-            if (!$user || $this->hasEvaluationRating) {
-                $currentMonth = Carbon::now()->month;
+        if (!$user || $this->hasEvaluationRating) {
+            $currentMonth = Carbon::now()->month;
 
-                if ($this->hasEvaluationRating) {
-                    $lastEvaluationMonth = $this->hasEvaluationRating?->created_at->month;
+            if ($this->hasEvaluationRating) {
+                $lastEvaluationMonth = $this->hasEvaluationRating?->created_at->month;
 
-                    if ($lastEvaluationMonth >= 1 && $lastEvaluationMonth <= 6) {
-                        if ($currentMonth >= 1 && $currentMonth <= 6) {
-                            $this->redirect('/super-admin/evaluation/user-evaluation', navigate: true);
-                            return;
-                        }
+                if ($lastEvaluationMonth >= 1 && $lastEvaluationMonth <= 6) {
+                    if ($currentMonth >= 1 && $currentMonth <= 6) {
+                        $this->redirect('/super-admin/evaluation/user-evaluation', navigate: true);
+                        return;
                     }
+                }
 
-                    if ($lastEvaluationMonth >= 7 && $lastEvaluationMonth <= 12) {
-                        if ($currentMonth >= 7 && $currentMonth <= 12) {
-                            $this->redirect('/super-admin/evaluation/user-evaluation', navigate: true);
-                            return;
-                        }
+                if ($lastEvaluationMonth >= 7 && $lastEvaluationMonth <= 12) {
+                    if ($currentMonth >= 7 && $currentMonth <= 12) {
+                        $this->redirect('/super-admin/evaluation/user-evaluation', navigate: true);
+                        return;
                     }
                 }
             }
@@ -97,7 +96,7 @@ class UserEvaluation extends Component
 
                     if (isset($this->attachment[$evaluationItem->id]) && $this->attachment[$evaluationItem->id]) {
 
-                        $attachmentPath = $this->attachment[$evaluationItem->id]->store('uploaded-attachments');
+                        $attachmentPath = $this->attachment[$evaluationItem->id]->store('uploaded-attachments', 'public');
                     }
                     $evalutionData[] = [
                         'user_id'                       =>      $this->user->id,

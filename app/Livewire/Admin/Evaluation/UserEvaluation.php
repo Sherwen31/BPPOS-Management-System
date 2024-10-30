@@ -93,7 +93,7 @@ class UserEvaluation extends Component
 
                     if (isset($this->attachment[$evaluationItem->id]) && $this->attachment[$evaluationItem->id]) {
 
-                        $attachmentPath = $this->attachment[$evaluationItem->id]->store('uploaded-attachments');
+                        $attachmentPath = $this->attachment[$evaluationItem->id]->store('uploaded-attachments', 'public');
                     }
                     EvaluationRating::create([
                         'user_id'                       =>      $this->user->id,
