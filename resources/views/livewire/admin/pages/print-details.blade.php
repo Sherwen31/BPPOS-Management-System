@@ -5,9 +5,11 @@
                 <span class="text-center text-uppercase"><strong>Police Non Commissioned Officer Performance Evaluation
                         Report</strong></span>
                 <br>
-                <span class="text-center"><strong>FOR Pat To PSSg (1<sup>st</sup> Level)</strong></span>
+                <span class="text-center"><strong>FOR {{ $rank }} To {{ $rank }} (1<sup>st</sup> Level)</strong></span>
                 <br>
-                <span class="text-center"><strong>Rating Period: July 1 - December 31, 2023</strong></span>
+                <span class="text-center"><strong>Rating Period: @foreach($date_period as $period)
+                    {{ $period }}
+                    @endforeach</strong></span>
             </div>
         </center>
 
@@ -272,19 +274,19 @@
                         <td colspan="3" class="vAlign fw-bold">Acknowledged:
                             <br />
                             <br />
-                            PEMS
-                            <br />PRBU PNCO
+                            {{ $significant->userRater->rank->rank_name }}
+                            <br />{{ $significant->userRater->position->position_name }} {{ $significant->userRater->unit->unit_assignment }}
                         </td>
                         <td class="vAlign fw-bold" colspan="4">Conformed:
                             <br />
                             <br />
-                            PSSg
-                            <br />PRBS / Survivor PNCO
+                            {{ $significant->user->rank->rank_name }}
+                            <br />{{ $significant->user->position->position_name }} / {{ $significant->user->unit->unit_assignment }}
                         </td>
                         <td class="vAlign fw-bold" colspan="4">Attested:
                             <br />
                             <br />
-                            Chief, PARMU
+                            {{ $significant->userReviewer->rank->rank_name }}, {{ $significant->userReviewer->position->position_name }}
                             <br />
                         </td>
                     </tr>
@@ -304,12 +306,12 @@
 
         <div class="mt-2 d-flex justify-content-between">
             <div class="text-center">
-                <span><u>December 31, 2023</u></span>
+                <span><u>{{ $significant->created_at->format('F j, Y') }}</u></span>
                 <br>
                 <span>Date Accomplished</span>
             </div>
             <div class="text-center">
-                <span><u>Signature Sample</u></span>
+                <span><u></u></span>
                 <br>
                 <span>Signature</span>
                 <br>

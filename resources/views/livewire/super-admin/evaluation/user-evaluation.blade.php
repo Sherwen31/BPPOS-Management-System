@@ -36,6 +36,25 @@
         <div class="card">
             <div class="card-body">
                 <form id="stepForm" wire:submit.prevent='submitEvaluation'>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-group col-4">
+                            <label for="user_reviewer_id" class="form-label">SelectReviewer</label>
+                            <select wire:model='user_reviewer_id' id="" class="form-select">
+                                <option hidden selected>Select Reviewer</option>
+                                <option disabled>Select Reviewer</option>
+                                @forelse ($reviewers as $reviewer)
+                                <option value="{{ $reviewer->id }}">{{ $reviewer->first_name }} {{ $reviewer->last_name
+                                    }}
+                                </option>
+                                @empty
+                                <option disabled>No users found</option>
+                                @endforelse
+                            </select>
+                            @error('user_reviewer_id')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="tab-content" id="pills-tabContent">
                         <!-- Step 1 -->
                         <div class="tab-pane fade {{ $activeTab === 1 ? 'show active' : '' }}" id="step1"
@@ -49,6 +68,7 @@
                                 <table class="table table-bordered table-hover">
                                     <thead class="table-dark">
                                         <td>Performance Indications</td>
+                                        <td>Attachment</td>
                                         <td class="text-center align-middle">Point Allocation</td>
                                         <td></td>
                                         <td class="text-center align-middle">Numerical Rating</td>
@@ -60,13 +80,21 @@
                                         <tr wire:key='{{ $item->id }}'>
 
                                             <td>{{ $item->performance_indications }}</td>
+                                            <td>
+                                                <input type="file"
+                                                    wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
+                                                    placeholder="Attachment">
+                                                @error('attachment.'.$item->id)
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </td>
                                             <td class="multiplier">{{ $item->point_allocation }}</td>
                                             <td>x</td>
                                             <td>
                                                 <input type="number"
                                                     wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
-                                                    step="1" placeholder="Enter number 1-5">
+                                                    step="1" placeholder="Rate 1-5">
                                                 @error('numerical_rating.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -140,13 +168,21 @@
                                                     style="min-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                     {{ $item->performance_indications }}</div>
                                             </td>
+                                            <td>
+                                                <input type="file"
+                                                    wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
+                                                    placeholder="Attachment">
+                                                @error('attachment.'.$item->id)
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </td>
                                             <td class="multiplier">{{ $item->point_allocation }}</td>
                                             <td>x</td>
                                             <td>
                                                 <input type="number"
                                                     wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
-                                                    step="1" placeholder="Enter number 1-5">
+                                                    step="1" placeholder="Rate 1-5">
                                                 @error('numerical_rating.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -194,6 +230,7 @@
                                 <table class="table table-bordered table-hover">
                                     <thead class="table-dark">
                                         <td>Performance Indications</td>
+                                        <td>Attachment</td>
                                         <td class="text-center align-middle">Point Allocation</td>
                                         <td></td>
                                         <td class="text-center align-middle">Numerical Rating</td>
@@ -209,13 +246,21 @@
                                                     style="min-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                     {{ $item->performance_indications }}</div>
                                             </td>
+                                            <td>
+                                                <input type="file"
+                                                    wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
+                                                    placeholder="Attachment">
+                                                @error('attachment.'.$item->id)
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </td>
                                             <td class="multiplier">{{ $item->point_allocation }}</td>
                                             <td>x</td>
                                             <td>
                                                 <input type="number"
                                                     wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
-                                                    step="1" placeholder="Enter number 1-5">
+                                                    step="1" placeholder="Rate 1-5">
                                                 @error('numerical_rating.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -263,6 +308,7 @@
                                 <table class="table table-bordered table-hover">
                                     <thead class="table-dark">
                                         <td>Performance Indications</td>
+                                        <td>Attachment</td>
                                         <td class="text-center align-middle">Point Allocation</td>
                                         <td></td>
                                         <td class="text-center align-middle">Numerical Rating</td>
@@ -278,13 +324,21 @@
                                                     style="min-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                     {{ $item->performance_indications }}</div>
                                             </td>
+                                            <td>
+                                                <input type="file"
+                                                    wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
+                                                    placeholder="Attachment">
+                                                @error('attachment.'.$item->id)
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </td>
                                             <td class="multiplier">{{ $item->point_allocation }}</td>
                                             <td>x</td>
                                             <td>
                                                 <input type="number"
                                                     wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
-                                                    step="1" placeholder="Enter number 1-5">
+                                                    step="1" placeholder="Rate 1-5">
                                                 @error('numerical_rating.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -332,6 +386,7 @@
                                 <table class="table table-bordered table-hover">
                                     <thead class="table-dark">
                                         <td>Performance Indications</td>
+                                        <td>Attachment</td>
                                         <td class="text-center align-middle">Point Allocation</td>
                                         <td></td>
                                         <td class="text-center align-middle">Numerical Rating</td>
@@ -347,13 +402,21 @@
                                                     style="min-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                     {{ $item->performance_indications }}</div>
                                             </td>
+                                            <td>
+                                                <input type="file"
+                                                    wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
+                                                    placeholder="Attachment">
+                                                @error('attachment.'.$item->id)
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </td>
                                             <td class="multiplier">{{ $item->point_allocation }}</td>
                                             <td>x</td>
                                             <td>
                                                 <input type="number"
                                                     wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
-                                                    step="1" placeholder="Enter number 1-5">
+                                                    step="1" placeholder="Rate 1-5">
                                                 @error('numerical_rating.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -425,13 +488,21 @@
                                             <td>x</td>
                                             <td>{{ $item->performance_indications }}</td>
                                             <td>x</td>
+                                            <td rowspan="6">
+                                                <input type="file"
+                                                    wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
+                                                    placeholder="Attachment">
+                                                @error('attachment.'.$item->id)
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </td>
                                             <td rowspan="6" class="multiplier">{{ $item->point_allocation }}</td>
                                             <td rowspan="6">x</td>
                                             <td rowspan="6">
                                                 <input type="number"
                                                     wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
-                                                    step="1" placeholder="Enter number 1-5">
+                                                    step="1" placeholder="Rate 1-5">
                                                 @error('numerical_rating.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror

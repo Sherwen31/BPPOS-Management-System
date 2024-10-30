@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('evaluation_item_id')->constrained()->onDelete('cascade')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->nullable();
+            $table->foreignId('user_rater_id')->constrained('users')->onDelete('cascade')->nullable();
+            $table->foreignId('user_reviewer_id')->constrained('users')->onDelete('cascade')->nullable();
             $table->integer('numerical_rating')->nullable();
             $table->integer('weight_score')->default(0)->nullable();
             $table->longText('attachment')->nullable();

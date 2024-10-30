@@ -20,4 +20,14 @@ class EvaluationRating extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function userRater()
+    {
+        return $this->belongsTo(User::class, 'user_rater_id');
+    }
+
+    public function userReviewer()
+    {
+        return $this->belongsTo(User::class, 'user_reviewer_id');
+    }
 }
