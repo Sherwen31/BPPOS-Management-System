@@ -192,10 +192,6 @@ select {
     width: 100%;
 }
 
-.read-only {
-    cursor: not-allowed;
-}
-
 .input-enter {
     display: flex;
     flex-direction: column;

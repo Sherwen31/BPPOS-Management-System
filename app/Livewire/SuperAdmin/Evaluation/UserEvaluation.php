@@ -36,9 +36,24 @@ class UserEvaluation extends Component
                 ->first();
 
             if (!$user || $this->hasEvaluationRating) {
-                $sixMonthsAgo = Carbon::today()->subMonths(6);
-                if ($this->hasEvaluationRating->created_at >= $sixMonthsAgo) {
-                    $this->redirect('/super-admin/evaluation/user-evaluation', navigate: true);
+                $currentMonth = Carbon::now()->month;
+
+                if ($this->hasEvaluationRating) {
+                    $lastEvaluationMonth = $this->hasEvaluationRating?->created_at->month;
+
+                    if ($lastEvaluationMonth >= 1 && $lastEvaluationMonth <= 6) {
+                        if ($currentMonth >= 1 && $currentMonth <= 6) {
+                            $this->redirect('/super-admin/evaluation/user-evaluation', navigate: true);
+                            return;
+                        }
+                    }
+
+                    if ($lastEvaluationMonth >= 7 && $lastEvaluationMonth <= 12) {
+                        if ($currentMonth >= 7 && $currentMonth <= 12) {
+                            $this->redirect('/super-admin/evaluation/user-evaluation', navigate: true);
+                            return;
+                        }
+                    }
                 }
             }
     }

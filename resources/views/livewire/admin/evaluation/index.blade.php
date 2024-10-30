@@ -209,16 +209,29 @@
 
                                     @php
                                     $hasEvaluationRating = \App\Models\EvaluationRating::where('user_id', $user->id)
-                                    ->orderBy('created_at', 'desc')
-                                    ->first();
-                                    $sixMonthsAgo = Illuminate\Support\Carbon::today()->subMonths(6);
-                                    $canEvaluate = $hasEvaluationRating?->created_at >= $sixMonthsAgo;
+                                        ->orderBy('created_at', 'desc')
+                                        ->first();
+
+                                    $currentMonth = Illuminate\Support\Carbon::now()->month;
+                                    $lastEvaluationMonth = $hasEvaluationRating?->created_at->month;
+                                    $cantEvaluate = true;
+
+                                    if ($lastEvaluationMonth >= 1 && $lastEvaluationMonth <= 6) {
+                                        if ($currentMonth >= 1 && $currentMonth <= 6) {
+                                            $canEvaluate = false;
+                                        }
+                                    }
+
+                                    if ($lastEvaluationMonth >= 7 && $lastEvaluationMonth <= 12) {
+                                        if ($currentMonth >= 7 && $currentMonth <= 12) {
+                                            $canEvaluate = false;
+                                        }
+                                    }
                                     @endphp
-                                    <a @if ($hasEvaluationRating) wire:click='userHasEvaluation({{ $user->id }})' @else
-                                        wire:navigate href="/admin/evaluation/user-evaluation/{{ $user->id }}/{{
-                                        $user->police_id }}" @endif
-                                        class="btn {{ $hasEvaluationRating ? 'bg-primary-subtle' : 'btn-primary' }} btn-sm">
-                                        <i class="far fa-file-circle-plus"></i> Evaluate
+                                    <a @if ($canEvaluate) wire:navigate href="/super-admin/evaluation/user-evaluation/{{ $user->id }}/{{ $user->police_id }}" @else
+                                        wire:click='userHasEvaluation({{ $user->id }})' @endif
+                                        class="btn {{ $canEvaluate ? 'btn-primary' : 'bg-primary-subtle' }} btn-sm">
+                                        <i class="far fa-file-circle-plus"></i> {{ $canEvaluate ? 'Evaluate' : 'Evaluated' }}
                                     </a>
                                     @if ($hasEvaluationRating)
                                     <a class="btn btn-warning btn-sm" wire:navigate

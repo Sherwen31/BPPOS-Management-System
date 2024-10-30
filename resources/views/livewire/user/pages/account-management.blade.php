@@ -30,10 +30,10 @@
                                 </div>
                                 <div class="account-inputs">
                                     <div class="input-readonly">
-                                        <label for="name"><strong>Name</strong></label>
-                                        <input id="name" name="name" class="read-only" type="text"
-                                            value="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}, {{ Auth::user()->middle_name }}"
-                                            style="margin-bottom: 10px;" readonly>
+                                        <label for="first_name"><strong>First Name</strong></label>
+                                        <input id="first_name" class="read-only" type="text" wire:model='first_name' style="margin-bottom: 10px;">
+                                        <label for="middle_name"><strong>Middle Name</strong></label>
+                                        <input id="middle_name" class="read-only" type="text" wire:model='middle_name' style="margin-bottom: 10px;">
                                         <label for="position"><strong>Position</strong></label>
                                         <input id="position" name="position" class="read-only" type="text"
                                             value="{{ Auth::user()->position->position_name }}"
@@ -59,6 +59,8 @@
                                             value="{{ $formattedDifference }}" style="margin-bottom: 10px;" readonly>
                                     </div>
                                     <div class="input-enter">
+                                        <label for="last_name"><strong>Last Name</strong></label>
+                                        <input id="last_name" class="read-only" type="text" wire:model='last_name' style="margin-bottom: 10px;">
                                         <label for="username"><strong>Username</strong></label>
                                         <input id="username" name="username" type="text"
                                             value="{{ Auth::user()->username }}" class="read-only"

@@ -32,15 +32,30 @@ class UserEvaluation extends Component
         $this->user = $user;
 
         $this->hasEvaluationRating = EvaluationRating::where('user_id', $user->id)
-                ->orderBy('created_at', 'desc')
-                ->first();
+            ->orderBy('created_at', 'desc')
+            ->first();
 
-            if (!$user || $this->hasEvaluationRating) {
-                $sixMonthsAgo = Carbon::today()->subMonths(6);
-                if ($this->hasEvaluationRating->created_at >= $sixMonthsAgo) {
-                    $this->redirect('/admin/evaluation/user-evaluation', navigate: true);
+        if (!$user || $this->hasEvaluationRating) {
+            $currentMonth = Carbon::now()->month;
+
+            if ($this->hasEvaluationRating) {
+                $lastEvaluationMonth = $this->hasEvaluationRating?->created_at->month;
+
+                if ($lastEvaluationMonth >= 1 && $lastEvaluationMonth <= 6) {
+                    if ($currentMonth >= 1 && $currentMonth <= 6) {
+                        $this->redirect('/admin/evaluation/user-evaluation', navigate: true);
+                        return;
+                    }
+                }
+
+                if ($lastEvaluationMonth >= 7 && $lastEvaluationMonth <= 12) {
+                    if ($currentMonth >= 7 && $currentMonth <= 12) {
+                        $this->redirect('/admin/evaluation/user-evaluation', navigate: true);
+                        return;
+                    }
                 }
             }
+        }
     }
 
     public function setActiveTab($tabIndex)

@@ -325,14 +325,29 @@ class Index extends Component
                 ->orderBy('created_at', 'desc')
                 ->first();
 
+            $currentMonth = Carbon::now()->month;
+
             if ($this->hasEvaluationRating) {
-                $sixMonthsAgo = Carbon::today()->subMonths(6);
-                if ($this->hasEvaluationRating->created_at >= $sixMonthsAgo) {
-                    $this->dispatch('toastr', [
-                        'type'          =>          'error',
-                        'message'       =>          'Evaluation already submitted. You can evaluate another after 6 months',
-                    ]);
-                    return;
+                $lastEvaluationMonth = $this->hasEvaluationRating?->created_at->month;
+
+                if ($lastEvaluationMonth >= 1 && $lastEvaluationMonth <= 6) {
+                    if ($currentMonth >= 1 && $currentMonth <= 6) {
+                        $this->dispatch('toastr', [
+                            'type' => 'error',
+                            'message' => 'Evaluation already submitted. You can evaluate again starting in July.',
+                        ]);
+                        return;
+                    }
+                }
+
+                if ($lastEvaluationMonth >= 7 && $lastEvaluationMonth <= 12) {
+                    if ($currentMonth >= 7 && $currentMonth <= 12) {
+                        $this->dispatch('toastr', [
+                            'type' => 'error',
+                            'message' => 'Evaluation already submitted. You can evaluate again starting in January.',
+                        ]);
+                        return;
+                    }
                 }
             }
         }

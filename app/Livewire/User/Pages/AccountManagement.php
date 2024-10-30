@@ -12,16 +12,25 @@ class AccountManagement extends Component
 
     public $new_password;
     public $new_password_confirmation;
+    public $first_name;
+    public $last_name;
+    public $middle_name;
     public function passwordChange()
     {
         $user = auth()->user();
 
         $this->validate([
-            'new_password'                  =>                  ['required', 'min:6', 'confirmed']
+            'new_password'                  =>                  ['required', 'min:6', 'confirmed'],
+            'first_name'                    =>                  ['required'],
+            'last_name'                     =>                  ['required'],
+            'middle_name'                   =>                  ['required'],
         ]);
 
         $user->update([
-            'password'          =>              $this->new_password
+            'password'          =>              $this->new_password,
+            'first_name'        =>              $this->first_name,
+            'last_name'         =>              $this->last_name,
+            'middle_name'       =>              $this->middle_name
         ]);
 
         $this->dispatch('toastr', [
@@ -35,7 +44,7 @@ class AccountManagement extends Component
     public function resetForm()
     {
         $this->reset(['new_password', 'new_password_confirmation']);
-        $this->resetErrorBag(); // Clears validation errors
+        $this->resetErrorBag();
     }
 
     public function render()
