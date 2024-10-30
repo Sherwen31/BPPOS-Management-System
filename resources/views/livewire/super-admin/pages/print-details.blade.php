@@ -25,7 +25,7 @@
                     <tr>
                         <th colspan="6">
                             3. Position / Designation: <br>
-                            <div style="text-align: center;">{{ $position }}</div>
+                            <div class="p-2">{{ $position }}</div>
                         </th>
 
                         <th colspan="5">4. Unit Assignment / Station / District <br><span style="margin-left: 20px;">{{
@@ -34,7 +34,7 @@
                     <tr>
                         <th colspan="11">
                             5. Years and Months in Current Position: <br>
-                            <div style="margin-left: 10%;">
+                            <div class='p-2'>
                                 @php
                                 $startDate = \Carbon\Carbon::parse($year_attended);
                                 $endDate = \Carbon\Carbon::now();

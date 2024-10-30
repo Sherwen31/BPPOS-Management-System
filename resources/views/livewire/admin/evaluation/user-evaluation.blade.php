@@ -38,7 +38,7 @@
                 <form id="stepForm" wire:submit.prevent='submitEvaluation'>
                     <div class="d-flex justify-content-center">
                         <div class="form-group col-4">
-                            <label for="user_reviewer_id" class="form-label">SelectReviewer</label>
+                            <label for="user_reviewer_id" class="form-label">Select Reviewer</label>
                             <select wire:model='user_reviewer_id' id="" class="form-select">
                                 <option hidden selected>Select Reviewer</option>
                                 <option disabled>Select Reviewer</option>
