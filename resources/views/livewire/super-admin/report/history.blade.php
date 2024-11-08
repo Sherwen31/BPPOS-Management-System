@@ -6,9 +6,8 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="mb-3">
-                <a href="/super-admin/history" wire:navigate class="btn btn-default bg-dark-subtle btn-sm text-dark"><i
-                        class="far fa-arrow-left"></i> Back to
-                    history</a>
+                <a href="/super-admin/performance-report" wire:navigate class="btn btn-default bg-dark-subtle btn-sm text-dark"><i
+                        class="far fa-arrow-left"></i> Back to Performance Report</a>
             </div>
             <div class="mainMod-top">
                 <h1>
@@ -28,7 +27,7 @@
                         @forelse ($groupedPerformanceReports as $item)
                         <tr>
                             <td scope="row">{{ $item->start_date->format('F j') }} -
-                                {{ $item->end_date->format('j, Y') }}</td>
+                                {{ $item->end_date->format('F j, Y') }}</td>
                             <td>
                                 <a wire:navigate
                                     href="/super-admin/user-scorecard/{{ $user->id }}/{{ $user->police_id }}/{{ $item->start_date }}/{{ $item->end_date }}"

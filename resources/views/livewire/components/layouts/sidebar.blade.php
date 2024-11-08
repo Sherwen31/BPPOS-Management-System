@@ -46,14 +46,14 @@
                     <span class="sideNavToolTip">User Evaluation Management</span>
                 </a>
             </li>
-            <li class="li">
+            {{-- <li class="li">
                 <a wire:navigate href="/super-admin/evaluation/rating-indicator"
                     class="{{ 'super-admin/evaluation/rating-indicator' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fa-sharp-duotone fa-solid fa-star-sharp-half"></i>
                     <span class="nav-item">Rating Indicator</span>
                     <span class="sideNavToolTip">Rating Indicator</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="li">
                 <a wire:navigate href="/super-admin/performance-report"
                     class="{{ 'super-admin/performance-report' === request()->path() ? 'active_sidebar' : '' }}">
@@ -62,14 +62,14 @@
                     <span class="sideNavToolTip">Performance Report</span>
                 </a>
             </li>
-            <li class="li">
+            {{-- <li class="li">
                 <a wire:navigate href="/super-admin/history"
                     class="{{ 'super-admin/history' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-clock-rotate-left"></i>
                     <span class="nav-item">History</span>
                     <span class="sideNavToolTip">History</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="li">
                 <a wire:navigate href="/super-admin/account-management"
                     class="{{ 'super-admin/account-management' === request()->path() ? 'active_sidebar' : '' }}">
@@ -122,14 +122,14 @@
                     <span class="sideNavToolTip">User Evaluation Management</span>
                 </a>
             </li>
-            <li class="li">
+            {{-- <li class="li">
                 <a wire:navigate href="/admin/evaluation/rating-indicator"
                     class="{{ 'admin/evaluation/rating-indicator' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fa-sharp-duotone fa-solid fa-star-sharp-half"></i>
                     <span class="nav-item">Rating Indicator</span>
                     <span class="sideNavToolTip">Rating Indicator</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="li">
                 <a wire:navigate href="/admin/performance-report"
                     class="{{ 'admin/performance-report' === request()->path() ? 'active_sidebar' : '' }}">
@@ -138,14 +138,14 @@
                     <span class="sideNavToolTip">Performance Report</span>
                 </a>
             </li>
-            <li class="li">
+            {{-- <li class="li">
                 <a wire:navigate href="/admin/history"
                     class="{{ 'admin/history' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-clock-rotate-left"></i>
                     <span class="nav-item">History</span>
                     <span class="sideNavToolTip">History</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="li">
                 <a wire:navigate href="/admin/account-management"
                     class="{{ 'admin/account-management' === request()->path() ? 'active_sidebar' : '' }}">

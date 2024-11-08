@@ -83,9 +83,9 @@ class PerformanceReport extends Component
             $saturday  = $this->saturday[$itemId] ?? null;
             $sunday    = $this->sunday[$itemId] ?? null;
             if (
-                empty($monday) || empty($tuesday) || empty($wednesday) ||
-                empty($thursday) || empty($friday) || empty($saturday) ||
-                empty($sunday)
+                is_null($monday) || is_null($tuesday) || is_null($wednesday) ||
+                is_null($thursday) || is_null($friday) || is_null($saturday) ||
+                is_null($sunday)
             ) {
                 $allFieldsFilled = false;
                 break;

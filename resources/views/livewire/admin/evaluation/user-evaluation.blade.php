@@ -8,7 +8,8 @@
         </div>
 
         <!-- Progress Indicator -->
-        <h3 class="text-center"><strong>Police ID:</strong> <u>{{ $police_id }}</u></h3>
+        <livewire:admin.evaluation.rating-indicator>
+        <h3 class="text-center"><strong>Police ID:</strong> <u>{{ $last_name }}{{ $last_name ? ',' : '' }} {{ $first_name }}</u></h3>
         <div class="progress-container mb-4">
             <span class="step-indicator {{ $activeTab === 1 || $activeTab === 2 || $activeTab === 3 ? 'active' : '' }}"
                 id="step1-indicator" wire:click="setActiveTab(1)" style="cursor: pointer;">
@@ -94,7 +95,7 @@
                                                 <input type="number"
                                                     wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
-                                                    step="1" placeholder="Rate 1-5">
+                                                    step="1">
                                                 @error('numerical_rating.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -184,7 +185,7 @@
                                                 <input type="number"
                                                     wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
-                                                    step="1" placeholder="Rate 1-5">
+                                                    step="1">
                                                 @error('numerical_rating.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -263,7 +264,7 @@
                                                 <input type="number"
                                                     wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
-                                                    step="1" placeholder="Rate 1-5">
+                                                    step="1">
                                                 @error('numerical_rating.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -342,7 +343,7 @@
                                                 <input type="number"
                                                     wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
-                                                    step="1" placeholder="Rate 1-5">
+                                                    step="1">
                                                 @error('numerical_rating.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -421,7 +422,7 @@
                                                 <input type="number"
                                                     wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
-                                                    step="1" placeholder="Rate 1-5">
+                                                    step="1">
                                                 @error('numerical_rating.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -509,7 +510,7 @@
                                                 <input type="number"
                                                     wire:model.live.debounce.10ms='numerical_rating.{{ $item->id }}'
                                                     class="form-control number-input multiplier-input" min="1" max="5"
-                                                    step="1" placeholder="Rate 1-5">
+                                                    step="1">
                                                 @error('numerical_rating.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror

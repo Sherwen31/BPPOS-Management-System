@@ -14,6 +14,8 @@ class UserEvaluation extends Component
     use WithFileUploads;
 
     public $police_id;
+    public $last_name;
+    public $first_name;
     public $evaluations;
     public $numerical_rating = [];
     public $attachment = [];
@@ -37,6 +39,8 @@ class UserEvaluation extends Component
         })->get();
 
         $this->police_id = $user->police_id;
+        $this->last_name = $user->last_name;
+        $this->first_name = $user->first_name;
 
         $this->user = $user;
 
