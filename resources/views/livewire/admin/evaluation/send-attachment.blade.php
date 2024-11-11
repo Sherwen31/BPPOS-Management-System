@@ -60,7 +60,7 @@
                                             <td>
                                                 <input type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
-                                                    placeholder="Attachment">
+                                                    placeholder="Attachment" accept="image/*">
                                                 @error('attachment.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -119,7 +119,7 @@
                                             <td>
                                                 <input type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
-                                                    placeholder="Attachment">
+                                                    placeholder="Attachment" accept="image/*">
                                                 @error('attachment.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -167,7 +167,7 @@
                                             <td>
                                                 <input type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
-                                                    placeholder="Attachment">
+                                                    placeholder="Attachment" accept="image/*">
                                                 @error('attachment.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -214,7 +214,7 @@
                                             <td>
                                                 <input type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
-                                                    placeholder="Attachment">
+                                                    placeholder="Attachment" accept="image/*">
                                                 @error('attachment.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -262,7 +262,7 @@
                                             <td>
                                                 <input type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
-                                                    placeholder="Attachment">
+                                                    placeholder="Attachment" accept="image/*">
                                                 @error('attachment.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -320,7 +320,7 @@
                                             <td rowspan="6">
                                                 <input type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
-                                                    placeholder="Attachment">
+                                                    placeholder="Attachment" accept="image/*">
                                                 @error('attachment.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror

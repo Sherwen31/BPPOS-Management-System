@@ -58,7 +58,7 @@
 
                                             <td>{{ $item->performance_indications }}</td>
                                             <td>
-                                                <input type="file"
+                                                <input accept="image/*" type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
                                                     placeholder="Attachment">
                                                 @error('attachment.'.$item->id)
@@ -117,7 +117,7 @@
                                             </td>
 
                                             <td>
-                                                <input type="file"
+                                                <input accept="image/*" type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
                                                     placeholder="Attachment">
                                                 @error('attachment.'.$item->id)
@@ -165,7 +165,7 @@
                                             </td>
 
                                             <td>
-                                                <input type="file"
+                                                <input accept="image/*" type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
                                                     placeholder="Attachment">
                                                 @error('attachment.'.$item->id)
@@ -212,7 +212,7 @@
                                             </td>
 
                                             <td>
-                                                <input type="file"
+                                                <input accept="image/*" type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
                                                     placeholder="Attachment">
                                                 @error('attachment.'.$item->id)
@@ -260,7 +260,7 @@
                                             </td>
 
                                             <td>
-                                                <input type="file"
+                                                <input accept="image/*" type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
                                                     placeholder="Attachment">
                                                 @error('attachment.'.$item->id)
@@ -318,7 +318,7 @@
                                             <td>x</td>
 
                                             <td rowspan="6">
-                                                <input type="file"
+                                                <input accept="image/*" type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
                                                     placeholder="Attachment">
                                                 @error('attachment.'.$item->id)
