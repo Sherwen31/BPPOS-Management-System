@@ -442,7 +442,7 @@
                                         <div class="text-center mb-4">
                                             @if ($viewUserData?->profile_picture === null)
                                             <img src="/images/police-512.png" alt="Profile Photo" id="profileImg"
-                                                class="img-fluid rounded-circle" style="max-width: 150px;">>
+                                                class="img-fluid rounded-circle" style="max-width: 150px;">
                                             @else
                                             <img src="{{ Storage::url($viewUserData?->profile_picture) }}"
                                                 alt="Profile Photo" id="profileImg" class="img-fluid rounded-circle"
@@ -670,14 +670,25 @@
 
                                                 <!-- Gender -->
                                                 <li class="mb-3 d-flex align-items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-male me-3">
-                                                        <circle cx="12" cy="12" r="10"></circle>
-                                                        <line x1="12" y1="2" x2="12" y2="12"></line>
-                                                        <line x1="12" y1="12" x2="16" y2="16"></line>
+                                                    @if ($viewUserData?->gender == 'Male')
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="feather feather-male me-3">
+                                                        <circle cx="12" cy="12" r="5" stroke="black" stroke-width="2" fill="none"/>
+                                                        <line x1="12" y1="2" x2="12" y2="7" stroke="black" stroke-width="2"/>
+                                                        <line x1="12" y1="7" x2="15" y2="4" stroke="black" stroke-width="2"/>
                                                     </svg>
+                                                    @elseif ($viewUserData?->gender == 'Female')
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="feather feather-male me-3">
+                                                        <circle cx="12" cy="12" r="5" stroke="black" stroke-width="2" fill="none"/>
+                                                        <line x1="12" y1="17" x2="12" y2="22" stroke="black" stroke-width="2"/>
+                                                        <line x1="12" y1="22" x2="9" y2="22" stroke="black" stroke-width="2"/>
+                                                    </svg>
+                                                    @else
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="feather feather-gender-neutral me-3">
+                                                        <circle cx="12" cy="12" r="8" stroke="black" stroke-width="2" fill="none"/>
+                                                        <line x1="12" y1="4" x2="12" y2="20" stroke="black" stroke-width="2"/>
+                                                        <line x1="4" y1="12" x2="20" y2="12" stroke="black" stroke-width="2"/>
+                                                    </svg>
+                                                    @endif
                                                     <span>{{ $viewUserData?->gender ?: 'N/A' }}</span>
                                                 </li>
                                             </ul>
