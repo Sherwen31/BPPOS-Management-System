@@ -42,6 +42,7 @@ class Index extends Component
     public $gender;
     public $userData;
     public $search = '';
+    public $viewUserData;
 
     public function listings()
     {
@@ -128,6 +129,22 @@ class Index extends Component
         $this->dispatch('closeModal');
 
         $this->resetData();
+    }
+
+    public function viewUser($id)
+    {
+        $user = User::with(['position', 'rank', 'unit', 'roles'])->find($id);
+
+        if (!$user) {
+            $this->dispatch('toastr', [
+                'type'          =>              'error',
+                'message'       =>              'No user found or deleted',
+            ]);
+
+            return;
+        } else {
+            $this->viewUserData = $user;
+        }
     }
 
     public function manageUser($id)
