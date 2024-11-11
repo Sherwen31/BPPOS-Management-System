@@ -36,20 +36,20 @@ class Index extends Component
         ]);
 
 
-        $this->usersFiltered = User::with(['evaluationRatings'])->whereHas('evaluationRatings', function ($query) {
-            if ($this->date_range !== null && $this->year !== null) {
-                if ($this->date_range == 'first_half') {
-                    $query->whereMonth('created_at', '>=', 1)
-                        ->whereMonth('created_at', '<=', 6);
-                } elseif ($this->date_range == 'second_half') {
-                    $query->whereMonth('created_at', '>=', 7)
-                        ->whereMonth('created_at', '<=', 12);
-                }
+        $this->usersFiltered = User::with(['evaluationRatings'])
+            ->whereHas('evaluationRatings', function ($query) {
+                if ($this->date_range !== null && $this->year !== null) {
+                    if ($this->date_range == 'first_half') {
+                        $query->whereMonth('created_at', '>=', 1)
+                            ->whereMonth('created_at', '<=', 6);
+                    } elseif ($this->date_range == 'second_half') {
+                        $query->whereMonth('created_at', '>=', 7)
+                            ->whereMonth('created_at', '<=', 12);
+                    }
 
-                $query->whereYear('created_at', $this->year);
-                $query->orderBy('weight_score', 'desc');
-            }
-        })
+                    $query->whereYear('created_at', $this->year);
+                }
+            })
             ->where(function ($query) {
                 if (auth()->user()->hasRole('super_admin')) {
                     $query->whereDoesntHave('roles', function ($query) {
@@ -63,9 +63,11 @@ class Index extends Component
             })
             ->where('id', '!=', auth()->user()->id)
             ->where('unit_id', '=', auth()->user()->unit_id)
+            ->withSum('evaluationRatings as total_weight_score', 'weight_score')
+            ->orderByDesc('total_weight_score')
             ->get();
 
-            $this->selected_year = $this->year;
+        $this->selected_year = $this->year;
     }
 
     public function resetDateRange()
