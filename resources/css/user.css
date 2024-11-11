@@ -52,6 +52,7 @@ td {
 
 .history {
     display: flex;
+    flex-direction: column;
     background-color: aliceblue;
     height: fit-content;
     width: fit-content;
@@ -73,6 +74,12 @@ td {
     border: #2f343d 1px solid;
     text-align: center;
     padding: 5px;
+}
+
+.curren-rank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .divider {

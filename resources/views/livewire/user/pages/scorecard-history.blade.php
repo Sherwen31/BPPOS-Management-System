@@ -13,8 +13,54 @@
                 </div>
                 <div class="mainScorecard">
                     <div class="history">
-                        <div class="history-scorecard">
-                            <h1><strong>HISTORY OF SCORECARD</strong></h1>
+                        <div class="flex d-flex">
+                            <div class="history-scorecard">
+                                <h1><strong>HISTORY OF SCORECARD</strong></h1>
+                                <table id="historyTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Period Covered</th>
+                                            <th class="action-btn">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($groupedPerformanceReports as $item)
+                                        <tr>
+                                            <td scope="row">{{ $item->start_date->format('F j') }} -
+                                                {{ $item->end_date->format('j, Y') }}</td>
+                                            <td>
+                                                <a wire:navigate
+                                                    href="/users/my-scorecard/{{ $item->start_date }}/{{ $item->end_date }}"
+                                                    class="btn btn-primary manage-btn btn-sm">
+                                                    <i class="far fa-eye"></i> View my Score
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="2" class="text-center">
+                                                <p>This user is no performance data added yet.</p>
+                                            </td>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                                {{ $groupedPerformanceReports->links() }}
+                            </div>
+                            {{-- <div class="history-promotion">
+                                <h1><strong>CURRENT RANK</strong></h1>
+                                <div class="divider">
+                                    <img src="/assets/police-badge-police-svgrepo-com.svg" alt="Badge" width="50px"
+                                        height="50px">
+                                </div>
+                                <div class="promotion-content" id="promotionItems">
+                                    <ul>
+                                    </ul>
+                                </div>
+                            </div> --}}
+                        </div>
+                        <div class="history-scorecard mt-5">
+                            <h1><strong>HISTORY OF EVALUATION</strong></h1>
                             <table id="historyTable">
                                 <thead>
                                     <tr>
@@ -23,39 +69,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($groupedPerformanceReports as $item)
+                                    @forelse ($groupedEvaluations as $evaluation)
                                     <tr>
-                                        <td scope="row">{{ $item->start_date->format('F j') }} -
-                                            {{ $item->end_date->format('j, Y') }}</td>
+                                        <td scope="row">
+                                            {{-- Period: Jan-June or July-Dec --}}
+                                            {{ $evaluation->period }} {{ $evaluation->year }}
+                                        </td>
                                         <td>
                                             <a wire:navigate
-                                                href="/users/my-scorecard/{{ $item->start_date }}/{{ $item->end_date }}"
+                                                href="/users/my-scorecard/{{ $evaluation->last_rating }}/{{ $evaluation->last_rating }}"
                                                 class="btn btn-primary manage-btn btn-sm">
-                                                <i class="far fa-eye"></i> View my Score
+                                                <i class="far fa-eye"></i> View my Evaluation Score
                                             </a>
                                         </td>
                                     </tr>
                                     @empty
                                     <tr>
                                         <td colspan="2" class="text-center">
-                                            <p>This user is no performance data added yet.</p>
+                                            <p>This user has no performance data added yet.</p>
                                         </td>
                                     </tr>
                                     @endforelse
                                 </tbody>
+
                             </table>
-                            {{ $groupedPerformanceReports->links() }}
-                        </div>
-                        <div class="history-promotion">
-                            <h1><strong>CURRENT RANK</strong></h1>
-                            <div class="divider">
-                                <img src="/assets/police-badge-police-svgrepo-com.svg" alt="Badge" width="50px"
-                                    height="50px">
-                            </div>
-                            <div class="promotion-content" id="promotionItems">
-                                <ul>
-                                </ul>
-                            </div>
+                            {{ $groupedEvaluations->links() }}
                         </div>
                     </div>
                 </div>

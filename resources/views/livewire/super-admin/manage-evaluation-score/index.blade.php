@@ -124,7 +124,6 @@
                                 <th scope="col">Rank</th>
                                 <th scope="col">Position Duration</th>
                                 <th scope="col">Total Weight Score</th>
-                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -163,21 +162,12 @@
                                 <td>
                                     {{ $user->evaluationRatings->sum('weight_score') }}
                                 </td>
-                                <td>
-                                    <div class="d-flex gap-1 flex-wrap">
-                                        <button wire:click='viewUser({{ $user->id }})' type="button"
-                                            class="btn btn-info text-light manage-btn btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#viewUserModal">
-                                            <i class="far fa-eye"></i> View
-                                        </button>
-                                    </div>
-                                </td>
 
                             </tr>
                             @empty
 
                             <tr>
-                                <td colspan="6">
+                                <td colspan="5">
                                     <p class="text-center mt-2">
                                         <strong>No data found for "{{ $date_range === "first_half" ? "January -
                                             June" :

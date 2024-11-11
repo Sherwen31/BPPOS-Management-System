@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User\Pages;
 
+use App\Models\EvaluationRating;
 use App\Models\PerformanceReportRating;
 use App\Models\User;
 use Livewire\Attributes\Title;
@@ -25,7 +26,15 @@ class ScorecardHistory extends Component
             ->groupBy('start_date', 'end_date')
             ->paginate(5);
 
-            return compact('user', 'groupedPerformanceReports');
+        $groupedEvaluations = EvaluationRating::where('user_id', $userId)
+            ->selectRaw('YEAR(created_at) as year')
+            ->selectRaw('CASE WHEN MONTH(created_at) BETWEEN 1 AND 6 THEN "Jan-June" ELSE "July-Dec" END as period')
+            ->selectRaw('MAX(created_at) as last_rating')
+            ->groupBy('year', 'period')
+            ->orderBy('year', 'desc')
+            ->paginate(5);
+
+            return compact('user', 'groupedPerformanceReports', 'groupedEvaluations');
     }
     public function render()
     {
