@@ -7,18 +7,14 @@ use App\Models\EvaluationRating;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 
 class UserEvaluation extends Component
 {
-    use WithFileUploads;
-
     public $police_id;
     public $last_name;
     public $first_name;
     public $evaluations;
     public $numerical_rating = [];
-    public $attachment = [];
     public $user_reviewer_id;
     public $user;
     public $activeTab = 1;
@@ -27,7 +23,13 @@ class UserEvaluation extends Component
 
     public function listEvaluations()
     {
-        $this->evaluations = Evaluation::with('evaluationItems')->get();
+        $user = $this->user;
+
+        $this->evaluations = Evaluation::with(['evaluationItems' => function ($query) use ($user) {
+            $query->with(['evaluationAttachments' => function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            }]);
+        }])->get();
     }
 
     public function mount($userId, $policeId)
@@ -80,7 +82,6 @@ class UserEvaluation extends Component
     {
         $this->validate([
             'numerical_rating.*'        =>      ['required', 'numeric', 'min:1', 'max:5'],
-            'attachment.*'              =>      ['required'],
             'user_reviewer_id'          =>      ['required'],
         ]);
 
@@ -96,19 +97,12 @@ class UserEvaluation extends Component
                     ]);
                     return;
                 } else {
-                    $attachmentPath = null;
-
-                    if (isset($this->attachment[$evaluationItem->id]) && $this->attachment[$evaluationItem->id]) {
-
-                        $attachmentPath = $this->attachment[$evaluationItem->id]->store('uploaded-attachments', 'public');
-                    }
                     $evalutionData[] = [
                         'user_id'                       =>      $this->user->id,
                         'user_reviewer_id'              =>      $this->user_reviewer_id,
                         'user_rater_id'                 =>      auth()->user()->id,
                         'evaluation_item_id'            =>      $evaluationItem->id,
                         'numerical_rating'              =>      $this->numerical_rating[$evaluationItem->id],
-                        'attachment'                    =>      $attachmentPath ?: null,
                         'weight_score'                  =>      $evaluationItem->point_allocation * $this->numerical_rating[$evaluationItem->id],
                     ];
                 }

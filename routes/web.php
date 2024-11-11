@@ -23,6 +23,8 @@ use App\Livewire\Admin\Pages\IndividualScorecard as AdminPagesIndividualScorecar
 use App\Livewire\Admin\Users\Index as AdminUsersIndex;
 use App\Livewire\Admin\Evaluation\RatingIndicator as AdminEvaluationRatingIndicator;
 use App\Livewire\Admin\Evaluation\Index as AdminEvaluationIndex;
+use App\Livewire\Admin\Evaluation\SendAttachment as AdminSendAttachment;
+use App\Livewire\Admin\Evaluation\SendAttachmentIndex as AdminSendAttachmentIndex;
 use App\Livewire\Admin\Evaluation\UserEvaluation as AdminEvaluationUserEvaluation;
 use App\Livewire\Admin\Pages\PrintDetails as AdminPagesPrintDetails;
 use App\Livewire\Admin\Report\PerformanceReport as AdminReportPerformanceReport;
@@ -38,6 +40,8 @@ use App\Livewire\User\Pages\IndividualScorecard as UserPagesIndividualScorecard;
 use App\Livewire\User\Pages\ScorecardHistory as UserPagesScorecardHistory;
 use App\Livewire\User\Pages\AccountManagement as UserPagesAccountManagement;
 use App\Livewire\User\ScoreCard\MyScorecard as UserScoreCardMyScorecard;
+use App\Livewire\User\Evaluation\Index as UserEvaluationIndex;
+use App\Livewire\User\Evaluation\SendAttachment as UserSendAttachment;
 
 // GLOBAL
 use App\Livewire\Global\Pages\Landing;
@@ -87,6 +91,8 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin|super_admin']], f
     Route::get('/admin/history', AdminReportUsersHistory::class);
     Route::get('/admin/history/{userId}/{policeId}', AdminReportHistory::class);
     Route::get('/admin/user-scorecard/{userId}/{policeId}/{startDate}/{endDate}', AdminScoreCardUserScorecard::class);
+    Route::get('/admin/evaluation/send-attachment', AdminSendAttachmentIndex::class);
+    Route::get('/admin/evaluation/send-attachment/{userId}/{policeId}', AdminSendAttachment::class);
 });
 
 
@@ -97,4 +103,6 @@ Route::group(['middleware' => ['auth', 'verified', 'role:user|admin|super_admin'
     Route::get('/users/account-management', UserPagesAccountManagement::class);
     Route::get('/users/my-scorecard/{startDate}/{endDate}', UserScoreCardMyScorecard::class);
     Route::get('/input-scorecard/performance-report/{userId}/{policeId}', AdminReportPerformanceReport::class);
+    Route::get('/users/evaluation/send-attachment', UserEvaluationIndex::class);
+    Route::get('/users/evaluation/send-attachment/{userId}/{policeId}', UserSendAttachment::class);
 });

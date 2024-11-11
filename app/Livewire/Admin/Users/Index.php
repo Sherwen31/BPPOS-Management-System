@@ -73,6 +73,8 @@ class Index extends Component
 
         $this->units = Unit::all();
 
+        $this->password = 'default_pass';
+
         return compact('users');
     }
 
@@ -88,7 +90,9 @@ class Index extends Component
             'year_attended'             =>                  ['date', 'required', 'before_or_equal:today'],
             'username'                  =>                  ['required', 'unique:users,username'],
             'password'                  =>                  ['required', 'min:6', 'max:50'],
-            'email'                     =>                  ['email', 'unique:users,email', 'required']
+            'email'                     =>                  ['email', 'unique:users,email', 'required'],
+            'civil_status'              =>                  ['required', 'in:Single,Married,Separated,Divorced,Engaged,Widowed,Not selected'],
+            'gender'                    =>                  ['required', 'in:Male,Female,Not selected'],
         ]);
 
         $user = User::create([
