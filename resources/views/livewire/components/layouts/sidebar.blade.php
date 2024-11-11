@@ -106,6 +106,12 @@
                     <span class="sideNavToolTip">Individual Scorecard</span>
                 </a>
             </li>
+            <li class="li"><a href="/admin/evaluation/send-attachment" wire:navigate
+                    class="{{ 'admin/evaluation/send-attachment' === request()->path() ? 'active_sidebar' : '' }}">
+                    <i class="fas fa-paperclip"></i>
+                    <span class="nav-item">Send Evaluation Attachment</span>
+                    <span class="sideNavToolTip">Send Evaluation Attachment</span>
+                </a></li>
             <li class="li">
                 <a wire:navigate href="/admin/user-account-management"
                     class="{{ 'admin/user-account-management' === request()->path() ? 'active_sidebar' : '' }}">

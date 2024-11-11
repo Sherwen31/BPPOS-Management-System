@@ -20,4 +20,9 @@ class EvaluationItem extends Model
     {
         return $this->hasMany(EvaluationRating::class)->chaperone();
     }
+
+    public function evaluationAttachments()
+    {
+        return $this->hasMany(EvaluationAttachment::class);
+    }
 }

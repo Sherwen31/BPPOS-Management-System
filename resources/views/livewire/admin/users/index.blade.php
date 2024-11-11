@@ -616,7 +616,7 @@
                                 <label for="usernameInput" class="form-label">Enter Username *</label>
                             </div>
                             <div wire class="mb-3 col-6 form-floating">
-                                <input wire:model='password' type="password" class="form-control" id="passwordInput"
+                                <input wire:model='password' disabled readonly type="password" class="form-control" id="passwordInput"
                                     placeholder="Enter Password" name="passwordInput">
                                 @error('password')
                                 <small class="text-danger">{{ $message }}</small>
