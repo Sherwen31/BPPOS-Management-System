@@ -15,6 +15,8 @@ use App\Livewire\SuperAdmin\Report\History as SuperAdminReportHistory;
 use App\Livewire\SuperAdmin\Report\UsersHistory as SuperAdminReportUsersHistory;
 use App\Livewire\SuperAdmin\ScoreCard\UserScorecard as SuperAdminScoreCardUserScorecard;
 use App\Livewire\SuperAdmin\Rank\Index as SuperAdminRankManagement;
+use App\Livewire\SuperAdmin\ManageEvaluationScore\Index as SuperAdminManageEvaluationScoreIndex;
+use App\Livewire\SuperAdmin\ManageEvaluationScore\PrintData as SuperAdminManageEvaluationScorePrintData;
 
 // ADMIN SIDE
 use App\Livewire\Admin\Pages\Dashboard as AdminPagesDashboard;
@@ -32,6 +34,8 @@ use App\Livewire\Admin\Report\PerformanceReportList as AdminReportPerformanceRep
 use App\Livewire\Admin\Report\History as AdminReportHistory;
 use App\Livewire\Admin\Report\UsersHistory as AdminReportUsersHistory;
 use App\Livewire\Admin\ScoreCard\UserScorecard as AdminScoreCardUserScorecard;
+use App\Livewire\SuperAdmin\ManageEvaluationScore\Index as AdminManageEvaluationScoreIndex;
+use App\Livewire\SuperAdmin\ManageEvaluationScore\PrintData as AdminManageEvaluationScorePrintData;
 
 
 // USER SIDE
@@ -75,6 +79,8 @@ Route::group(['middleware' => ['auth', 'verified', 'role:super_admin']], functio
     Route::get('/super-admin/history', SuperAdminReportUsersHistory::class);
     Route::get('/super-admin/history/{userId}/{policeId}', SuperAdminReportHistory::class);
     Route::get('/super-admin/user-scorecard/{userId}/{policeId}/{startDate}/{endDate}', SuperAdminScoreCardUserScorecard::class);
+    Route::get('/super-admin/manage-evaluation-score', SuperAdminManageEvaluationScoreIndex::class);
+    Route::get('/super-admin/print-evaluation-score/{dateRange}/{year}', SuperAdminManageEvaluationScorePrintData::class);
 });
 
 Route::group(['middleware' => ['auth', 'verified', 'role:admin|super_admin']], function () {
@@ -93,6 +99,8 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin|super_admin']], f
     Route::get('/admin/user-scorecard/{userId}/{policeId}/{startDate}/{endDate}', AdminScoreCardUserScorecard::class);
     Route::get('/admin/evaluation/send-attachment', AdminSendAttachmentIndex::class);
     Route::get('/admin/evaluation/send-attachment/{userId}/{policeId}', AdminSendAttachment::class);
+    Route::get('/admin/manage-evaluation-score', AdminManageEvaluationScoreIndex::class);
+    Route::get('/admin/print-evaluation-score/{dateRange}/{year}', AdminManageEvaluationScorePrintData::class);
 });
 
 

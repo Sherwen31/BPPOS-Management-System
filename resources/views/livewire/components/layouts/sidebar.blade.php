@@ -71,6 +71,14 @@
                 </a>
             </li> --}}
             <li class="li">
+                <a wire:navigate href="/super-admin/manage-evaluation-score"
+                    class="{{ 'super-admin/manage-evaluation-score' === request()->path() ? 'active_sidebar' : '' }}">
+                    <i class="fas fa-file-check"></i>
+                    <span class="nav-item">Manage Evaluation Score</span>
+                    <span class="sideNavToolTip">Manage Evaluation Score</span>
+                </a>
+            </li>
+            <li class="li">
                 <a wire:navigate href="/super-admin/account-management"
                     class="{{ 'super-admin/account-management' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-cog"></i>
@@ -152,6 +160,14 @@
                     <span class="sideNavToolTip">History</span>
                 </a>
             </li> --}}
+            <li class="li">
+                <a wire:navigate href="/admin/manage-evaluation-score"
+                    class="{{ 'admin/manage-evaluation-score' === request()->path() ? 'active_sidebar' : '' }}">
+                    <i class="fas fa-file-check"></i>
+                    <span class="nav-item">Manage Evaluation Score</span>
+                    <span class="sideNavToolTip">Manage Evaluation Score</span>
+                </a>
+            </li>
             <li class="li">
                 <a wire:navigate href="/admin/account-management"
                     class="{{ 'admin/account-management' === request()->path() ? 'active_sidebar' : '' }}">

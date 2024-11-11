@@ -45,6 +45,7 @@
                             </td>
                             <td>
                                 {{ $user->position?->position_name }}
+
                             </td>
                             <td>
                                 {{ $user->unit?->unit_assignment }}
