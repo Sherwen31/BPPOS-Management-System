@@ -14,14 +14,16 @@ class UnitAssignmentSeeder extends Seeder
     public function run(): void
     {
         $unit_assignments = [
-            ['unit_assignment'             =>                'Homicide Unit'],
-            ['unit_assignment'             =>                'Cybercrime Unit'],
-            ['unit_assignment'             =>                'Narcotics Unit'],
-            ['unit_assignment'             =>                'Traffic Unit'],
-            ['unit_assignment'             =>                'Patrol Unit'],
-            ['unit_assignment'             =>                'K-9 Unit'],
-            ['unit_assignment'             =>                'Internal Affairs'],
-            ['unit_assignment'             =>                'Special Weapons and Tactics (SWAT)'],
+            ['unit_assignment'             =>                'Administration'],
+            ['unit_assignment'             =>                'Intelligence'],
+            ['unit_assignment'             =>                'Operation'],
+            ['unit_assignment'             =>                'Supply'],
+            ['unit_assignment'             =>                'Police Community Relation'],
+            ['unit_assignment'             =>                'Finance'],
+            ['unit_assignment'             =>                'Investigation'],
+            ['unit_assignment'             =>                'Human Research and Resources  Development'],
+            ['unit_assignment'             =>                'PSSMU'],
+            ['unit_assignment'             =>                'PPU'],
         ];
 
         foreach ($unit_assignments as $unit) {
