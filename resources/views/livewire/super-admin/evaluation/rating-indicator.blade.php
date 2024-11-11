@@ -36,7 +36,7 @@
                 </tbody>
             </table>
         </div>
-        <br />
+        {{-- <br />
         <div class="">
             <h3>Rating Table for Personal Traits</h3>
         </div>
@@ -103,6 +103,6 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div> --}}
     </center>
 </div>

@@ -65,6 +65,7 @@ class Index extends Component
                 $query->where('name', 'super_admin')->orWhere('name', 'admin');
             })
             ->where('id', '!=', auth()->user()->id)
+            ->where('unit_id', '=', auth()->user()->unit_id)
             ->orderBy('id', 'asc')->paginate(10);
 
         $this->positions = Position::all();
