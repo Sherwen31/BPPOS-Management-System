@@ -27,10 +27,11 @@ class MyEvaluationScoreIndex extends Component
 
         $groupedEvaluations = EvaluationRating::where('user_id', $userId)
             ->selectRaw('YEAR(created_at) as year')
+            ->selectRaw('created_at as processed_at')
             ->selectRaw('CASE WHEN MONTH(created_at) BETWEEN 1 AND 6 THEN "January - June" ELSE "July - December" END as period')
             ->selectRaw('MAX(created_at) as last_rating')
-            ->groupBy('year', 'period')
-            ->orderBy('year', 'desc')
+            ->groupBy('year', 'period', 'processed_at')
+            ->orderBy('processed_at', 'desc')
             ->paginate(5, ['*'], 'evaluationPage');
 
         return compact('user', 'groupedPerformanceReports', 'groupedEvaluations');

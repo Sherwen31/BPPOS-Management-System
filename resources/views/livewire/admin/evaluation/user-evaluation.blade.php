@@ -88,7 +88,7 @@
                                                     @forelse ($item->evaluationAttachments as $attachment)
                                                     @if ($attachment->attachment !== null)
                                                     <a class="btn btn-primary btn-sm"
-                                                        href="{{ Storage::url($attachment->attachment) }}">
+                                                        href="{{ Storage::url($attachment->attachment) }}" target="_blank">
                                                         <i class="far fa-eye"></i> View
                                                     </a>
                                                     @else
@@ -185,7 +185,7 @@
                                                     @forelse ($item->evaluationAttachments as $attachment)
                                                     @if ($attachment->attachment !== null)
                                                     <a class="btn btn-primary btn-sm"
-                                                        href="{{ Storage::url($attachment->attachment) }}">
+                                                        href="{{ Storage::url($attachment->attachment) }}" target="_blank">
                                                         <i class="far fa-eye"></i> View
                                                     </a>
                                                     @else
@@ -271,7 +271,7 @@
                                                     @forelse ($item->evaluationAttachments as $attachment)
                                                     @if ($attachment->attachment !== null)
                                                     <a class="btn btn-primary btn-sm"
-                                                        href="{{ Storage::url($attachment->attachment) }}">
+                                                        href="{{ Storage::url($attachment->attachment) }}" target="_blank">
                                                         <i class="far fa-eye"></i> View
                                                     </a>
                                                     @else
@@ -357,7 +357,7 @@
                                                     @forelse ($item->evaluationAttachments as $attachment)
                                                     @if ($attachment->attachment !== null)
                                                     <a class="btn btn-primary btn-sm"
-                                                        href="{{ Storage::url($attachment->attachment) }}">
+                                                        href="{{ Storage::url($attachment->attachment) }}" target="_blank">
                                                         <i class="far fa-eye"></i> View
                                                     </a>
                                                     @else
@@ -443,7 +443,7 @@
                                                     @forelse ($item->evaluationAttachments as $attachment)
                                                     @if ($attachment->attachment !== null)
                                                     <a class="btn btn-primary btn-sm"
-                                                        href="{{ Storage::url($attachment->attachment) }}">
+                                                        href="{{ Storage::url($attachment->attachment) }}" target="_blank">
                                                         <i class="far fa-eye"></i> View
                                                     </a>
                                                     @else
@@ -539,7 +539,7 @@
                                                     @forelse ($item->evaluationAttachments as $attachment)
                                                     @if ($attachment->attachment !== null)
                                                     <a class="btn btn-primary btn-sm"
-                                                        href="{{ Storage::url($attachment->attachment) }}">
+                                                        href="{{ Storage::url($attachment->attachment) }}" target="_blank">
                                                         <i class="far fa-eye"></i> View
                                                     </a>
                                                     @else

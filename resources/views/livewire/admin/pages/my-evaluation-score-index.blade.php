@@ -36,7 +36,7 @@
                                         @empty
                                         <tr>
                                             <td colspan="2" class="text-center">
-                                                <p>This user is no performance data added yet.</p>
+                                                <p>You have not input your performance report yet.</p>
                                             </td>
                                         </tr>
                                         @endforelse
