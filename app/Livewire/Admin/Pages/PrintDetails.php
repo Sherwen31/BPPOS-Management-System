@@ -45,12 +45,14 @@ class PrintDetails extends Component
     public function printDetails()
     {
         $currentYear = now()->year;
+        $todaysDate = now();
 
-        $this->evaluations = Evaluation::with(['evaluationItems', 'evaluationItems.evaluationRatings' => function ($query) use ($currentYear) {
-            $query->where(function ($query) use ($currentYear) {
-                $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-07-31"])
-                    ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
-            });
+        $this->evaluations = Evaluation::with(['evaluationItems', 'evaluationItems.evaluationRatings' => function ($query) use ($currentYear, $todaysDate) {
+            if ($todaysDate->month < 7) {
+                $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"]);
+            } else {
+                $query->whereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+            }
         }])->get();
 
         $this->output = Evaluation::where('title', 'Output')->with('evaluationItems')->first();
@@ -69,9 +71,14 @@ class PrintDetails extends Component
 
         $user_output_points = EvaluationRating::where('user_id', $this->user->id)
             ->whereIn('evaluation_item_id', $outputItemIds)
-            ->where(function ($query) use ($currentYear) {
-                $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-07-31"])
-                    ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+            ->where(function ($query) use ($currentYear, $todaysDate) {
+                // $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"])
+                //     ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                if ($todaysDate->month < 7) {
+                    $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"]);
+                } else {
+                    $query->whereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                }
             })
             ->sum('weight_score');
 
@@ -84,9 +91,14 @@ class PrintDetails extends Component
 
         $job_knowledge_points = EvaluationRating::where('user_id', $this->user->id)
             ->whereIn('evaluation_item_id', $job_knowledgeItemIds)
-            ->where(function ($query) use ($currentYear) {
-                $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-07-31"])
-                    ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+            ->where(function ($query) use ($currentYear, $todaysDate) {
+                // $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"])
+                //     ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                if ($todaysDate->month < 7) {
+                    $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"]);
+                } else {
+                    $query->whereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                }
             })
             ->sum('weight_score');
 
@@ -99,9 +111,14 @@ class PrintDetails extends Component
 
         $user_work_management_points = EvaluationRating::where('user_id', $this->user->id)
             ->whereIn('evaluation_item_id', $work_managementItemIds)
-            ->where(function ($query) use ($currentYear) {
-                $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-07-31"])
-                    ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+            ->where(function ($query) use ($currentYear, $todaysDate) {
+                // $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"])
+                //     ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                if ($todaysDate->month < 7) {
+                    $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"]);
+                } else {
+                    $query->whereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                }
             })
             ->sum('weight_score');
 
@@ -114,9 +131,14 @@ class PrintDetails extends Component
 
         $user_interpersonal_points = EvaluationRating::where('user_id', $this->user->id)
             ->whereIn('evaluation_item_id', $interpersonalItemIds)
-            ->where(function ($query) use ($currentYear) {
-                $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-07-31"])
-                    ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+            ->where(function ($query) use ($currentYear, $todaysDate) {
+                // $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"])
+                //     ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                if ($todaysDate->month < 7) {
+                    $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"]);
+                } else {
+                    $query->whereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                }
             })
             ->sum('weight_score');
 
@@ -129,9 +151,14 @@ class PrintDetails extends Component
 
         $user_concern_points = EvaluationRating::where('user_id', $this->user->id)
             ->whereIn('evaluation_item_id', $concernItemIds)
-            ->where(function ($query) use ($currentYear) {
-                $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-07-31"])
-                    ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+            ->where(function ($query) use ($currentYear, $todaysDate) {
+                // $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"])
+                //     ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                if ($todaysDate->month < 7) {
+                    $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"]);
+                } else {
+                    $query->whereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                }
             })
             ->sum('weight_score');
 
@@ -144,9 +171,14 @@ class PrintDetails extends Component
 
         $user_personal_points = EvaluationRating::where('user_id', $this->user->id)
             ->whereIn('evaluation_item_id', $personalItemIds)
-            ->where(function ($query) use ($currentYear) {
-                $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-07-31"])
-                    ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+            ->where(function ($query) use ($currentYear, $todaysDate) {
+                // $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"])
+                //     ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                if ($todaysDate->month < 7) {
+                    $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"]);
+                } else {
+                    $query->whereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                }
             })
             ->sum('weight_score');
 
@@ -181,9 +213,14 @@ class PrintDetails extends Component
         }
 
         $this->significant = EvaluationRating::with(['userReviewer', 'userRater', 'user'])->where('user_id', $this->user->id)
-            ->where(function ($query) use ($currentYear) {
-                $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-07-31"])
-                    ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+            ->where(function ($query) use ($currentYear, $todaysDate) {
+                // $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"])
+                //     ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                if ($todaysDate->month < 7) {
+                    $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-06-30"]);
+                } else {
+                    $query->whereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+                }
             })
             ->first();
     }

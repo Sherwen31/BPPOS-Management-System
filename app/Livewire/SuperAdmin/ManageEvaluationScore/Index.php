@@ -39,6 +39,9 @@ class Index extends Component
         $this->usersFiltered = User::with(['evaluationRatings'])
             ->whereHas('evaluationRatings', function ($query) {
                 if ($this->date_range !== null && $this->year !== null) {
+
+                    $query->whereYear('created_at', $this->year);
+
                     if ($this->date_range == 'first_half') {
                         $query->whereMonth('created_at', '>=', 1)
                             ->whereMonth('created_at', '<=', 6);
@@ -46,8 +49,6 @@ class Index extends Component
                         $query->whereMonth('created_at', '>=', 7)
                             ->whereMonth('created_at', '<=', 12);
                     }
-
-                    $query->whereYear('created_at', $this->year);
                 }
             })
             ->where(function ($query) {
@@ -62,8 +63,19 @@ class Index extends Component
                 }
             })
             ->where('id', '!=', auth()->user()->id)
-            ->where('unit_id', '=', auth()->user()->unit_id)
-            ->withSum('evaluationRatings as total_weight_score', 'weight_score')
+            ->withSum(['evaluationRatings as total_weight_score' => function ($query) {
+                if ($this->date_range !== null && $this->year !== null) {
+                    $query->whereYear('created_at', $this->year);
+
+                    if ($this->date_range == 'first_half') {
+                        $query->whereMonth('created_at', '>=', 1)
+                            ->whereMonth('created_at', '<=', 6);
+                    } elseif ($this->date_range == 'second_half') {
+                        $query->whereMonth('created_at', '>=', 7)
+                            ->whereMonth('created_at', '<=', 12);
+                    }
+                }
+            }], 'weight_score')
             ->orderByDesc('total_weight_score')
             ->get();
 

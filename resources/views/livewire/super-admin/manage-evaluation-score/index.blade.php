@@ -160,7 +160,7 @@
                                     {{ $formattedDifference }}
                                 </td>
                                 <td>
-                                    {{ $user->evaluationRatings->sum('weight_score') }}
+                                    {{ $user->total_weight_score }}
                                 </td>
 
                             </tr>
