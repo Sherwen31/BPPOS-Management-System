@@ -39,7 +39,7 @@
                         @empty
                         <tr>
                             <td colspan="2" class="text-center">
-                                <p>This user is no performance data added yet.</p>
+                                <p>No performance data added yet.</p>
                             </td>
                         </tr>
                         @endforelse
