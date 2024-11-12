@@ -152,14 +152,14 @@
                     <span class="sideNavToolTip">Performance Report</span>
                 </a>
             </li>
-            <li class="li">
+            {{-- <li class="li">
                 <a wire:navigate href="/admin/history"
                     class="{{ 'admin/history' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-clock-rotate-left"></i>
                     <span class="nav-item">History</span>
                     <span class="sideNavToolTip">History</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="li">
                 <a wire:navigate href="/admin/my-score-history"
                     class="{{ 'admin/my-score-history' === request()->path() ? 'active_sidebar' : '' }}">

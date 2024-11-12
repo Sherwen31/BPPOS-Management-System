@@ -64,7 +64,11 @@ class MyEvaluationScore extends Component
         $this->concern = Evaluation::where('title', 'Concern for the Organization')->first();
         $this->personal = Evaluation::where('title', 'Personal Qualities')->first();
 
-        $this->total_weight_score = EvaluationRating::where('user_id', $this->user->id)->whereDate('created_at', today())->sum('weight_score');
+        $this->total_weight_score = EvaluationRating::where('user_id', $this->user->id)
+            ->where(function ($query) use ($currentYear) {
+                $query->whereBetween('created_at', ["{$currentYear}-01-01", "{$currentYear}-07-31"])
+                    ->orWhereBetween('created_at', ["{$currentYear}-07-01", "{$currentYear}-12-31"]);
+            })->sum('weight_score');
 
         // OUTPUT
         $this->output_total_points = $this->output->evaluationItems->sum('point_allocation') * $this->max_points;
