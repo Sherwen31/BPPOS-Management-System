@@ -85,7 +85,7 @@
                                     @empty
                                     <tr>
                                         <td colspan="2" class="text-center">
-                                            <p>This user has no performance data added yet.</p>
+                                            <p>You're not evaluated yet.</p>
                                         </td>
                                     </tr>
                                     @endforelse
