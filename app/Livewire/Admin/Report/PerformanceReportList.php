@@ -65,6 +65,7 @@ class PerformanceReportList extends Component
                 $query->where('name', 'admin')->orWhere('name', 'super_admin');
             })
             ->where('id', '!=', auth()->user()->id)
+            ->where('unit_id', '=', auth()->user()->unit_id)
             ->orderBy('id', 'asc')->paginate(10);
 
         return compact('users');
