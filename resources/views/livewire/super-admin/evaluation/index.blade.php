@@ -466,7 +466,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="9">
+                            <td colspan="10">
                                 <p class="text-center mt-2"><strong>{{ $search ? 'No "' . $search . '" users found' :
                                         'No users yet' }}</strong></p>
                             </td>

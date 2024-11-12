@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\User\Pages;
+namespace App\Livewire\Admin\Pages;
 
 use App\Models\EvaluationRating;
 use App\Models\PerformanceReportRating;
@@ -9,11 +9,10 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ScorecardHistory extends Component
+class MyEvaluationScoreIndex extends Component
 {
-
     use WithPagination;
-    #[Title('User | View History')]
+    #[Title('Admin | View History')]
 
     public function listing()
     {
@@ -34,10 +33,10 @@ class ScorecardHistory extends Component
             ->orderBy('year', 'desc')
             ->paginate(5, ['*'], 'evaluationPage');
 
-            return compact('user', 'groupedPerformanceReports', 'groupedEvaluations');
+        return compact('user', 'groupedPerformanceReports', 'groupedEvaluations');
     }
     public function render()
     {
-        return view('livewire.user.pages.scorecard-history', $this->listing());
+        return view('livewire.admin.pages.my-evaluation-score-index', $this->listing());
     }
 }

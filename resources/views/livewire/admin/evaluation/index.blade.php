@@ -112,7 +112,7 @@
             <div class="mainMod-top">
                 <h1>User Evaluation Management</h1>
             </div>
-            <div class="d-flex justify-content-start">
+            <div class="d-flex justify-content-between">
                 <div>
                     <input type="search" wire:model.live.debounce.200ms="search" class="form-control"
                         placeholder="Search...">
@@ -474,7 +474,7 @@
                         @empty
 
                         <tr>
-                            <td colspan="9">
+                            <td colspan="10">
                                 <p class="text-center mt-2"><strong>{{ $search ? 'No "' . $search . '" users found' :
                                         'No users yet' }}</strong></p>
                             </td>

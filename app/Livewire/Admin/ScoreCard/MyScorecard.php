@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\User\ScoreCard;
+namespace App\Livewire\Admin\ScoreCard;
 
 use App\Models\PerformanceReportItem;
 use App\Models\PerformanceReportRating;
@@ -10,10 +10,12 @@ use Livewire\Component;
 
 class MyScorecard extends Component
 {
+
     public $user;
     public $performanceItems = [];
     public $dateCovered;
-    #[Title('User | My Scorecard')]
+
+    #[Title('Admin | My Scorecard')]
 
     public function mount($startDate, $endDate)
     {
@@ -36,8 +38,9 @@ class MyScorecard extends Component
             }
         ])->orderBy('activity', 'asc')->get();
     }
+
     public function render()
     {
-        return view('livewire.user.score-card.my-scorecard');
+        return view('livewire.admin.score-card.my-scorecard');
     }
 }

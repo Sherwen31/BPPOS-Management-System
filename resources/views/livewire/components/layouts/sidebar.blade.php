@@ -161,6 +161,14 @@
                 </a>
             </li>
             <li class="li">
+                <a wire:navigate href="/admin/my-score-history"
+                    class="{{ 'admin/my-score-history' === request()->path() ? 'active_sidebar' : '' }}">
+                    <i class="fas fa-hundred-points"></i>
+                    <span class="nav-item">My Score History</span>
+                    <span class="sideNavToolTip">My Score History</span>
+                </a>
+            </li>
+            <li class="li">
                 <a wire:navigate href="/admin/manage-evaluation-score"
                     class="{{ 'admin/manage-evaluation-score' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-file-check"></i>
