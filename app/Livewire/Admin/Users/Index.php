@@ -6,6 +6,7 @@ use App\Models\Position;
 use App\Models\Rank;
 use App\Models\Unit;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,7 +16,7 @@ class Index extends Component
 
     use WithPagination;
 
-    #[Title('Admin | User Account Management')]
+    #[Title('Admin | Personnel Profiles')]
 
     public $positions = [];
     public $roles = [];
@@ -76,6 +77,10 @@ class Index extends Component
         $this->units = Unit::all();
 
         $this->password = 'default_pass';
+
+        $this->unit_id = auth()->user()->unit_id;
+
+        $this->age = Carbon::parse($this->date_of_birth)->age;
 
         return compact('users');
     }

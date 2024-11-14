@@ -26,8 +26,8 @@
                 <a wire:navigate href="/super-admin/user-account-management"
                     class="{{ 'super-admin/user-account-management' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-users"></i>
-                    <span class="nav-item">User Account Management</span>
-                    <span class="sideNavToolTip">User Account Management</span>
+                    <span class="nav-item">Personnel Profiles</span>
+                    <span class="sideNavToolTip">Personnel Profiles</span>
                 </a>
             </li>
             <li class="li">
@@ -102,8 +102,8 @@
                 <a wire:navigate href="/admin/user-account-management"
                     class="{{ 'admin/user-account-management' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-users"></i>
-                    <span class="nav-item">User Account Management</span>
-                    <span class="sideNavToolTip">User Account Management</span>
+                    <span class="nav-item">Personnel Profiles</span>
+                    <span class="sideNavToolTip">Personnel Profiles</span>
                 </a>
             </li>
             <li class="li">

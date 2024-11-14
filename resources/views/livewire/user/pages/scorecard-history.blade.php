@@ -13,6 +13,13 @@
                 </div>
                 <div class="mainScorecard">
                     <div class="history">
+                        <div class="text-end mb-5 mt-5">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#viewArchive">
+                                <i class="fa-regular fa-box-archive"></i>
+                                View Archive History
+                            </button>
+                        </div>
                         <div class="flex d-flex">
                             <div class="history-scorecard">
                                 <h1><strong>HISTORY OF SCORECARD</strong></h1>
@@ -27,7 +34,7 @@
                                         @forelse ($groupedPerformanceReports as $item)
                                         <tr>
                                             <td scope="row">{{ $item->start_date->format('F j') }} -
-                                                {{ $item->end_date->format('j, Y') }}</td>
+                                                {{ $item->end_date->format('F j, Y') }}</td>
                                             <td>
                                                 <a wire:navigate
                                                     href="/users/my-scorecard/{{ $item->start_date }}/{{ $item->end_date }}"
@@ -94,6 +101,106 @@
                             </table>
                             {{ $groupedEvaluations->links('', ['pageName' => 'evaluationPage']) }}
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div wire:ignore.self class="modal fade" id="viewArchive" tabindex="-1" aria-labelledby="viewArchiveLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="viewArchiveLabel">Archive History</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="flex d-flex justify-content-center mt-3">
+                            <div class="history-scorecard">
+                                <h1><strong>SCORECARD</strong></h1>
+                                <table id="historyTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Period Covered</th>
+                                            <th class="action-btn">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($groupedPerformanceReportsArchive as $item)
+                                        <tr>
+                                            <td scope="row">{{ $item->start_date->format('F j') }} -
+                                                {{ $item->end_date->format('F j, Y') }}</td>
+                                            <td>
+                                                <a target='_blank'
+                                                    href="/users/my-scorecard/{{ $item->start_date }}/{{ $item->end_date }}"
+                                                    class="btn btn-primary manage-btn btn-sm">
+                                                    <i class="far fa-eye"></i> View my Score
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="2" class="text-center">
+                                                <p>No archive of your performance report.</p>
+                                            </td>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                                {{ $groupedPerformanceReportsArchive->links('', ['pageName' => 'performancePageArchive']) }}
+                            </div>
+                            {{-- <div class="history-promotion">
+                                <h1><strong>CURRENT RANK</strong></h1>
+                                <div class="divider">
+                                    <img src="/assets/police-badge-police-svgrepo-com.svg" alt="Badge" width="50px"
+                                        height="50px">
+                                </div>
+                                <div class="promotion-content" id="promotionItems">
+                                    <ul>
+                                    </ul>
+                                </div>
+                            </div> --}}
+                        </div>
+                        <div class="d-flex justify-content-center mt-5">
+                            <div class="history-scorecard">
+                                <h1><strong>EVALUATION</strong></h1>
+                                <table id="historyTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Period Covered</th>
+                                            <th class="action-btn">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($groupedEvaluationsArchive as $evaluation)
+                                        <tr>
+                                            <td scope="row">
+                                                {{ $evaluation->period }} {{ $evaluation->year }}
+                                            </td>
+                                            <td>
+                                                <a target="_blank"
+                                                    href="/users/my-evaluation-score/{{ $evaluation->last_rating }}/{{ auth()->user()->last_name }}/{{ auth()->user()->first_name }}/{{ auth()->user()->police_id }}/{{ auth()->user()->id }}"
+                                                    class="btn btn-primary manage-btn btn-sm">
+                                                    <i class="far fa-eye"></i> View Evaluation Score
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="2" class="text-center">
+                                                <p>No archive of your evaluation.</p>
+                                            </td>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+
+                                </table>
+                                {{ $groupedEvaluationsArchive->links('', ['pageName' => 'evaluationPageArchive']) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

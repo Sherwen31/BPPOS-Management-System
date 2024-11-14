@@ -15,7 +15,7 @@ class Index extends Component
 
     use WithPagination;
 
-    #[Title('Super Admin | User Account Management')]
+    #[Title('Super Admin | Personnel Profiles')]
 
     public $positions = [];
     public $roles = [];
@@ -47,7 +47,7 @@ class Index extends Component
     public function listings()
     {
         $users = User::with(['position', 'rank', 'unit', 'roles'])->whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'super_admin')->orWhere('name', 'user');
+            $query->where('name', 'super_admin');
         })
             ->where(function ($query) {
                 $query->where('first_name', 'like', '%' . $this->search . '%')

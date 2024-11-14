@@ -6,7 +6,7 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="mainMod-top">
-                <h1>User Account Management</h1>
+                <h1>Personnel Profiles</h1>
             </div>
             <div class="d-flex justify-content-between">
                 <div>
@@ -15,7 +15,7 @@
                 </div>
                 <div>
                     <button wire:click='resetData' class="btn mb-2 btn-sm btn-dark" data-bs-toggle="modal"
-                        data-bs-target="#createUserModal"><i class="far fa-user-plus"></i> Create User</button>
+                        data-bs-target="#createUserModal"><i class="far fa-user-plus"></i> Add Personnel</button>
                 </div>
             </div>
             <div class="mainMod-skills">
@@ -728,14 +728,14 @@
         </div>
     </div>
 
-    {{-- Create User Modal --}}
+    {{-- Add Personnel Modal --}}
     <div wire:ignore.self class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <form action="#" id='addUser' wire:submit.prevent="createUser">
                 <div class="modal-content" style="max-height: 500px; overflow: auto;">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="createUserModalLabel">Create User</h1>
+                        <h1 class="modal-title fs-5" id="createUserModalLabel">Add Personnel</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -951,7 +951,7 @@
                         <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"
                             wire:click='resetData'>Close</button>
                         <button type="submit" class="btn btn-primary btn-sm" id="createUserBtn">
-                            <span wire:loading.remove wire:target='createUser'>Add user</span>
+                            <span wire:loading.remove wire:target='createUser'>Add Personnel</span>
                             <span wire:loading wire:target='createUser'>Adding...</span>
                         </button>
                     </div>
