@@ -257,7 +257,9 @@ class Index extends Component
             'gender'                    =>                  $this->gender,
         ]);
 
-        $this->userData->userOldUnits()->attach($oldUnit);
+        if ($this->unit_id !== $oldUnit) {
+            $this->userData->userOldUnits()->attach($oldUnit);
+        }
 
         $this->dispatch('toastr', [
             'type'              =>              'success',

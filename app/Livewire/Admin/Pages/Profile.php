@@ -128,7 +128,9 @@ class Profile extends Component
 
         $user->save();
 
-        $user->userOldUnits()->attach($oldUnit);
+        if ($this->unit_id  !== $oldUnit) {
+            $user->userOldUnits()->attach($oldUnit);
+        }
 
         $this->dispatch('toastr', [
             'type'          =>          'success',

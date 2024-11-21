@@ -49,25 +49,29 @@
                                         <input id="first_name" type="text" wire:model='first_name'
                                             style="margin-bottom: 10px;">
                                         @error('first_name')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror
                                         <label for="middle_name"><strong>Middle Name</strong></label>
                                         <input id="middle_name" type="text" wire:model='middle_name'
                                             style="margin-bottom: 10px;">
                                         @error('middle_name')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror
                                         <label for="nationality"><strong>Nationality</strong></label>
                                         <input id="nationality" type="text" wire:model='nationality'
                                             style="margin-bottom: 10px;">
                                         @error('nationality')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror
                                         <label for="contact_number"><strong>Contact Number</strong></label>
                                         <input id="contact_number" type="number" wire:model='contact_number'
                                             style="margin-bottom: 10px;">
                                         @error('contact_number')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror
                                         <label for="civil_status"><strong>Civil Status</strong></label>
                                         <select id="civil_status" wire:model='civil_status'
@@ -83,13 +87,17 @@
                                             <option value="Not selected">Rather not to say</option>
                                         </select>
                                         @error('civil_status')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror
                                         <label for="position"><strong>Position</strong></label>
                                         <input id="position" name="position" class="read-only" type="text"
                                             value="{{ Auth::user()->position->position_name }}"
                                             style="margin-bottom: 10px;" readonly>
-                                        <label for="unit_assignment"><strong>Unit Assignment</strong></label>
+                                        <label for="unit_assignment"><strong>Unit Assignment(<button
+                                                    data-bs-toggle="modal" data-bs-target="#oldUnit" type="button"
+                                                    class="btn btn-link btn-sm"><i class="far fa-eye"></i>
+                                                    Old</button>)</strong></label>
                                         <input id="unit_assignment" name="unit_assignment" class="read-only" type="text"
                                             value="{{ Auth::user()->unit->unit_assignment }}"
                                             style="margin-bottom: 10px;" readonly>
@@ -103,7 +111,8 @@
                                             placeholder="New Password" style="margin-bottom: 10px;">
 
                                         @error('new_password')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror
                                     </div>
                                     <div class="input-enter">
@@ -111,25 +120,29 @@
                                         <input id="last_name" type="text" wire:model='last_name'
                                             style="margin-bottom: 10px;">
                                         @error('last_name')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror
                                         <label for="username"><strong>Username</strong></label>
                                         <input id="username" wire:model='username' name="username" type="text"
                                             style="margin-bottom: 10px;">
                                         @error('username')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror
                                         <label for="religion"><strong>Religion</strong></label>
                                         <input id="religion" wire:model='religion' name="religion" type="text"
                                             style="margin-bottom: 10px;">
                                         @error('religion')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror
                                         <label for="age"><strong>Age</strong></label>
                                         <input id="age" name="age" wire:model='age' type="number"
                                             style="margin-bottom: 10px;">
                                         @error('age')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror
                                         <label for="gender"><strong>Civil Gender</strong></label>
                                         <select id="gender" wire:model='gender' style="margin-bottom: 10px;">
@@ -140,18 +153,21 @@
                                             <option value="Not selected">Rather not to say</option>
                                         </select>
                                         @error('gender')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror <label for="email"><strong>Email</strong></label>
                                         <input id="email" wire:model='email' name="email" type="email"
                                             style="margin-bottom: 10px;">
                                         @error('email')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror
                                         <label for="date_of_birth"><strong>Date of Birth</strong></label>
                                         <input id="date_of_birth" wire:model='date_of_birth' name="date_of_birth"
                                             type="date" style="margin-bottom: 10px;">
                                         @error('date_of_birth')
-                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message }}</span>
+                                        <span class="text-danger mb-2" style="margin-top: -10px;">{{ $message
+                                            }}</span>
                                         @enderror
                                         <label for="years"><strong>Years</strong></label>
 
@@ -163,7 +179,8 @@
 
                                         $years = $diff->y;
                                         $months = $diff->m;
-                                        $formattedDifference = $years !== 0 ? "{$years} years and {$months} months" :
+                                        $formattedDifference = $years !== 0 ? "{$years} years and {$months} months"
+                                        :
                                         "{$months}
                                         months";
                                         @endphp
@@ -187,6 +204,41 @@
                             </form>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="oldUnit" tabindex="-1" aria-labelledby="oldUnitLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="oldUnitLabel">Old Unit Assignments</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex gap-2 align-items-center flex-wrap">
+                        @forelse (auth()->user()->userOldUnits as $oldUnit)
+                        <div>
+                            <span class="badge text-bg-primary px-3 py-2 text-wrap">
+                                {{ $oldUnit->unit_assignment }}
+                            </span> <i class="far fa-arrow-right"></i>
+                        </div>
+                        @empty
+                        <div class="d-flex justify-content-center w-100 align-items-center flex-column">
+                            <p class="fw-bold mb-2"><i class="far fa-xmark-to-slot fs-2"></i></p>
+                            <p class="fw-bold">You don't have any old unit assignments yet.</p>
+                        </div>
+                        @endforelse
+                        @if (auth()->user()->userOldUnits->count() !== 0)
+                        <span class="badge text-bg-info text-white px-3 py-2 text-wrap">
+                            {{ auth()->user()->unit->unit_assignment }}
+                        </span>
+                        @endif
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

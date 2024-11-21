@@ -350,9 +350,11 @@
                                         <p class="fw-bold">You don't have any old unit assignments yet.</p>
                                     </div>
                                     @endforelse
+                                    @if (auth()->user()->userOldUnits->count() !== 0)
                                     <span class="badge text-bg-info text-white px-3 py-2 text-wrap">
                                         {{ $recentUnit }}
                                     </span>
+                                    @endif
                                 </div>
                             </div>
                         </div>

@@ -251,7 +251,9 @@ class Index extends Component
         ]);
 
 
-        $this->userData->userOldUnits()->attach($oldUnit);
+        if ($this->unit_id !== $oldUnit) {
+            $this->userData->userOldUnits()->attach($oldUnit);
+        }
 
         $this->dispatch('toastr', [
             'type'              =>              'success',

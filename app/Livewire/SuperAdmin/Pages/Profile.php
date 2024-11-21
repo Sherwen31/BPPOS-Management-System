@@ -67,13 +67,13 @@ class Profile extends Component
         $this->nationality = $user->nationality;
         $this->religion = $user->religion;
         $this->civil_status = $user->civil_status;
+        $this->recentUnit = $user->unit->unit_assignment;
 
         $this->positions = Position::all();
 
         $this->ranks = Rank::all();
 
         $this->units = Unit::all();
-
     }
 
 
@@ -128,7 +128,9 @@ class Profile extends Component
 
         $user->save();
 
-        $user->userOldUnits()->attach($oldUnit);
+        if ($this->unit_id  !== $oldUnit) {
+            $user->userOldUnits()->attach($oldUnit);
+        }
 
         $this->dispatch('toastr', [
             'type'          =>          'success',
