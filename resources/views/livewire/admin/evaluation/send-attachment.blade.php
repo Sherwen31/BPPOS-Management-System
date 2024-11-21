@@ -58,12 +58,43 @@
 
                                             <td>{{ $item->performance_indications }}</td>
                                             <td>
-                                                <input type="file"
+                                                @php
+                                                $uploadedAttachment =
+                                                $item->evaluationAttachments->where('evaluation_item_id',
+                                                $item->id)->where('user_id', Auth::user()->id)->first();
+                                                @endphp
+
+                                                @if($uploadedAttachment && $uploadedAttachment->attachment !== null)
+                                                <div class="d-flex gap-2 justify-content-center">
+                                                    <img src="{{ Storage::url($uploadedAttachment->attachment) }}"
+                                                        alt="" width="40" height="40">
+                                                    <button
+                                                        wire:confirm="Are you sure you want to remove this attachment? This action cannot be undone."
+                                                        type="button" class="btn btn-link text-dark"
+                                                        wire:click="removeImage({{ $item->id }})"><i
+                                                            class="far fa-x"></i></button>
+                                                </div>
+                                                @else
+                                                @if(isset($attachment[$item->id]))
+                                                <div class="d-flex gap-2 justify-content-center">
+                                                    <img src="{{ $attachment[$item->id]->temporaryUrl() }}" alt=""
+                                                        width="40" height="40">
+                                                    <button type="button" class="btn btn-link text-dark"
+                                                        wire:click="removeTempUrl({{ $item->id }})"><i
+                                                            class="far fa-x"></i></button>
+                                                </div>
+                                                @else
+                                                <input wire:loading.remove wire:target='attachment.{{ $item->id }}'
+                                                    accept="image/*" type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
-                                                    placeholder="Attachment" accept="image/*">
+                                                    placeholder="Attachment">
+                                                <span wire:loading wire:target='attachment.{{ $item->id }}'
+                                                    class="spinner-border spinner-border-sm"></span>
+                                                @endif
                                                 @error('attachment.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
+                                                @endif
                                             </td>
 
                                         </tr>
@@ -117,12 +148,43 @@
                                             </td>
 
                                             <td>
-                                                <input type="file"
+                                                @php
+                                                $uploadedAttachment =
+                                                $item->evaluationAttachments->where('evaluation_item_id',
+                                                $item->id)->where('user_id', Auth::user()->id)->first();
+                                                @endphp
+
+                                                @if($uploadedAttachment && $uploadedAttachment->attachment !== null)
+                                                <div class="d-flex gap-2 justify-content-center">
+                                                    <img src="{{ Storage::url($uploadedAttachment->attachment) }}"
+                                                        alt="" width="40" height="40">
+                                                    <button
+                                                        wire:confirm="Are you sure you want to remove this attachment? <br> This action cannot be undone."
+                                                        type="button" class="btn btn-link text-dark"
+                                                        wire:click="removeImage({{ $item->id }})"><i
+                                                            class="far fa-x"></i></button>
+                                                </div>
+                                                @else
+                                                @if(isset($attachment[$item->id]))
+                                                <div class="d-flex gap-2 justify-content-center">
+                                                    <img src="{{ $attachment[$item->id]->temporaryUrl() }}" alt=""
+                                                        width="40" height="40">
+                                                    <button type="button" class="btn btn-link text-dark"
+                                                        wire:click="removeTempUrl({{ $item->id }})"><i
+                                                            class="far fa-x"></i></button>
+                                                </div>
+                                                @else
+                                                <input wire:loading.remove wire:target='attachment.{{ $item->id }}'
+                                                    accept="image/*" type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
-                                                    placeholder="Attachment" accept="image/*">
+                                                    placeholder="Attachment">
+                                                <span wire:loading wire:target='attachment.{{ $item->id }}'
+                                                    class="spinner-border spinner-border-sm"></span>
+                                                @endif
                                                 @error('attachment.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
+                                                @endif
                                             </td>
 
                                         </tr>
@@ -165,12 +227,43 @@
                                             </td>
 
                                             <td>
-                                                <input type="file"
+                                                @php
+                                                $uploadedAttachment =
+                                                $item->evaluationAttachments->where('evaluation_item_id',
+                                                $item->id)->where('user_id', Auth::user()->id)->first();
+                                                @endphp
+
+                                                @if($uploadedAttachment && $uploadedAttachment->attachment !== null)
+                                                <div class="d-flex gap-2 justify-content-center">
+                                                    <img src="{{ Storage::url($uploadedAttachment->attachment) }}"
+                                                        alt="" width="40" height="40">
+                                                    <button
+                                                        wire:confirm="Are you sure you want to remove this attachment? <br> This action cannot be undone."
+                                                        type="button" class="btn btn-link text-dark"
+                                                        wire:click="removeImage({{ $item->id }})"><i
+                                                            class="far fa-x"></i></button>
+                                                </div>
+                                                @else
+                                                @if(isset($attachment[$item->id]))
+                                                <div class="d-flex gap-2 justify-content-center">
+                                                    <img src="{{ $attachment[$item->id]->temporaryUrl() }}" alt=""
+                                                        width="40" height="40">
+                                                    <button type="button" class="btn btn-link text-dark"
+                                                        wire:click="removeTempUrl({{ $item->id }})"><i
+                                                            class="far fa-x"></i></button>
+                                                </div>
+                                                @else
+                                                <input wire:loading.remove wire:target='attachment.{{ $item->id }}'
+                                                    accept="image/*" type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
-                                                    placeholder="Attachment" accept="image/*">
+                                                    placeholder="Attachment">
+                                                <span wire:loading wire:target='attachment.{{ $item->id }}'
+                                                    class="spinner-border spinner-border-sm"></span>
+                                                @endif
                                                 @error('attachment.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
+                                                @endif
                                             </td>
                                         </tr>
                                         @empty
@@ -212,12 +305,43 @@
                                             </td>
 
                                             <td>
-                                                <input type="file"
+                                                @php
+                                                $uploadedAttachment =
+                                                $item->evaluationAttachments->where('evaluation_item_id',
+                                                $item->id)->where('user_id', Auth::user()->id)->first();
+                                                @endphp
+
+                                                @if($uploadedAttachment && $uploadedAttachment->attachment !== null)
+                                                <div class="d-flex gap-2 justify-content-center">
+                                                    <img src="{{ Storage::url($uploadedAttachment->attachment) }}"
+                                                        alt="" width="40" height="40">
+                                                    <button
+                                                        wire:confirm="Are you sure you want to remove this attachment? <br> This action cannot be undone."
+                                                        type="button" class="btn btn-link text-dark"
+                                                        wire:click="removeImage({{ $item->id }})"><i
+                                                            class="far fa-x"></i></button>
+                                                </div>
+                                                @else
+                                                @if(isset($attachment[$item->id]))
+                                                <div class="d-flex gap-2 justify-content-center">
+                                                    <img src="{{ $attachment[$item->id]->temporaryUrl() }}" alt=""
+                                                        width="40" height="40">
+                                                    <button type="button" class="btn btn-link text-dark"
+                                                        wire:click="removeTempUrl({{ $item->id }})"><i
+                                                            class="far fa-x"></i></button>
+                                                </div>
+                                                @else
+                                                <input wire:loading.remove wire:target='attachment.{{ $item->id }}'
+                                                    accept="image/*" type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
-                                                    placeholder="Attachment" accept="image/*">
+                                                    placeholder="Attachment">
+                                                <span wire:loading wire:target='attachment.{{ $item->id }}'
+                                                    class="spinner-border spinner-border-sm"></span>
+                                                @endif
                                                 @error('attachment.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
+                                                @endif
                                             </td>
 
                                         </tr>
@@ -260,12 +384,43 @@
                                             </td>
 
                                             <td>
-                                                <input type="file"
+                                                @php
+                                                $uploadedAttachment =
+                                                $item->evaluationAttachments->where('evaluation_item_id',
+                                                $item->id)->where('user_id', Auth::user()->id)->first();
+                                                @endphp
+
+                                                @if($uploadedAttachment && $uploadedAttachment->attachment !== null)
+                                                <div class="d-flex gap-2 justify-content-center">
+                                                    <img src="{{ Storage::url($uploadedAttachment->attachment) }}"
+                                                        alt="" width="40" height="40">
+                                                    <button
+                                                        wire:confirm="Are you sure you want to remove this attachment? <br> This action cannot be undone."
+                                                        type="button" class="btn btn-link text-dark"
+                                                        wire:click="removeImage({{ $item->id }})"><i
+                                                            class="far fa-x"></i></button>
+                                                </div>
+                                                @else
+                                                @if(isset($attachment[$item->id]))
+                                                <div class="d-flex gap-2 justify-content-center">
+                                                    <img src="{{ $attachment[$item->id]->temporaryUrl() }}" alt=""
+                                                        width="40" height="40">
+                                                    <button type="button" class="btn btn-link text-dark"
+                                                        wire:click="removeTempUrl({{ $item->id }})"><i
+                                                            class="far fa-x"></i></button>
+                                                </div>
+                                                @else
+                                                <input wire:loading.remove wire:target='attachment.{{ $item->id }}'
+                                                    accept="image/*" type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
-                                                    placeholder="Attachment" accept="image/*">
+                                                    placeholder="Attachment">
+                                                <span wire:loading wire:target='attachment.{{ $item->id }}'
+                                                    class="spinner-border spinner-border-sm"></span>
+                                                @endif
                                                 @error('attachment.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
+                                                @endif
                                             </td>
 
                                         </tr>
@@ -318,12 +473,43 @@
                                             <td>x</td>
 
                                             <td rowspan="6">
-                                                <input type="file"
+                                                @php
+                                                $uploadedAttachment =
+                                                $item->evaluationAttachments->where('evaluation_item_id',
+                                                $item->id)->where('user_id', Auth::user()->id)->first();
+                                                @endphp
+
+                                                @if($uploadedAttachment && $uploadedAttachment->attachment !== null)
+                                                <div class="d-flex gap-2 justify-content-center">
+                                                    <img src="{{ Storage::url($uploadedAttachment->attachment) }}"
+                                                        alt="" width="40" height="40">
+                                                    <button
+                                                        wire:confirm="Are you sure you want to remove this attachment? <br> This action cannot be undone."
+                                                        type="button" class="btn btn-link text-dark"
+                                                        wire:click="removeImage({{ $item->id }})"><i
+                                                            class="far fa-x"></i></button>
+                                                </div>
+                                                @else
+                                                @if(isset($attachment[$item->id]))
+                                                <div class="d-flex gap-2 justify-content-center">
+                                                    <img src="{{ $attachment[$item->id]->temporaryUrl() }}" alt=""
+                                                        width="40" height="40">
+                                                    <button type="button" class="btn btn-link text-dark"
+                                                        wire:click="removeTempUrl({{ $item->id }})"><i
+                                                            class="far fa-x"></i></button>
+                                                </div>
+                                                @else
+                                                <input wire:loading.remove wire:target='attachment.{{ $item->id }}'
+                                                    accept="image/*" type="file"
                                                     wire:model.live.debounce.10ms='attachment.{{ $item->id }}'
-                                                    placeholder="Attachment" accept="image/*">
+                                                    placeholder="Attachment">
+                                                <span wire:loading wire:target='attachment.{{ $item->id }}'
+                                                    class="spinner-border spinner-border-sm"></span>
+                                                @endif
                                                 @error('attachment.'.$item->id)
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
+                                                @endif
                                             </td>
 
                                         </tr>
