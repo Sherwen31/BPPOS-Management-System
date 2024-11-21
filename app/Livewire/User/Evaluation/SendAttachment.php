@@ -100,6 +100,27 @@ class SendAttachment extends Component
         $this->redirect('/users/evaluation/send-attachment', navigate: true);
     }
 
+    public function removeTempUrl($item)
+    {
+        unset($this->attachment[$item]);
+    }
+
+    public function removeImage($item)
+    {
+        $evaluationAttachment = EvaluationAttachment::where('evaluation_item_id', $item)->where("user_id", auth()->user()->id)->first();
+
+        if ($evaluationAttachment && $evaluationAttachment->attachment === null) {
+            $this->dispatch('toastr', [
+                'type'          =>          'error',
+                'message'       =>          'Attachment not found',
+            ]);
+            return;
+        }
+        $evaluationAttachment->update([
+            'attachment' => null
+        ]);
+    }
+
     public function render()
     {
         return view('livewire.user.evaluation.send-attachment', [
