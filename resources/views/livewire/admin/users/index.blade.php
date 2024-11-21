@@ -125,7 +125,7 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    @if ($viewUserData)
+                                                    @if ($userData)
                                                     <div class="d-flex gap-2 align-items-center">
                                                         <div class="mb-3 form-floating">
                                                             <input wire:model='first_name' type="text"

@@ -73,4 +73,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(PerformanceReportRating::class);
     }
+
+    public function userOldUnits()
+    {
+        return $this->belongsToMany(Unit::class, 'old_user_units')->withTimestamps();
+    }
 }

@@ -6,6 +6,7 @@ use App\Models\Position;
 use App\Models\Rank;
 use App\Models\Unit;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -42,7 +43,9 @@ class Profile extends Component
     public $units = [];
     public $positions = [];
     public $ranks = [];
+    public $recentUnit;
 
+    #[On('profileSave')]
     public function profile()
     {
         $user = auth()->user();
@@ -70,6 +73,7 @@ class Profile extends Component
         $this->ranks = Rank::all();
 
         $this->units = Unit::all();
+
     }
 
 
@@ -97,6 +101,8 @@ class Profile extends Component
             'year_attended'                   =>              ['required', 'date', 'before_or_equal:today'],
         ]);
 
+        $oldUnit = $user->unit->id;
+
         $updateData = [
             'first_name'                          =>              $this->first_name,
             'last_name'                           =>              $this->last_name,
@@ -118,15 +124,18 @@ class Profile extends Component
             'civil_status'                        =>              $this->civil_status,
         ];
 
-
         $user->update($updateData);
 
         $user->save();
+
+        $user->userOldUnits()->attach($oldUnit);
 
         $this->dispatch('toastr', [
             'type'          =>          'success',
             'message'       =>          'Profile updated successfully',
         ]);
+
+        $this->dispatch('profileSave');
     }
 
     public function profilePictureChange()

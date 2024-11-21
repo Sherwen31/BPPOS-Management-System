@@ -188,8 +188,8 @@
                                     <div class="row g-3 mb-2">
                                         <div class="col-md-6">
                                             <label for="nationality" class="form-label">Nationality</label>
-                                            <input type="text" class="form-control" wire:model='nationality' id="nationality"
-                                                placeholder="Nationality">
+                                            <input type="text" class="form-control" wire:model='nationality'
+                                                id="nationality" placeholder="Nationality">
                                             @error('nationality')
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror
@@ -329,6 +329,30 @@
                                         <span wire:loading.remove wire:target='profilePictureChange'><i
                                                 class="far fa-save"></i> Save</span>
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="mb-3">Old Unit Assignments</h4>
+                                <div class="d-flex gap-2 align-items-center flex-wrap">
+                                    @forelse (auth()->user()->userOldUnits as $oldUnit)
+                                    <div>
+                                        <span class="badge text-bg-primary px-3 py-2 text-wrap">
+                                            {{ $oldUnit->unit_assignment }}
+                                        </span> <i class="far fa-arrow-right"></i>
+                                    </div>
+                                    @empty
+                                    <div class="d-flex justify-content-center w-100 align-items-center flex-column">
+                                        <p class="fw-bold mb-2"><i class="far fa-xmark-to-slot fs-2"></i></p>
+                                        <p class="fw-bold">You don't have any old unit assignments yet.</p>
+                                    </div>
+                                    @endforelse
+                                    <span class="badge text-bg-info text-white px-3 py-2 text-wrap">
+                                        {{ $recentUnit }}
+                                    </span>
                                 </div>
                             </div>
                         </div>

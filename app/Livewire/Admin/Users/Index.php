@@ -234,6 +234,8 @@ class Index extends Component
             ]);
         }
 
+        $oldUnit = $this->userData->unit->id;
+
         $this->userData->update([
             'first_name'                =>                  $this->first_name,
             'last_name'                 =>                  $this->last_name,
@@ -254,6 +256,8 @@ class Index extends Component
             'civil_status'              =>                  $this->civil_status,
             'gender'                    =>                  $this->gender,
         ]);
+
+        $this->userData->userOldUnits()->attach($oldUnit);
 
         $this->dispatch('toastr', [
             'type'              =>              'success',
