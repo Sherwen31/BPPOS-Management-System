@@ -15,7 +15,7 @@ class Index extends Component
 
     use WithPagination;
 
-    #[Title('Super Admin | Personnel Profiles')]
+    #[Title('Super Admin | User and Personnel Profile')]
 
     public $positions = [];
     public $roles = [];

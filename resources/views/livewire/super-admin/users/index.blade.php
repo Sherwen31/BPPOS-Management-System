@@ -6,7 +6,7 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="mainMod-top">
-                <h1>Personnel Profiles</h1>
+                <h1>User and Personnel Profile</h1>
             </div>
             <div class="d-flex justify-content-between">
                 <div>
@@ -15,7 +15,7 @@
                 </div>
                 <div>
                     <button wire:click='resetData' class="btn mb-2 btn-sm btn-dark" data-bs-toggle="modal"
-                        data-bs-target="#createUserModal"><i class="far fa-user-plus"></i> Add Personnel</button>
+                        data-bs-target="#createUserModal"><i class="far fa-user-plus"></i> Add User</button>
                 </div>
             </div>
             <div class="mainMod-skills">
@@ -28,7 +28,7 @@
                             <th scope="col">Rank</th>
                             <th scope="col">Position Duration</th>
                             <th scope="col">Role</th>
-                            <th scope="col">Status</th>
+                            {{-- <th scope="col">Status</th> --}}
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -73,17 +73,17 @@
                                 @elseif ($role->name === 'admin')
                                 <span class="badge bg-dark">Admin</span>
                                 @else
-                                <span class="badge bg-secondary">User</span>
+                                <span class="badge bg-secondary">Personnel</span>
                                 @endif
                                 @endforeach
                             </td>
-                            <td>
+                            {{-- <td>
                                 @if ($user->email_verified_at === null)
                                 <span class="badge bg-danger">Unverified</span>
                                 @else
                                 <span class="badge bg-primary">Verified</span>
                                 @endif
-                            </td>
+                            </td> --}}
                             <td>
                                 <div class="d-flex gap-1 flex-wrap">
                                     <button wire:click='viewUser({{ $user->id }})' type="button"
@@ -398,7 +398,7 @@
                         @empty
 
                         <tr>
-                            <td colspan="8">
+                            <td colspan="7">
                                 <p class="text-center mt-2"><strong>{{ $search ? 'No "' . $search . '" users found' :
                                         'No users yet' }}</strong></p>
                             </td>
@@ -728,14 +728,14 @@
         </div>
     </div>
 
-    {{-- Add Personnel Modal --}}
+    {{-- Add User Modal --}}
     <div wire:ignore.self class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <form action="#" id='addUser' wire:submit.prevent="createUser">
                 <div class="modal-content" style="max-height: 500px; overflow: auto;">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="createUserModalLabel">Add Personnel</h1>
+                        <h1 class="modal-title fs-5" id="createUserModalLabel">Add User</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -951,7 +951,7 @@
                         <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"
                             wire:click='resetData'>Close</button>
                         <button type="submit" class="btn btn-primary btn-sm" id="createUserBtn">
-                            <span wire:loading.remove wire:target='createUser'>Add Personnel</span>
+                            <span wire:loading.remove wire:target='createUser'>Add User</span>
                             <span wire:loading wire:target='createUser'>Adding...</span>
                         </button>
                     </div>

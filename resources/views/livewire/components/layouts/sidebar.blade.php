@@ -34,8 +34,8 @@
                 <a wire:navigate href="/super-admin/user-account-management"
                     class="{{ 'super-admin/user-account-management' === request()->path() ? 'active_sidebar' : '' }}">
                     <i class="fas fa-users"></i>
-                    <span class="nav-item">Personnel Profiles</span>
-                    <span class="sideNavToolTip">Personnel Profiles</span>
+                    <span class="nav-item">User and Personnel Profile</span>
+                    <span class="sideNavToolTip">User and Personnel Profile</span>
                 </a>
             </li>
             <li class="li">
