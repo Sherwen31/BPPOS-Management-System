@@ -232,7 +232,7 @@ class MyEvaluationScore extends Component
     public function mount($date)
     {
         $user = auth()->user();
-        $user = User::where('id', $user->id)->where('police_id', $user->police_id)->first();
+        $user = User::with(['evaluationRatings', 'evaluationAttachments'])->where('id', $user->id)->where('police_id', $user->police_id)->first();
 
         $this->police_id = $user->police_id;
 

@@ -17,22 +17,22 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th colspan="6">1. Ratee's Name (Last Name, Given Name, Middle Name)<br>
+                        <th colspan="8">1. Ratee's Name (Last Name, Given Name, Middle Name)<br>
                             <span class="p-2">{{ $last_name }}, {{ $first_name }} {{ $middle_name }}</span>
                         </th>
-                        <th colspan="5">2. Rank:<br> <span style="margin-left: 20px;">{{ $rank }}</span></th>
+                        <th colspan="8">2. Rank:<br> <span style="margin-left: 20px;">{{ $rank }}</span></th>
                     </tr>
                     <tr>
-                        <th colspan="6">
+                        <th colspan="8">
                             3. Position / Designation: <br>
                             <div class="p-2">{{ $position }}</div>
                         </th>
 
-                        <th colspan="5">4. Unit Assignment / Station / District <br><span style="margin-left: 20px;">{{
+                        <th colspan="8">4. Unit Assignment / Station / District <br><span style="margin-left: 20px;">{{
                                 $unit_assign }}</span></th>
                     </tr>
                     <tr>
-                        <th colspan="11">
+                        <th colspan="16">
                             5. Years and Months in Current Position: <br>
                             <div class="p-2">
                                 @php
@@ -54,6 +54,7 @@
                         <th class="text-center" rowspan="2">Parts</th>
                         <th class="text-center" rowspan="2">Dimensions</th>
                         <th class="text-center" rowspan="2" colspan="4">Performance Indications</th>
+                        <th class="text-center" rowspan="2" colspan="5">Uploaded Attachments</th>
                     </tr>
                     <tr class="table-light">
                         <th class="text-center">Point Allocation</th>
@@ -71,6 +72,17 @@
                         <td class="text-center" rowspan="4">{{ $evaluation->title }} ({{ $evaluation->sub_title }} points)</td>
                         @foreach ($evaluation->evaluationItems as $item)
                         <td colspan="4">{{ $item->performance_indications }}</td>
+                        @php
+                            $uploadedAttachment = $item->evaluationAttachments->where('evaluation_item_id', $item->id)->where('user_id', Auth::user()->id)->first();
+                        @endphp
+                        <td colspan="5" align="center">
+                            @if ($uploadedAttachment && $uploadedAttachment->attachment !== null)
+                            <a target="_blank" href="{{ Storage::url($uploadedAttachment->attachment) }}"><i class="far fa-eye"
+                                class="btn btn-sm btn-primary"></i> View</a>
+                            @else
+                            No attachment
+                            @endif
+                        </td>
                         <td class="text-center">{{ $item->point_allocation }}</td>
                         <td class="text-center">x</td>
                         @forelse ($item->evaluationRatings->where('user_id', $user->id) as $rating)
@@ -91,6 +103,17 @@
                         <td class="text-center" rowspan="8">{{ $evaluation->title }} ({{ $evaluation->sub_title }} points)</td>
                         @foreach ($evaluation->evaluationItems as $item)
                         <td colspan="4">{{ $item->performance_indications }}</td>
+                        @php
+                            $uploadedAttachment = $item->evaluationAttachments->where('evaluation_item_id', $item->id)->where('user_id', Auth::user()->id)->first();
+                        @endphp
+                        <td colspan="5" align="center">
+                            @if ($uploadedAttachment && $uploadedAttachment->attachment !== null)
+                            <a target="_blank" href="{{ Storage::url($uploadedAttachment->attachment) }}"><i class="far fa-eye"
+                                class="btn btn-sm btn-primary"></i> View</a>
+                            @else
+                            No attachment
+                            @endif
+                        </td>
                         <td class="text-center">{{ $item->point_allocation }}</td>
                         <td class="text-center">x</td>
                         @forelse ($item->evaluationRatings->where('user_id', $user->id) as $rating)
@@ -110,6 +133,17 @@
                         <td class="text-center" rowspan="6">{{ $evaluation->title }} ({{ $evaluation->sub_title }} points)</td>
                         @foreach ($evaluation->evaluationItems as $item)
                         <td colspan="4">{{ $item->performance_indications }}</td>
+                        @php
+                            $uploadedAttachment = $item->evaluationAttachments->where('evaluation_item_id', $item->id)->where('user_id', Auth::user()->id)->first();
+                        @endphp
+                        <td colspan="5" align="center">
+                            @if ($uploadedAttachment && $uploadedAttachment->attachment !== null)
+                            <a target="_blank" href="{{ Storage::url($uploadedAttachment->attachment) }}"><i class="far fa-eye"
+                                class="btn btn-sm btn-primary"></i> View</a>
+                            @else
+                            No attachment
+                            @endif
+                        </td>
                         <td class="text-center">{{ $item->point_allocation }}</td>
                         <td class="text-center">x</td>
                         @forelse ($item->evaluationRatings->where('user_id', $user->id) as $rating)
@@ -129,6 +163,17 @@
                         <td class="text-center" rowspan="5">{{ $evaluation->title }} ({{ $evaluation->sub_title }} points)</td>
                         @foreach ($evaluation->evaluationItems as $item)
                         <td colspan="4">{{ $item->performance_indications }}</td>
+                        @php
+                            $uploadedAttachment = $item->evaluationAttachments->where('evaluation_item_id', $item->id)->where('user_id', Auth::user()->id)->first();
+                        @endphp
+                        <td colspan="5" align="center">
+                            @if ($uploadedAttachment && $uploadedAttachment->attachment !== null)
+                            <a target="_blank" href="{{ Storage::url($uploadedAttachment->attachment) }}"><i class="far fa-eye"
+                                class="btn btn-sm btn-primary"></i> View</a>
+                            @else
+                            No attachment
+                            @endif
+                        </td>
                         <td class="text-center">{{ $item->point_allocation }}</td>
                         <td class="text-center">x</td>
                         @forelse ($item->evaluationRatings->where('user_id', $user->id) as $rating)
@@ -148,6 +193,17 @@
                         <td class="text-center" rowspan="3">{{ $evaluation->title }} ({{ $evaluation->sub_title }} points)</td>
                         @foreach ($evaluation->evaluationItems as $item)
                         <td colspan="4">{{ $item->performance_indications }}</td>
+                        @php
+                            $uploadedAttachment = $item->evaluationAttachments->where('evaluation_item_id', $item->id)->where('user_id', Auth::user()->id)->first();
+                        @endphp
+                        <td colspan="5" align="center">
+                            @if ($uploadedAttachment && $uploadedAttachment->attachment !== null)
+                            <a target="_blank" href="{{ Storage::url($uploadedAttachment->attachment) }}"><i class="far fa-eye"
+                                class="btn btn-sm btn-primary"></i> View</a>
+                            @else
+                            No attachment
+                            @endif
+                        </td>
                         <td class="text-center">{{ $item->point_allocation }}</td>
                         <td class="text-center">x</td>
                         @forelse ($item->evaluationRatings->where('user_id', $user->id) as $rating)
@@ -171,7 +227,18 @@
                         <td class="text-center"><strong>{{ $item->performance_indications }}</strong></td>
                         <td class="text-center"><strong>X</strong></td>
                         <td class="text-center"><strong>{{ $item->performance_indications }}</strong></td>
-                        <td class="text-center"><strong>X</strong></td>
+                        <td class="text-center"><strong>X</strong></td>d</td>
+                        <td colspan="5" rowspan="6" class="text-center align-middle">
+                            @php
+                                $uploadedAttachment = $item->evaluationAttachments->where('evaluation_item_id', $item->id)->where('user_id', Auth::user()->id)->first();
+                            @endphp
+                            @if ($uploadedAttachment && $uploadedAttachment->attachment !== null)
+                            <a target="_blank" href="{{ Storage::url($uploadedAttachment->attachment) }}"><i class="far fa-eye"
+                                class="btn btn-sm btn-primary"></i> View</a>
+                            @else
+                            No attachment
+                            @endif
+                        </td>
                         <td rowspan="6" class="text-center align-middle">{{ $item->point_allocation }}</td>
                         <td rowspan="6" class="text-center align-middle">X</td>
                         @forelse ($item->evaluationRatings->where('user_id', $user->id) as $rating)
@@ -216,9 +283,11 @@
                         <td class="text-center">X</td>
                     </tr>
                     <tr>
-                        <td colspan="6">
+                        <td colspan="10">
                             <div style="margin-left: 45%;">Nr of Traits with check marks</div>
                         </td>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -227,8 +296,8 @@
                     </tr>
                     @endforeach
                     <tr>
-                        <td colspan="9">
-                            <div style="margin-left: 30%;">TOTAL WEIGHTED SCORE (TWS)</div>
+                        <td colspan="15">
+                            <div style="margin-left: 24%;">TOTAL WEIGHTED SCORE (TWS)</div>
                         </td>
                         <td rowspan="3" colspan="2" class="vAlign">
                             {{ $total_weight_score }} <br> {{ number_format($user_total_points, 1) }}
@@ -250,40 +319,40 @@
 
                     </tr>
                     <tr>
-                        <td colspan="9">
-                            <div style="margin-left: 30%;">NUMERICAL PERFORMANCE RATING (NPR) = TWS / 5</div>
+                        <td colspan="15">
+                            <div style="margin-left: 24%;">NUMERICAL PERFORMANCE RATING (NPR) = TWS / 5</div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="9">
-                            <div style="margin-left: 30%;">EQUIVALENT ADJECTIVAL PERFORMANCE RATING (APR) (Pls refer to
+                        <td colspan="15">
+                            <div style="margin-left: 24%;">EQUIVALENT ADJECTIVAL PERFORMANCE RATING (APR) (Pls refer to
                                 NPR-APR Table)</div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="11">Rater's Assessment of Ratee: I certify that this report represents my best
+                        <td colspan="16">Rater's Assessment of Ratee: I certify that this report represents my best
                             judgment. [X] I DP : : I DO NOT recommend this personnel be granted (a) promotion (b)
                             designation to higher position (c) relief<br>
                             This personnel needs Improvements on the following:
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="11">Significant / Critical Incident(s)</td>
+                        <td colspan="16">Significant / Critical Incident(s)</td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="vAlign fw-bold">Acknowledged:
+                        <td colspan="4" class="vAlign fw-bold">Acknowledged:
                             <br />
                             <br />
                             {{ $significant->userRater->rank->rank_name }}
                             <br />{{ $significant->userRater->position->position_name }} {{ $significant->userRater->unit->unit_assignment }}
                         </td>
-                        <td class="vAlign fw-bold" colspan="4">Conformed:
+                        <td class="vAlign fw-bold" colspan="7">Conformed:
                             <br />
                             <br />
                             {{ $significant->user->rank->rank_name }}
                             <br />{{ $significant->user->position->position_name }} / {{ $significant->user->unit->unit_assignment }}
                         </td>
-                        <td class="vAlign fw-bold" colspan="4">Attested:
+                        <td class="vAlign fw-bold" colspan="5">Attested:
                             <br />
                             <br />
                             {{ $significant->userReviewer->rank->rank_name }}, {{ $significant->userReviewer->position->position_name }}
@@ -291,9 +360,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="vAlign fw-bold" colspan="3">RATER</td>
-                        <td class="vAlign fw-bold" colspan="4">RATEE</td>
-                        <td class="vAlign fw-bold" colspan="4">REVIEWER</td>
+                        <td class="vAlign fw-bold" colspan="4">RATER</td>
+                        <td class="vAlign fw-bold" colspan="7">RATEE</td>
+                        <td class="vAlign fw-bold" colspan="5">REVIEWER</td>
                     </tr>
                 </tbody>
             </table>

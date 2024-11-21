@@ -64,6 +64,11 @@ class User extends Authenticatable
         return $this->hasMany(EvaluationRating::class)->chaperone();
     }
 
+    public function evaluationAttachments()
+    {
+        return $this->hasMany(EvaluationAttachment::class)->chaperone();
+    }
+
     public function performanceReportRatings()
     {
         return $this->hasMany(PerformanceReportRating::class);
