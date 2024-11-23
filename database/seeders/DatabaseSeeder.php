@@ -14,12 +14,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
         $this->call([
             PositionSeeder::class,
             RankSeeder::class,
             UnitAssignmentSeeder::class,
             RolesAndPermissionsSeeder::class,
         ]);
+
+        $roles = ['admin', 'user'];
+        foreach ($roles as $role) {
+            \Spatie\Permission\Models\Role::firstOrCreate(['name' => $role]);
+        }
+
+        User::factory(1000)->create()->each(function ($user) use ($roles) {
+            $role = $roles[array_rand($roles)];
+            $user->assignRole($role);
+        });
     }
 }

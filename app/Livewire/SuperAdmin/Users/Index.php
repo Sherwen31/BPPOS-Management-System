@@ -7,6 +7,7 @@ use App\Models\Rank;
 use App\Models\Unit;
 use App\Models\User;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -41,8 +42,11 @@ class Index extends Component
     public $password;
     public $email;
     public $userData;
-    public $search = '';
     public $viewUserData;
+    public $search = '';
+
+    #[Url(except: 10, history: true, as: 'sw')]
+    public $show = 10;
 
     public function listings()
     {
@@ -65,7 +69,7 @@ class Index extends Component
                     });
             })
             ->where('id', '!=', auth()->user()->id)
-            ->orderBy('id', 'asc')->paginate(10);
+            ->orderBy('id', 'asc')->paginate($this->show);
 
         $this->positions = Position::all();
 
