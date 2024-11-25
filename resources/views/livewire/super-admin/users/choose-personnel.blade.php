@@ -1,14 +1,17 @@
 <div>
-    <div wire:ignore.self class="modal fade" id="choosePersonnel" tabindex="-1" aria-labelledby="choosePersonnelLabel"
-        data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="choosePersonnel" tabindex="-1" aria-labelledby="choosePersonnelLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="choosePersonnelLabel">Choose Personnel</h1>
+                    @if($units->count() === 0)
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    @endif
                 </div>
                 <div class="modal-body">
                     <div class="card bg-transparent">
-                        <h4 class="mt-3">Admins</h4>
+                        <h4 class="mt-3">Admins ({{ $users->count() }})</h4>
                         <hr>
                         <table class="table">
                             <thead></thead>
@@ -31,10 +34,10 @@
                                         No roles selected
                                         @endforelse
                                     </td>
-                                    <td><input type="checkbox" checked wire:click='moveToUser({{ $user->id }})'></td>
+                                    <td><input type="checkbox" wire:loading.attr='disabled' checked wire:click='moveToUser({{ $user->id }})'></td>
                                 </tr>
                                 @empty
-                                <tr>
+                                <tr class="text-center">
                                     <td colspan="4">No admins available</td>
                                 </tr>
                                 @endforelse
@@ -45,7 +48,7 @@
                         @if($units->count() > 0)
                         <h5>Total units not assigned: {{ $units->count() }}</h5>
                         @endif
-                        <h4 class="mt-3">Personnels</h4>
+                        <h4 class="mt-3">Personnels ({{ $personnels->count() }})</h4>
                         <hr>
                         <table class="table">
                             <thead>
@@ -70,18 +73,24 @@
                                     </td>
                                     <td align="center">
                                         <div class="d-flex gap-3">
-                                            <input type="checkbox" wire:model.live='selected'
-                                                value="{{ $personnel->id }}">
+                                            <input type="checkbox" wire:model.live='selected' wire:loading.attr='disabled' wire:target='selected' value="{{ $personnel->id }}">
                                             <div>
-                                                <select wire:model='selected_unit.{{ $personnel->id }}'
-                                                    class="form-select">
+                                                <select wire:model.live='selected_unit.{{ $personnel->id }}' class="form-select">
                                                     <option selected hidden>Select Unit</option>
                                                     <option disabled>Select Unit</option>
                                                     @forelse ($units as $unit)
-                                                    <option value="{{ $unit->id }}">{{ $unit->unit_assignment }}
+                                                    <option wire:key='{{ $unit->id }}' @if(in_array($unit->id, $selected_unit) )
+                                                        disabled
+                                                        hidden
+                                                        @else
+                                                        value="{{ $unit->id }}"
+                                                        @endif
+                                                        wire:loading.attr='disabled'
+                                                        wire:target='selected_unit.{{ $personnel->id }}'
+                                                        >{{ $unit->unit_assignment }}
                                                     </option>
                                                     @empty
-                                                    No units available
+                                                    <option disabled>No units available</option>
                                                     @endforelse
                                                 </select>
                                                 @error('selected_unit.' . $personnel->id)
@@ -95,19 +104,28 @@
                                 </tr>
                                 @empty
 
-                                <tr>
-                                    <td colspan="3">No personnels available</td>
+                                <tr class="text-center">
+                                    <td colspan="4">No personnels available</td>
                                 </tr>
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary btn-sm" wire:click='loadMorePage'><span wire:loading.remove wire:target='loadMorePage'>Load More (20)</span><span wire:loading wire:target='loadMorePage' class="spinner-border spinner-border-sm"></span></button>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
+                    @if($units->count() === 0)
+                    <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                    @endif
                     <button type="button" class="btn btn-primary btn-sm" @if (count($selected)> 0)
                         wire:click='confirmChanges'
-                        @else disabled @endif>Confirm
-                        changes</button>
+                        @else disabled @endif wire:loading.attr='disabled'>
+                        <span wire:loading.remove wire:target='confirmChanges'>Confirm
+                            changes</span>
+                        <span wire:loading wire:target='confirmChanges'><span class="spinner-border spinner-border-sm"></span> Confirming...</span>
+                    </button>
                 </div>
             </div>
         </div>

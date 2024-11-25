@@ -7,6 +7,7 @@ use App\Models\Rank;
 use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Support\Carbon;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -45,6 +46,7 @@ class Index extends Component
     public $search = '';
     public $viewUserData;
 
+    #[On('refreshDataUnit')]
     public function listings()
     {
         $users = User::with(['position', 'rank', 'unit', 'roles'])

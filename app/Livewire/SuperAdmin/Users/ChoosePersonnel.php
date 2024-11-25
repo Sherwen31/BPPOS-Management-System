@@ -12,6 +12,8 @@ class ChoosePersonnel extends Component
 
     public $selected = [];
     public $selected_unit = [];
+    public $loadMore = 20;
+    public $loadTotal = 50;
 
     public function listings()
     {
@@ -22,15 +24,21 @@ class ChoosePersonnel extends Component
 
         $personnels = User::query()->with(['roles', 'position', 'unit', 'rank'])->whereHas('roles', function ($query) {
             $query->where('name', 'user');
-        })->where('id', '!=', auth()->user()->id)->get();
+        })->where('id', '!=', auth()->user()->id)->take($this->loadTotal)->get();
 
         $units = Unit::query()->with(['users'])->whereDoesntHave('users', function ($query) {
             $query->whereHas('roles', function ($subQuery) {
                 $subQuery->where('name', 'admin');
             });
-        })->where('id', '!=', auth()->user()->id)->get();
+        })
+            ->get();
 
         return compact('users', 'personnels', 'units');
+    }
+
+    public function loadMorePage()
+    {
+        $this->loadTotal += $this->loadMore;
     }
 
     public function moveToUser($id)
@@ -58,6 +66,7 @@ class ChoosePersonnel extends Component
         $users = User::with(['roles'])->whereIn('id', $this->selected)->get();
 
         foreach ($users as $user) {
+            $userOldUnit = $user->unit->id;
             if (!$user->hasRole('admin')) {
                 $this->validate([
                     'selected_unit.' . $user->id => [
@@ -74,13 +83,20 @@ class ChoosePersonnel extends Component
 
             $user->syncRoles('admin');
 
+            $user->userOldUnits()->attach($userOldUnit);
+
             $user->save();
         }
+
 
         $this->dispatch('toastr', [
             'type'          =>              'success',
             'message'       =>              'Selected users are successfully converted to a admin personnel and assigned to the selected unit',
         ]);
+
+        $this->dispatch('closeModal');
+        $this->dispatch('refreshData');
+        $this->reset();
     }
 
     public function render()

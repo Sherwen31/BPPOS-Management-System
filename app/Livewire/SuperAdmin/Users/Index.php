@@ -6,6 +6,7 @@ use App\Models\Position;
 use App\Models\Rank;
 use App\Models\Unit;
 use App\Models\User;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -45,9 +46,10 @@ class Index extends Component
     public $viewUserData;
     public $search = '';
 
-    #[Url(except: 10, history: true, as: 'sw')]
+    #[Url(except: 10, history: true, as: 'show_per_page')]
     public $show = 10;
 
+    #[On('refreshData')]
     public function listings()
     {
         $users = User::with(['position', 'rank', 'unit', 'roles'])->whereDoesntHave('roles', function ($query) {

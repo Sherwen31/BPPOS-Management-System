@@ -30,7 +30,7 @@
                 </div>
                <div class="d-flex gap-2">
                 <div>
-                    <button class="btn mb-2 btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#choosePersonnel"><i class="far fa-hand-pointer"></i> Choose Personnel</button>
+                    <button type="button" class="btn mb-2 btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#choosePersonnel"><i class="far fa-hand-pointer"></i> Choose User/Personnel</button>
                 </div>
                 <div>
                     <button wire:click='resetData' class="btn mb-2 btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#createUserModal"><i class="far fa-user-plus"></i> Add User</button>
@@ -883,6 +883,7 @@
             @this.on('closeModal', (data) => {
                 const eventData = Array.isArray(data) ? data[0] : data;
                 $('#createUserModal').modal('hide');
+                $('#choosePersonnel').modal('hide');
                 $(`#manageUserModal${eventData.userId}`).modal('hide');
 
                 document.getElementById('createUserModal').classList.remove('show');
