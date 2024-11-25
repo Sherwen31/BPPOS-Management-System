@@ -1,4 +1,5 @@
 <div>
+    @livewire('super-admin.users.choose-personnel')
     <div class="containerMod">
         @livewire('components.layouts.sidebar')
         <section class="mainMod">
@@ -27,9 +28,14 @@
                         </select>
                     </div>
                 </div>
+               <div class="d-flex gap-2">
+                <div>
+                    <button class="btn mb-2 btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#choosePersonnel"><i class="far fa-hand-pointer"></i> Choose Personnel</button>
+                </div>
                 <div>
                     <button wire:click='resetData' class="btn mb-2 btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#createUserModal"><i class="far fa-user-plus"></i> Add User</button>
                 </div>
+               </div>
             </div>
             <div class="mainMod-skills">
                 <table class="table">

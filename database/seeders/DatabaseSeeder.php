@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
         ]);
 
-        $roles = ['admin', 'user'];
+        $roles = ['admin', 'user', 'super_admin'];
         foreach ($roles as $role) {
             \Spatie\Permission\Models\Role::firstOrCreate(['name' => $role]);
         }
