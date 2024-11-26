@@ -2,6 +2,7 @@
 
 namespace App\Livewire\SuperAdmin\ManageEvaluationScore;
 
+use App\Models\Evaluation;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Livewire\Attributes\Title;

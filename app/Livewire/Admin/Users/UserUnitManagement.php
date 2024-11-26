@@ -20,6 +20,7 @@ class UserUnitManagement extends Component
                 $query->where('name', 'user');
             })
             ->where('unit_id', '!=', $user->unit_id)
+            ->orderBy('first_name', 'asc')
             ->take($this->loadTotal)
             ->get();
 

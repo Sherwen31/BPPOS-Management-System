@@ -4,10 +4,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="userUnitManagementLabel">Choose Personnel</h1>
-                    @if($personnels->count() === 0)
+                    {{-- @if($personnels->count() === 0) --}}
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    @endif
+                    {{-- @endif --}}
                 </div>
                 <div class="modal-body">
                     <div class="card bg-transparent">
@@ -25,7 +25,7 @@
                             <tbody>
                                 @forelse ($personnels as $personnel)
                                 <tr wire:key='{{ $personnel->id }}'>
-                                    <td>{{ $personnel->fist_name }} {{ $personnel->last_name }}</td>
+                                    <td>{{ $personnel->first_name }} {{ $personnel->last_name }}</td>
                                     <td>{{ $personnel->unit->unit_assignment }}</td>
                                     <td>
                                         @forelse ($personnel->roles as $role)
@@ -55,9 +55,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    @if($personnels->count() === 0)
+                    {{-- @if($personnels->count() === 0) --}}
                     <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal" aria-label="Close">Close</button>
-                    @endif
+                    {{-- @endif --}}
                     <button type="button" class="btn btn-primary btn-sm" @if (count($selected)> 0)
                         wire:click='confirmChanges'
                         @else disabled @endif wire:loading.attr='disabled'>

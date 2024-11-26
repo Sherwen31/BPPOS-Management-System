@@ -15,18 +15,21 @@ class PrintData extends Component
 
     public function mount($dateRange, $year)
     {
-        $this->users = User::with(['evaluationRatings'])->whereHas('evaluationRatings', function ($query) use ($dateRange, $year) {
-            if ($dateRange == 'first_half') {
-                $query->whereMonth('created_at', '>=', 1)
-                    ->whereMonth('created_at', '<=', 6);
-            } elseif ($dateRange == 'second_half') {
-                $query->whereMonth('created_at', '>=', 7)
-                    ->whereMonth('created_at', '<=', 12);
-            }
+        $this->users = User::with(['evaluationRatings'])
+            ->whereHas('evaluationRatings', function ($query) use ($dateRange, $year) {
+                if ($dateRange !== null && $year !== null) {
 
-            $query->whereYear('created_at', $year);
-            $query->orderBy('weight_score', 'desc');
-        })
+                    $query->whereYear('created_at', $year);
+
+                    if ($dateRange == 'first_half') {
+                        $query->whereMonth('created_at', '>=', 1)
+                            ->whereMonth('created_at', '<=', 6);
+                    } elseif ($dateRange == 'second_half') {
+                        $query->whereMonth('created_at', '>=', 7)
+                            ->whereMonth('created_at', '<=', 12);
+                    }
+                }
+            })
             ->where(function ($query) {
                 if (auth()->user()->hasRole('super_admin')) {
                     $query->whereDoesntHave('roles', function ($query) {
@@ -39,7 +42,20 @@ class PrintData extends Component
                 }
             })
             ->where('id', '!=', auth()->user()->id)
-            ->where('unit_id', '=', auth()->user()->unit_id)
+            ->withSum(['evaluationRatings as total_weight_score' => function ($query)  use ($dateRange, $year) {
+                if ($dateRange !== null && $year !== null) {
+                    $query->whereYear('created_at', $year);
+
+                    if ($dateRange == 'first_half') {
+                        $query->whereMonth('created_at', '>=', 1)
+                            ->whereMonth('created_at', '<=', 6);
+                    } elseif ($dateRange == 'second_half') {
+                        $query->whereMonth('created_at', '>=', 7)
+                            ->whereMonth('created_at', '<=', 12);
+                    }
+                }
+            }], 'weight_score')
+            ->orderByDesc('total_weight_score')
             ->get();
     }
     public function render()

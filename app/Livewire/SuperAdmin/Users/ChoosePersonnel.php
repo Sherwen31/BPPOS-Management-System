@@ -18,19 +18,32 @@ class ChoosePersonnel extends Component
     public function listings()
     {
 
-        $users = User::query()->with(['roles', 'position', 'unit', 'rank'])->whereHas('roles', function ($query) {
-            $query->where('name', 'admin');
-        })->where('id', '!=', auth()->user()->id)->get();
+        $users = User::query()
+            ->with(['roles', 'position', 'unit', 'rank'])
+            ->whereHas('roles', function ($query) {
+                $query->where('name', 'admin');
+            })
+            ->where('id', '!=', auth()->user()->id)
+            ->orderBy('first_name', 'asc')
+            ->get();
 
-        $personnels = User::query()->with(['roles', 'position', 'unit', 'rank'])->whereHas('roles', function ($query) {
-            $query->where('name', 'user');
-        })->where('id', '!=', auth()->user()->id)->take($this->loadTotal)->get();
+        $personnels = User::query()
+            ->with(['roles', 'position', 'unit', 'rank'])
+            ->whereHas('roles', function ($query) {
+                $query->where('name', 'user');
+            })
+            ->where('id', '!=', auth()->user()->id)
+            ->orderBy('first_name', 'asc')
+            ->take($this->loadTotal)
+            ->get();
 
-        $units = Unit::query()->with(['users'])->whereDoesntHave('users', function ($query) {
-            $query->whereHas('roles', function ($subQuery) {
-                $subQuery->where('name', 'admin');
-            });
-        })
+        $units = Unit::query()
+            ->with(['users'])
+            ->whereDoesntHave('users', function ($query) {
+                $query->whereHas('roles', function ($subQuery) {
+                    $subQuery->where('name', 'admin');
+                });
+            })
             ->get();
 
         return compact('users', 'personnels', 'units');

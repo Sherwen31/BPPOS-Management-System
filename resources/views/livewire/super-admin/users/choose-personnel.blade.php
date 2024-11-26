@@ -25,7 +25,7 @@
                             <tbody>
                                 @forelse ($users as $user)
                                 <tr wire:key='{{ $user->id }}'>
-                                    <td>{{ $user->fist_name }} {{ $user->last_name }}</td>
+                                    <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                                     <td>{{ $user->unit->unit_assignment }}</td>
                                     <td>
                                         @forelse ($user->roles as $role)
@@ -62,7 +62,7 @@
                             <tbody>
                                 @forelse ($personnels as $personnel)
                                 <tr wire:key='{{ $personnel->id }}'>
-                                    <td>{{ $personnel->fist_name }} {{ $personnel->last_name }}</td>
+                                    <td>{{ $personnel->first_name }} {{ $personnel->last_name }}</td>
                                     <td>{{ $personnel->unit->unit_assignment }}</td>
                                     <td>
                                         @forelse ($personnel->roles as $role)
