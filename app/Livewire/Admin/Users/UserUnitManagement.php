@@ -8,6 +8,8 @@ use Livewire\Component;
 class UserUnitManagement extends Component
 {
     public $selected = [];
+    public $loadTotal = 50;
+    public $loadMore = 20;
 
     public function listings()
     {
@@ -18,6 +20,7 @@ class UserUnitManagement extends Component
                 $query->where('name', 'user');
             })
             ->where('unit_id', '!=', $user->unit_id)
+            ->take($this->loadTotal)
             ->get();
 
         return compact('personnels');
@@ -51,6 +54,11 @@ class UserUnitManagement extends Component
         $this->dispatch('closeModal');
 
         $this->dispatch('refreshDataUnit');
+    }
+
+    public function loadMorePage()
+    {
+        $this->loadTotal += $this->loadMore;
     }
 
 
