@@ -24,30 +24,26 @@
                                     <table class="table table-bordered table-hover">
                                         <thead class="table-dark">
                                             <tr>
-                                                <th>Numerical Rating</th>
-                                                <th>Number of Traits</th>
+                                                <th>Numerical Performance Rating (NPR)</th>
+                                                <th>Adjectival Performance Rating (APR)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>5</td>
-                                                <td>Nine (9) to Ten (10)</td>
+                                                <td>91-100</td>
+                                                <td>Outstanding <strong>(OS)</strong></td>
                                             </tr>
                                             <tr>
-                                                <td>4</td>
-                                                <td>Seven (7) to Eight (8)</td>
+                                                <td>81-90.99</td>
+                                                <td>Very Satisfactory <strong>(VS)</strong></td>
                                             </tr>
                                             <tr>
-                                                <td>3</td>
-                                                <td>Five (5) to Six (6)</td>
+                                                <td>71-80.99</td>
+                                                <td>Satisfactory <strong>(SF)</strong></td>
                                             </tr>
                                             <tr>
-                                                <td>2</td>
-                                                <td>Three (3) to Four (4)</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>One (1) to Two (2)</td>
+                                                <td>70.99-BELOW</td>
+                                                <td>Poor <strong>(PR)</strong></td>
                                             </tr>
                                         </tbody>
                                     </table>
