@@ -10,6 +10,8 @@ class UserUnitManagement extends Component
     public $selected = [];
     public $loadTotal = 50;
     public $loadMore = 20;
+    public $searchPersonnel = '';
+    public $filterPersonnel = 'asc';
 
     public function listings()
     {
@@ -20,7 +22,17 @@ class UserUnitManagement extends Component
                 $query->where('name', 'user');
             })
             ->where('unit_id', '!=', $user->unit_id)
-            ->orderBy('first_name', 'asc')
+            ->where(function ($query) {
+                $query->where('first_name', 'like', '%' . $this->searchPersonnel . '%')
+                    ->orWhere('last_name', 'like', '%' . $this->searchPersonnel . '%')
+                    ->orWhereHas('unit', function ($subQuery) {
+                        $subQuery->where('unit_assignment', 'like', '%' . $this->searchPersonnel . '%');
+                    })
+                    ->orWhereHas('roles', function ($subQuery) {
+                        $subQuery->where('name', 'like', '%' . $this->searchPersonnel . '%');
+                    });
+            })
+            ->orderBy('first_name', $this->filterPersonnel)
             ->take($this->loadTotal)
             ->get();
 
