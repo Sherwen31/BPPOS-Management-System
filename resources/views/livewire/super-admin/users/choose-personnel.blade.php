@@ -11,7 +11,18 @@
                 </div>
                 <div class="modal-body">
                     <div class="card bg-transparent">
-                        <h4 class="mt-3">Admins ({{ $users->count() }})</h4>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="mt-3">Admins ({{ $users->count() }})</h4>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <select class="form-select" wire:model.live.debounce.200ms='filterAdmin'>
+                                    <option value="asc">Filter by ascending</option>
+                                    <option value="desc">Filter by descending</option>
+                                </select>
+                                <input type="search" wire:model.live.200ms="searchAdmin" placeholder="Search admin..." class="form-control">
+                            </div>
+                        </div>
                         <hr>
                         <table class="table">
                             <thead></thead>
@@ -48,7 +59,18 @@
                         @if($units->count() > 0)
                         <h5>Total units not assigned: {{ $units->count() }}</h5>
                         @endif
-                        <h4 class="mt-3">Personnels ({{ $personnels->count() }})</h4>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="mt-3">Personnels ({{ $personnels->count() }})</h4>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <select class="form-select" wire:model.live.debounce.200ms='filterPersonnel'>
+                                    <option value="asc">Filter by ascending</option>
+                                    <option value="desc">Filter by descending</option>
+                                </select>
+                                <input type="search" wire:model.live.200ms="searchPersonnel" placeholder="Search personnel..." class="form-control">
+                            </div>
+                        </div>
                         <hr>
                         <table class="table">
                             <thead>

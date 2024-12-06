@@ -14,6 +14,10 @@ class ChoosePersonnel extends Component
     public $selected_unit = [];
     public $loadMore = 20;
     public $loadTotal = 50;
+    public $searchAdmin = '';
+    public $searchPersonnel = '';
+    public $filterAdmin = 'asc';
+    public $filterPersonnel = 'asc';
 
     public function listings()
     {
@@ -24,7 +28,17 @@ class ChoosePersonnel extends Component
                 $query->where('name', 'admin');
             })
             ->where('id', '!=', auth()->user()->id)
-            ->orderBy('first_name', 'asc')
+            ->where(function ($query) {
+                $query->where('first_name', 'like', '%' . $this->searchAdmin . '%')
+                    ->orWhere('last_name', 'like', '%' . $this->searchAdmin . '%')
+                    ->orWhereHas('unit', function ($subQuery) {
+                        $subQuery->where('unit_assignment', 'like', '%' . $this->searchAdmin . '%');
+                    })
+                    ->orWhereHas('roles', function ($subQuery) {
+                        $subQuery->where('name', 'like', '%' . $this->searchAdmin . '%');
+                    });
+            })
+            ->orderBy('first_name', $this->filterAdmin)
             ->get();
 
         $personnels = User::query()
@@ -33,7 +47,17 @@ class ChoosePersonnel extends Component
                 $query->where('name', 'user');
             })
             ->where('id', '!=', auth()->user()->id)
-            ->orderBy('first_name', 'asc')
+            ->orderBy('first_name', $this->filterPersonnel)
+            ->where(function ($query) {
+                $query->where('first_name', 'like', '%' . $this->searchPersonnel . '%')
+                    ->orWhere('last_name', 'like', '%' . $this->searchPersonnel . '%')
+                    ->orWhereHas('unit', function ($subQuery) {
+                        $subQuery->where('unit_assignment', 'like', '%' . $this->searchPersonnel . '%');
+                    })
+                    ->orWhereHas('roles', function ($subQuery) {
+                        $subQuery->where('name', 'like', '%' . $this->searchPersonnel . '%');
+                    });
+            })
             ->take($this->loadTotal)
             ->get();
 

@@ -33,6 +33,9 @@
                     <button type="button" class="btn mb-2 btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#choosePersonnel"><i class="far fa-hand-pointer"></i> Choose User/Personnel</button>
                 </div>
                 <div>
+                    <button type="button" class="btn mb-2 btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#importPersonnel"><i class="far fa-file-import"></i> Import User/Personnel</button>
+                </div>
+                <div>
                     <button wire:click='resetData' class="btn mb-2 btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#createUserModal"><i class="far fa-user-plus"></i> Add User</button>
                 </div>
                </div>
@@ -383,6 +386,55 @@
             </div>
             {{ $users->links() }}
         </section>
+    </div>
+
+    {{-- Import User Modal --}}
+    <div wire:ignore.self class="modal fade" id="importPersonnel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="importPersonnelLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="importPersonnelLabel">Import Personnel</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click='resetFile'></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="d-flex justify-content-center">
+                            <input type="file" class="file-input" id="file" hidden wire:model='file' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                            @if ($file)
+                            <div class="file-preview text-center p-3 border rounded shadow-sm bg-light position-relative">
+                                <i class="far fa-xmark position-absolute top-0 end-0 mt-2 me-2 text-secondary" style="cursor: pointer" wire:click='resetFile'></i>
+                                <div class="file-icon mb-2">
+                                    <i class="far fa-file fa-3x text-primary"></i>
+                                </div>
+                                <p class="file-name font-weight-bold">{{ $file->getClientOriginalName() }}</p>
+                                <p class="file-size text-muted">{{ number_format($file->getSize() / 1024, 2) }} KB</p>
+                                <p class="file-size text-muted">Total data: {{ $totalData }}</p>
+                            </div>
+                            @else
+                            <button wire:loading.attr='disabled' wire:loading.remove wire:target='file' type="button" class="btn btn-primary upload-btn" onclick="document.getElementById('file').click();">
+                                <i class="far fa-file-import"></i> Choose file to import
+                            </button>
+                            <h4 wire:loading wire:target='file' class="wave-animation">Please wait...</h4>
+                            @endif
+                        </div>
+                        @error('file')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" wire:click='resetFile'>Cancel</button>
+                    <button type="button" class="btn btn-primary" wire:loading.attr='disabled' wire:target='file,import' wire:click='import'>
+                        <span wire:loading.remove wire:target='file'>
+                            <span wire:loading.remove wire:target='import'>Import</span>
+                            <span wire:loading wire:target='import'>Importing...</span>
+                        </span>
+                        <span wire:loading wire:target='file'><span class="spinner-border spinner-border-sm"></span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     {{-- View User Modal --}}
@@ -884,6 +936,7 @@
                 const eventData = Array.isArray(data) ? data[0] : data;
                 $('#createUserModal').modal('hide');
                 $('#choosePersonnel').modal('hide');
+                $('#importPersonnel').modal('hide');
                 $(`#manageUserModal${eventData.userId}`).modal('hide');
 
                 document.getElementById('createUserModal').classList.remove('show');
@@ -892,4 +945,21 @@
         });
 
     </script>
+
+    <style>
+        @keyframes wave {
+            0% { transform: translateY(0); }
+            25% { transform: translateY(-10px); }
+            50% { transform: translateY(0); }
+            75% { transform: translateY(10px); }
+            100% { transform: translateY(0); }
+        }
+
+        .wave-animation {
+            display: inline-block;
+            font-weight: 600;
+            animation: wave 1s infinite;
+            color: #007bff;
+        }
+    </style>
 </div>

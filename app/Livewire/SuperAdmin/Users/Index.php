@@ -10,12 +10,15 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class Index extends Component
 {
 
     use WithPagination;
+    use WithFileUploads;
 
     #[Title('Super Admin | User and Personnel Profile')]
 
@@ -45,6 +48,8 @@ class Index extends Component
     public $userData;
     public $viewUserData;
     public $search = '';
+    public $file;
+    public $totalData = 0;
 
     #[Url(except: 10, history: true, as: 'show_per_page')]
     public $show = 10;
@@ -80,6 +85,16 @@ class Index extends Component
         $this->units = Unit::all();
 
         $this->password = 'default_pass';
+
+        if ($this->file) {
+            $spreadsheet = IOFactory::load($this->file->getRealPath());
+
+            $sheet = $spreadsheet->getActiveSheet();
+
+            $data = $sheet->toArray();
+
+            $this->totalData = count($data);
+        }
 
         return compact('users');
     }
@@ -323,6 +338,69 @@ class Index extends Component
             'unit_id.required'             =>              'The Unit Assigned is required',
             'rank_id.required'             =>              'The Rank is required',
         ];
+    }
+
+    public function import()
+    {
+        $this->validate([
+            'file'          =>          ['required', 'mimes:xlsx,csv,xls', 'max:2048'],
+        ]);
+
+        $spreadsheet = IOFactory::load($this->file->getRealPath());
+
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $data = $sheet->toArray();
+
+        $this->totalData = count($data);
+
+        $createdCount = 0;
+        $existingCount = 0;
+
+        foreach ($data as $row) {
+            $isExists = User::where('email', $row[13])->orWhere('username', $row[3])->first();
+            if (!$isExists) {
+                $user =User::create([
+                    'last_name' => $row[0],
+                    'first_name' => $row[1],
+                    'middle_name' => $row[2],
+                    'username' => $row[3],
+                    'police_id' => $row[4],
+                    'position_id' => $row[5],
+                    'unit_id' => $row[6],
+                    'rank_id' => $row[7],
+                    'year_attended' => $row[8],
+                    'contact_number' => $row[9],
+                    'age' => $row[10],
+                    'nationality' => $row[11],
+                    'religion' => $row[12],
+                    'email' => $row[13],
+                    'date_of_birth' => $row[14],
+                    'civil_status' => $row[15],
+                    'gender' => $row[16],
+                    'password' => bcrypt('password'),
+                    'email_verified_at' => now()
+                ]);
+
+                $user->assignRole('user');
+
+                $createdCount++;
+            } else {
+                $existingCount++;
+            }
+        }
+
+        $this->reset();
+        $this->dispatch('toastr', [
+            'type'          =>              'success',
+            'message'       =>              $createdCount . ' of ' . count($data) . ' user(s)/personnel(s) was imported successfully.' . ' and ' . $existingCount . ' of ' . count($data) . ' user(s)/personnel(s) already exists.',
+        ]);
+        $this->dispatch('closeModal');
+    }
+
+    public function resetFile()
+    {
+        $this->file = null;
     }
 
     public function render()
